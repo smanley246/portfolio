@@ -1,0 +1,5 @@
+/* src/index.css (Tailwind v4) */
+@import "tailwindcss";
+
+/* Optional: keep this if you want smooth scrolling */
+html { scroll-behavior: smooth; }
