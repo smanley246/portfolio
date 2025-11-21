@@ -10,11 +10,21 @@ const ProjectsSection: React.FC = () => (
         name="subView – Subscription Tracker"
         blurb="React Native + Expo app to track subscription costs with Firebase auth, realtime data, and charts."
         tags={["React Native", "Expo Router", "Firebase", "TypeScript"]}
+        preview="/subViewLogo.png"
+        media={[
+          {type:"image", src: "/IMG_1263.PNG", alt: "Image of App" }, 
+          {type:"image", src: "/IMG_1264.PNG", alt: "Image of App" }, 
+          {type:"image", src: "/IMG_1265.PNG", alt: "Image of App" }, 
+          {type:"image", src: "/IMG_1266.PNG", alt: "Image of App" }, 
+          {type:"image", src: "/IMG_1267.PNG", alt: "Image of App" }, 
+          {type:"image", src: "/IMG_1271.PNG", alt: "Image of App" }, 
+          {type:"image", src: "/IMG_1272.PNG", alt: "Image of App" }, 
+          {type:"image", src: "/IMG_1273.PNG", alt: "Image of App" }]}
         repo="https://github.com/your-github/subView"
         details={
           <>
             <p>
-              TEST POP UPsubView is a mobile app built with React Native and Expo. It helps users track their subscription costs, supports Firebase authentication, and displays real-time data and charts.
+              subView is a mobile app built with React Native and Expo. It helps users track their subscription costs, supports Firebase authentication, and displays real-time data and charts.
             </p>
             <ul className="list-disc ml-5 mt-2 text-sm space-y-1">
               <li>Built with Expo Router for navigation</li>
@@ -26,9 +36,14 @@ const ProjectsSection: React.FC = () => (
         }
       />
       <ProjectCard
-        name="Seven-Segment Display Driver"
+        name="Real Time µC/OS-III PID Controller"
         blurb="Microcontroller driver for BA56-126WA M3 7-segment display (multiplexing, brightness PWM)."
         tags={["Embedded", "C", "Electronics"]}
+        preview="/hotAirPlantPreview.JPEG"
+        media={[
+          {type:"image", src: "/hotAirPlantPreview.JPEG", alt: "7-segment display showing temperature reading" }, 
+          {type:"image", src: "/hotAirPlantManual.png", alt: "Schematic of the PID controller circuit" }, 
+          {type:"image", src: "/hotAirPlantAuto.png", alt: "PCB layout for the PID controller" }]}
         details={
           <>
             <p>
@@ -47,6 +62,8 @@ const ProjectsSection: React.FC = () => (
         blurb="This very page—responsive, animated, and accessible single-page site with smooth scrolling."
         tags={["React", "Tailwind", "Framer Motion"]}
         repo="https://github.com/your-github/portfolio"
+        preview="/react.svg"
+        media={[{type:"image", src: "/portfolioWebsitePreview.png", alt: "React logo" }, {type:"image", src: "/react.svg", alt: "React logo" }]}
         details={
           <>
             <p>
@@ -61,18 +78,19 @@ const ProjectsSection: React.FC = () => (
         }
       />
       <ProjectCard
-        name="CUDA/ML Experiments"
-        blurb="Notes and scripts from debugging CUDA + PyTorch environments and optimizing DDP training."
-        tags={["Python", "PyTorch", "CUDA"]}
+        name="Current Arduino Project. Sensor + RFID Home Automation"
+        blurb="Project in progress using Arduino to read RFID tags and sensor data for home automation."
+        tags={["Circuitry", "Arduino", "Programming"]}
+        preview="/arduino.JPEG"
         details={
           <>
             <p>
-              A collection of scripts and notes from working with CUDA and PyTorch, focused on distributed data parallel (DDP) training and environment setup.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra, enim et pharetra congue, nulla dolor fringilla sem, ut ullamcorper nibh tortor id elit. Curabitur vehicula pharetra augue, sed pretium quam interdum sit amet. Curabitur dapibus vitae nisi lacinia luctus. Morbi vel dapibus erat, nec ornare nisi. Nullam eu imperdiet risus, pretium porta odio. Curabitur scelerisque varius nibh, sed lobortis velit sagittis sit amet. Aenean dapibus nisi id dolor tempus, ac tristique libero fermentum.
             </p>
             <ul className="list-disc ml-5 mt-2 text-sm space-y-1">
-              <li>Debugging CUDA environments</li>
-              <li>Optimizing PyTorch DDP training</li>
-              <li>Automation scripts for reproducibility</li>
+              <li>Circuit Design</li>
+              <li>Electrical Component Implementation</li>
+              <li>Software Integration</li>
             </ul>
           </>
         }

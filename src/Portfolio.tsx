@@ -10,7 +10,7 @@
 import { useHashScroll } from "./hooks/useHashScroll";
 import { useDevSmokeTests } from "./hooks/useDevSmokeTests";
 //Imports of Components
-import CircuitCanvasComponent from "./components/CircuitBackgroud";
+import CircuitCanvasComponent from "./components/CircuitBackground";
 import UserHeroSectionComponent from "./sections/UserHeroSection";
 import NavbarComponent from "./components/Navbar";
 import Footer from "./components/Footer";
