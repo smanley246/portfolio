@@ -10,7 +10,8 @@ const ProjectsSection: React.FC = () => (
         name="subView – Subscription Tracker"
         blurb="React Native + Expo app to track subscription costs with Firebase auth, realtime data, and charts."
         tags={["React Native", "Expo Router", "Firebase", "TypeScript"]}
-        preview="/subViewLogo.png"
+        //preview="/subViewLogo.png"
+        preview="/IMG_1263.PNG"
         media={[
           {type:"image", src: "/IMG_1263.PNG", alt: "Image of App" }, 
           {type:"image", src: "/IMG_1264.PNG", alt: "Image of App" }, 
@@ -62,8 +63,11 @@ const ProjectsSection: React.FC = () => (
         blurb="This very page—responsive, animated, and accessible single-page site with smooth scrolling."
         tags={["React", "Tailwind", "Framer Motion"]}
         repo="https://github.com/your-github/portfolio"
-        preview="/react.svg"
-        media={[{type:"image", src: "/portfolioWebsitePreview.png", alt: "React logo" }, {type:"image", src: "/react.svg", alt: "React logo" }]}
+        preview="/portfolioWebsiteCodeSnip.png"
+        media={[
+          {type:"image", src: "/portfolioWebsitePreview.png", alt: "Website Preview" }, 
+          {type:"image", src: "/portfolioWebsiteCodeSnip.png", alt: "Website Code Snipit" }, 
+          {type:"image", src: "/react.svg", alt: "React logo" }]}
         details={
           <>
             <p>

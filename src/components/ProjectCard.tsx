@@ -96,15 +96,33 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
           {/* RIGHT: preview image */}
           {preview && (
-            <div className="w-full md:w-40 lg:w-56 flex-shrink-0">
-              <div className="overflow-hidden rounded-xl">
-                <img
-                  src={preview}
-                  alt={`${name} preview`}
-                  className="w-full h-28 sm:h-32 md:h-full object-cover hover:scale-[1.03] transition-transform duration-300"
-                />
-              </div>
+            <div className="project-card">
+            <div
+              className="preview-contain"
+              style={{
+                width: "256px",
+                height: "256px",
+                overflow: "hidden",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#0a1f36", // Optional: background color for empty space
+                borderRadius: "16px",
+              }}
+            >
+              <img
+                src={preview}
+                alt={`${name} preview`}
+                
+                style={{
+                  width: "100%",
+                  //height: "100%",
+                  objectFit: "cover", // Ensures the image covers the area
+                }}
+              />
             </div>
+            {/* Other content */}
+          </div>
           )}
         </div>
       </Card>

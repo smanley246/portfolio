@@ -1,8 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { scrollToId } from "../utils/scrollToId";
-// If you want more reliable asset loading in Vite:
-// import headshot from "../assets/headshot.jpeg";
 
 const UserHeroSection: React.FC = () => {
   return (
@@ -18,7 +16,6 @@ const UserHeroSection: React.FC = () => {
           text-white
         "
       >
-        {/* Left side: text */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
