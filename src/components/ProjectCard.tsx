@@ -1,7 +1,8 @@
 /*
  * ProjectCard.tsx
- * Card component for showcasing a single project
- * Supports preview image, expandable modal, and image/video media gallery
+ * Card for showcasing a project.
+ * Mobile (<1024px): single column layout, image below text, Expand opens new-tab gallery.
+ * Desktop (>=1024px): side-by-side layout, Expand opens modal with media viewer.
  */
 
 import React, { useState } from "react";
@@ -10,7 +11,6 @@ import Card from "./Card";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// Media item type for the gallery inside the expanded view
 type ProjectMedia = {
   type: "image" | "video";
   src: string;
@@ -24,9 +24,11 @@ interface ProjectCardProps {
   link?: string;
   repo?: string;
   details?: React.ReactNode;
-  preview?: string;   // preview image on the main card
-  media?: ProjectMedia[]; // optional gallery for the modal
+  preview?: string;
+  media?: ProjectMedia[];
 }
+
+const MOBILE_BREAKPOINT = 1024;
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   name,
@@ -38,33 +40,176 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   preview,
   media = [],
 }) => {
-  const [expanded, setExpanded] = useState(false); // controls full-screen modal
-  const [activeIndex, setActiveIndex] = useState(0); // which media item is active
+  const [expanded, setExpanded] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const hasMedia = media.length > 0; // quick flag for gallery availability
-  const activeMedia = hasMedia ? media[activeIndex] : undefined; // currently shown media
+  const hasMedia = media.length > 0;
+  const activeMedia = hasMedia ? media[activeIndex] : undefined;
 
-  // Go to previous media item in the gallery
-  const goPrev = () => {
-    if (!hasMedia) return;
-    setActiveIndex((prev) => (prev - 1 + media.length) % media.length);
+  const isSmallViewport = () =>
+    typeof window !== "undefined" && window.innerWidth <= MOBILE_BREAKPOINT;
+
+  // -------------------------------
+  // MOBILE NEW TAB GALLERY
+  // -------------------------------
+  const openMobileDetailTab = () => {
+    if (typeof window === "undefined") return;
+    const win = window.open("", "_blank");
+    if (!win) return;
+
+    const esc = (txt: string) =>
+      txt.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+    const safeName = esc(name);
+    const safeBlurb = esc(blurb);
+
+    let mediaItemsHtml = "";
+    if (media.length > 0) {
+      mediaItemsHtml = `
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery">
+          ${media
+            .map((m, i) => {
+              const alt = esc(m.alt || `${name} media ${i + 1}`);
+              return m.type === "image"
+                ? `
+                  <div class="media">
+                    <img src="${m.src}" alt="${alt}" />
+                  </div>`
+                : `
+                  <div class="media">
+                    <video src="${m.src}" controls playsinline></video>
+                  </div>`;
+            })
+            .join("")}
+        </div>
+        <p class="swipe-hint">Swipe horizontally to see more.</p>
+      `;
+    } else if (preview) {
+      mediaItemsHtml = `
+        <h2 class="section-title">Preview</h2>
+        <div class="media"><img src="${preview}" /></div>
+      `;
+    }
+
+    const tagsHtml = tags
+      .map(
+        (t) =>
+          `<span class="tag">${esc(t)}</span>`
+      )
+      .join("");
+
+    win.document.write(`
+      <!doctype html>
+      <html lang="en">
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <title>${safeName}</title>
+          <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body {
+              font-family: system-ui;
+              background: radial-gradient(circle at 20% 0%, #143a66 0, #08192b 60%);
+              color: #fff;
+              padding: 16px;
+            }
+            header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 12px;
+            }
+            .close-btn {
+              padding: 6px 12px;
+              background: white;
+              border: none;
+              border-radius: 999px;
+              color: #000;
+            }
+            .gallery {
+              display: flex;
+              gap: 12px;
+              overflow-x: auto;
+              scroll-snap-type: x mandatory;
+              padding-bottom: 6px;
+            }
+            .media {
+              flex: 0 0 100%;
+              max-width: 100%;
+              scroll-snap-align: center;
+              border-radius: 16px;
+              overflow: hidden;
+              background: #000;
+            }
+            img, video {
+              width: 100%;
+              height: auto;
+            }
+            .card {
+              background: rgba(10,31,54,.93);
+              padding: 16px;
+              border-radius: 16px;
+              border: 1px solid rgba(148,163,184,.35);
+            }
+            .tag {
+              padding: 4px 8px;
+              font-size: .75rem;
+              border-radius: 999px;
+              border: 1px solid rgba(148,163,184,.4);
+              background: rgba(15,23,42,.8);
+              margin-right: 6px;
+            }
+          </style>
+        </head>
+        <body>
+          <header>
+            <h1>${safeName}</h1>
+            <button class="close-btn" onclick="window.close()">Close</button>
+          </header>
+
+          <div class="card">
+            <p>${safeBlurb}</p>
+            ${mediaItemsHtml}
+
+            <div style="margin-top:10px;">${tagsHtml}</div>
+          </div>
+
+          <script>
+            window.addEventListener('load', () => {
+              const g = document.querySelector('.gallery');
+              if (g) g.scrollLeft = 0;
+            });
+          </script>
+        </body>
+      </html>
+    `);
+    win.document.close();
   };
 
-  // Go to next media item in the gallery
-  const goNext = () => {
-    if (!hasMedia) return;
-    setActiveIndex((prev) => (prev + 1) % media.length);
+  // -------------------------------
+  // EXPAND HANDLER
+  // -------------------------------
+  const handleExpandClick = () => {
+    setActiveIndex(0); // always start at first image
+    if (isSmallViewport()) openMobileDetailTab();
+    else setExpanded(true);
   };
+
+  const goPrev = () =>
+    hasMedia && setActiveIndex((i) => (i - 1 + media.length) % media.length);
+
+  const goNext = () =>
+    hasMedia && setActiveIndex((i) => (i + 1) % media.length);
 
   return (
     <>
-      {/* MAIN PROJECT CARD */}
+      {/* ============================== CARD ============================== */}
       <Card>
-        {/* MAIN CARD LAYOUT: text left, image right */}
-        <div className="flex flex-col md:flex-row gap-4 h-full">
-          {/* LEFT: title, blurb, tags */}
-          <div className="flex-1 flex flex-col">
-            {/* Title row with optional Live link + Expand button */}
+        <div className="flex flex-col lg:flex-row gap-4 h-full">
+
+          {/* ---------- TEXT FIRST ALWAYS ON MOBILE ---------- */}
+          <div className="flex-1 flex flex-col order-1 lg:order-1">
             <div className="flex items-start gap-2">
               <div className="flex items-center gap-2 flex-wrap">
                 <h3 className="text-lg font-semibold">{name}</h3>
@@ -73,28 +218,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                     href={link}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-normal text-blue-300 hover:underline"
+                    className="inline-flex items-center gap-1 text-sm text-blue-300"
                   >
                     Live <ArrowUpRight className="w-4 h-4" />
                   </a>
                 )}
               </div>
 
-              {/* Expand button opens the full-screen modal */}
               <button
-                onClick={() => setExpanded(true)}
-                className="ml-auto p-2 rounded-lg hover:bg-white/10 flex items-center gap-1 text-xs sm:text-sm"
-                aria-label="Expand"
+                onClick={handleExpandClick}
+                className="ml-auto p-2 rounded-lg hover:bg-white/10 text-xs sm:text-sm flex items-center gap-1"
               >
                 <Expand className="w-4 h-4" /> Expand
               </button>
             </div>
 
-            {/* Short project description on the card */}
             <p className="mt-1 text-sm text-blue-100/90">{blurb}</p>
 
-            {/* Tags / tech stack pills pinned to bottom of the card column */}
-            <div className="mt-auto pt-3 flex flex-wrap gap-2">
+            <div className="mt-3 lg:mt-auto flex flex-wrap gap-2">
               {tags.map((t) => (
                 <span
                   key={t}
@@ -106,29 +247,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             </div>
           </div>
 
-          {/* RIGHT: preview image (static thumbnail on the card) */}
+          {/* ---------- IMAGE SECOND ALWAYS ON MOBILE ---------- */}
           {preview && (
-            <div className="project-card">
+            <div className="order-2 lg:order-2 w-full lg:w-auto">
               <div
-                className="preview-contain"
-                style={{
-                  width: "256px",
-                  height: "256px",
-                  overflow: "hidden",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "#0a1f36",
-                  borderRadius: "16px",
-                }}
+                className="
+                  w-full
+                  lg:w-56 xl:w-64
+                  aspect-[4/5]
+                  overflow-hidden
+                  rounded-2xl
+                  bg-[#0a1f36]
+                "
               >
                 <img
                   src={preview}
                   alt={`${name} preview`}
-                  style={{
-                    width: "100%",
-                    objectFit: "cover", // crop edges to keep card filled
-                  }}
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>
@@ -136,7 +271,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
       </Card>
 
-      {/* ============= FULL-SCREEN MODAL ============= */}
+      {/* ============================== DESKTOP MODAL ============================== */}
       <AnimatePresence>
         {expanded && (
           <motion.div
@@ -145,7 +280,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Modal container with scale-in animation */}
             <motion.div
               className="bg-[#0a1f36] rounded-2xl p-6 md:p-8 max-w-6xl w-[95vw] h-[90vh] relative text-white shadow-xl flex flex-col gap-6 overflow-hidden"
               initial={{ scale: 0.9, opacity: 0 }}
@@ -153,59 +287,44 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.25 }}
             >
-              {/* Close button in top-right of modal */}
               <button
                 onClick={() => setExpanded(false)}
                 className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10"
-                aria-label="Close"
               >
                 <X className="w-5 h-5" />
               </button>
 
               <div className="flex flex-col md:flex-row gap-6 h-full">
-                {/* LEFT: media viewer (image/video + thumbnails) */}
+                {/* MEDIA VIEWER */}
                 <div className="md:w-1/2 w-full flex flex-col gap-3">
                   {hasMedia ? (
                     <>
-                      {/* Main media display area */}
-                      <div className="relative flex-1 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center">
+                      <div className="relative flex-1 bg-black/40 rounded-xl flex items-center justify-center overflow-hidden">
                         {activeMedia?.type === "image" && (
-                          <img
-                            src={activeMedia.src}
-                            alt={activeMedia.alt || name}
-                            className="w-full h-full object-contain"
-                          />
+                          <img src={activeMedia.src} className="w-full h-full object-contain" />
                         )}
                         {activeMedia?.type === "video" && (
-                          <video
-                            src={activeMedia.src}
-                            controls
-                            className="w-full h-full object-contain"
-                          />
+                          <video src={activeMedia.src} controls className="w-full h-full object-contain" />
                         )}
 
-                        {/* Arrow controls for stepping through media */}
                         {media.length > 1 && (
                           <>
                             <button
                               onClick={goPrev}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 hover:bg-black/70 border border-white/20"
-                              aria-label="Previous media"
+                              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50"
                             >
-                              <ChevronLeft className="w-5 h-5" />
+                              <ChevronLeft />
                             </button>
                             <button
                               onClick={goNext}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 hover:bg-black/70 border border-white/20"
-                              aria-label="Next media"
+                              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50"
                             >
-                              <ChevronRight className="w-5 h-5" />
+                              <ChevronRight />
                             </button>
                           </>
                         )}
                       </div>
 
-                      {/* Thumbnails row below main media (if more than one) */}
                       {media.length > 1 && (
                         <div className="flex gap-2 overflow-x-auto pb-1">
                           {media.map((m, i) => (
@@ -213,17 +332,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                               key={i}
                               onClick={() => setActiveIndex(i)}
                               className={`border rounded-lg overflow-hidden flex-shrink-0 ${
-                                i === activeIndex
-                                  ? "border-blue-400"
-                                  : "border-white/20"
+                                i === activeIndex ? "border-blue-400" : "border-white/20"
                               }`}
                             >
                               {m.type === "image" ? (
-                                <img
-                                  src={m.src}
-                                  alt={m.alt || `${name} media ${i + 1}`}
-                                  className="w-20 h-14 object-cover"
-                                />
+                                <img src={m.src} className="w-20 h-14 object-cover" />
                               ) : (
                                 <div className="w-20 h-14 flex items-center justify-center bg-black/60 text-[10px]">
                                   Video
@@ -234,35 +347,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                         </div>
                       )}
                     </>
-                  ) : preview ? (
-                    // Fallback: show the same preview image if no media array is provided
-                    <div className="flex-1 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center">
-                      <img
-                        src={preview}
-                        alt={`${name} preview`}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
                   ) : (
-                    // Empty state when no media or preview is supplied
-                    <div className="flex-1 rounded-xl border border-dashed border-white/20 flex items-center justify-center text-xs text-blue-100/60">
-                      No media added yet
+                    <div className="flex-1 bg-black/40 rounded-xl flex items-center justify-center">
+                      <img src={preview} className="w-full h-full object-contain" />
                     </div>
                   )}
                 </div>
 
-                {/* RIGHT: project description, tags, and external links */}
+                {/* DETAILS */}
                 <div className="md:w-1/2 w-full flex flex-col overflow-y-auto pr-1">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                    {name}
-                  </h2>
-
-                  {/* Detailed description: prefer `details` if provided */}
+                  <h2 className="text-2xl md:text-3xl font-bold mb-3">{name}</h2>
                   <div className="mb-4 text-sm md:text-base leading-relaxed">
                     {details ? details : blurb}
                   </div>
 
-                  {/* Tags duplicated here for quick scan */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {tags.map((t) => (
                       <span
@@ -274,25 +372,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                     ))}
                   </div>
 
-                  {/* External repo + live demo links pinned to bottom */}
-                  <div className="mt-auto flex flex-wrap gap-4 pt-2">
+                  <div className="mt-auto flex gap-4">
                     {repo && (
-                      <a
-                        href={repo}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-sm text-blue-300 hover:underline"
-                      >
-                        <Github className="w-5 h-5" /> View Repo
+                      <a href={repo} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-blue-300">
+                        <Github className="w-5 h-5" /> Repo
                       </a>
                     )}
                     {link && (
-                      <a
-                        href={link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-sm text-blue-300 hover:underline"
-                      >
+                      <a href={link} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-blue-300">
                         <ArrowUpRight className="w-5 h-5" /> Live Demo
                       </a>
                     )}

@@ -17,7 +17,7 @@ const ProjectsSection: React.FC = () => (
       {/* Project: Subscription Tracker App */}
       <ProjectCard
         name="Subscription Tracker App: SubView"
-        blurb="React Native + Expo app to track subscription costs with Firebase auth, realtime data, and charts."
+        blurb="React Native + Expo app to track subscription costs with Firebase auth, realtime data, and charts. Account creation, login, and password reset included. API logo integrtion for popular services. Firebase database to store user data securely."
         tags={["React Native", "Expo Router", "Firebase", "TypeScript"]}
         preview="/IMG_1263.PNG"
         media={[
@@ -34,7 +34,8 @@ const ProjectsSection: React.FC = () => (
         details={
           <>
             <p>
-              subView is a mobile app built with React Native and Expo. It helps users track their subscription costs, supports Firebase authentication, and displays real-time data and charts.
+            React Native + Expo app to track subscription costs with Firebase auth, realtime data, and charts. Account creation, login, and 
+            password reset included. API logo integrtion for popular services. Firebase database to store user data securely.
             </p>
             <ul className="list-disc ml-5 mt-2 text-sm space-y-1">
               <li>Built with Expo Router for navigation</li>
@@ -49,22 +50,25 @@ const ProjectsSection: React.FC = () => (
       {/* Project: Real Time OS-III PID Controller */}
       <ProjectCard
         name="Real Time OS-III PID Controller"
-        blurb="Microcontroller driver for BA56-126WA M3 7-segment display (multiplexing, brightness PWM)."
+        blurb="Real time Hot Air Plant PID controller. Programmed with uCOS-III to ensure responiveness and safetly. Auto and manual modes with LCD display and button interfacewith real time temperature 
+        monitoring and control. Auto controlls temperature based on setpoint, manual allows direct user control of voltage."
         tags={["Embedded", "C", "Electronics"]}
         preview="/hotAirPlantPreview.JPEG"
         media={[
-          {type:"image", src: "/hotAirPlantPreview.JPEG", alt: "7-segment display showing temperature reading" }, 
-          {type:"image", src: "/hotAirPlantManual.png", alt: "Schematic of the PID controller circuit" }, 
-          {type:"image", src: "/hotAirPlantAuto.png", alt: "PCB layout for the PID controller" }]}
+          {type:"image", src: "/hotAirPlantPreview.JPEG", alt: "LCD display showing temperature reading" }, 
+          {type:"image", src: "/hotAirPlantManual.png", alt: "Manual Mode" }, 
+          {type:"image", src: "/hotAirPlantAuto.png", alt: "Auto Mode" }]}
         details={
           <>
             <p>
-              A custom driver for the BA56-126WA M3 7-segment display, supporting multiplexing and PWM-based brightness control. Designed for microcontroller projects and electronics prototyping.
+            Real time Hot Air Plant PID controller. Programmed with uCOS-III to ensure responiveness and safetly. Auto and 
+            manual modes with LCD display and button interfacewith real time temperature monitoring and control. 
+            Auto controlls temperature based on setpoint, manual allows direct user control of voltage.
             </p>
             <ul className="list-disc ml-5 mt-2 text-sm space-y-1">
-              <li>Efficient multiplexing for multiple digits</li>
-              <li>PWM for adjustable brightness</li>
-              <li>Written in C for portability</li>
+              <li>Userinterface designed for usability</li>
+              <li>PID for adjustable control</li>
+              <li>Written in uCOS-III for stability</li>
             </ul>
           </>
         }
@@ -73,8 +77,8 @@ const ProjectsSection: React.FC = () => (
       {/* Project: Portfolio Website */}
       <ProjectCard
         name="Portfolio Website"
-        blurb="This very page—responsive, animated, and accessible single-page site with smooth scrolling."
-        tags={["React", "Tailwind", "Framer Motion"]}
+        blurb="This very page, developed to be responsive, animated, and accessible single-page site with smooth scrolling. Uses React, Vite, Tailwind CSS, and Framer Motion. Hosted on Vercel for fast global delivery."
+        tags={["React", "Vite", "Vercel", "Tailwind CSS", "Framer Motion"]}
         repo="https://github.com/your-github/portfolio"
         preview="/portfolioWebsiteCodeSnip.png"
         media={[
@@ -83,9 +87,10 @@ const ProjectsSection: React.FC = () => (
           {type:"image", src: "/react.svg", alt: "React logo" }]}
         details={
           <>
-            <p>
-              My personal portfolio site, built with React and Tailwind CSS. Features smooth scrolling, accessibility, and animated transitions using Framer Motion.
-            </p>
+          <p>
+            This very page, developed to be responsive, animated, and accessible single-page site with smooth scrolling. 
+            Uses React, Vite, Tailwind CSS, and Framer Motion. Hosted on Vercel for fast global delivery.
+          </p>
             <ul className="list-disc ml-5 mt-2 text-sm space-y-1">
               <li>Fully responsive design</li>
               <li>Accessible navigation and content</li>
@@ -98,13 +103,17 @@ const ProjectsSection: React.FC = () => (
       {/* Project: Arduino Project placeholder */}
       <ProjectCard
         name="Arduino Project: Sensor + RFID Automation"
-        blurb="Project in progress using Arduino to read RFID tags and sensor data for home automation."
+        blurb="Project in progress using Arduino to read RFID tags and sensor data for home automation. Many other projects have been completed using Arduino microcontrollers for various applications."
         tags={["Circuitry", "Arduino", "Programming"]}
         preview="/arduino.JPEG"
+        media={[
+          {type:"image", src: "/arduino.JPEG", alt: "Website Preview" }, 
+          {type:"image", src: "/Arduino_Logo.png", alt: "Website Code Snipit" }]}
         details={
           <>
             <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra, enim et pharetra congue, nulla dolor fringilla sem, ut ullamcorper nibh tortor id elit. Curabitur vehicula pharetra augue, sed pretium quam interdum sit amet. Curabitur dapibus vitae nisi lacinia luctus. Morbi vel dapibus erat, nec ornare nisi. Nullam eu imperdiet risus, pretium porta odio. Curabitur scelerisque varius nibh, sed lobortis velit sagittis sit amet. Aenean dapibus nisi id dolor tempus, ac tristique libero fermentum.
+              Project in progress using Arduino to read RFID tags and sensor data for home automation. 
+              Many other projects have been completed using Arduino microcontrollers for various applications.
             </p>
             <ul className="list-disc ml-5 mt-2 text-sm space-y-1">
               <li>Circuit Design</li>
