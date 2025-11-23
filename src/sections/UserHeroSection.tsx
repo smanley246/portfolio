@@ -38,16 +38,22 @@ const UserHeroSection: React.FC = () => {
 
           <div className="mt-6 flex flex-wrap gap-3">
             <button
+              onClick={() => scrollToId("education")}
+              className="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm sm:text-base"
+            >
+              Education
+            </button>
+            <button
+              onClick={() => scrollToId("experience")}
+              className="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm sm:text-base"
+            >
+              Work Experience
+            </button>
+            <button
               onClick={() => scrollToId("projects")}
               className="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm sm:text-base"
             >
-              View Projects
-            </button>
-            <button
-              onClick={() => scrollToId("about")}
-              className="px-4 py-2 rounded-xl border border-white/20 font-semibold text-sm sm:text-base"
-            >
-              About Me
+              Projects
             </button>
           </div>
         </motion.div>
@@ -70,10 +76,9 @@ const UserHeroSection: React.FC = () => {
             "
           >
             <img
-              // src={headshot}
-              src="./src/assets/headshot.jpeg"
+              src={"/headshot.JPEG"}
               alt="Samuel Manley Headshot"
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = "none";

@@ -1,8 +1,6 @@
 /* src/index.css (Tailwind v4) */
 @import "tailwindcss";
 
-/* Optional: keep this if you want smooth scrolling */
-
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
@@ -10,12 +8,10 @@ body {
   height: 100%;
 }
 
-/* Match this color to your main blue background */
 body {
-  background-color: #0a1f36; /* or your dark navy */
+  background-color: #0a1f36;
 }
 
-/* Make the React app fill the viewport */
 #root {
   min-height: 100vh;
 }

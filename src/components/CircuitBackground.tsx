@@ -1,13 +1,4 @@
 import React, { useEffect, useRef } from "react";
-
-/**
- * CircuitCanvasBG
- * - Canvas 2D, no extra deps
- * - Non-overlapping traces hugging the edges (no crossings)
- * - Traces start off-screen, grow with scroll, then tail retracts
- * - End-cap dots stick to the visible ends
- * - Responsive & retina-friendly with a fixed virtual view (1440x900)
- */
 const CircuitCanvasBG: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -15,8 +6,6 @@ const CircuitCanvasBG: React.FC = () => {
   // Virtual design space
   const VW = 1440;
   const VH = 900;
-
-  // Central “safe” box around your hero content (keeps traces out)
 
   // Pre-planned, NON-OVERLAPPING polylines (orthogonal, rounded corners)
   // All start from off-screen edges (x < 0, x > VW, y < 0, y > VH)
@@ -78,13 +67,11 @@ const CircuitCanvasBG: React.FC = () => {
     endDist: number,
     radius = 10
   ) {
-    // Clip distances
-    const { total } = { total: segs.reduce((a, b) => a + b, 0) };
+    const total = segs.reduce((a, b) => a + b, 0);
     const s = Math.max(0, Math.min(total, startDist));
     const e = Math.max(0, Math.min(total, endDist));
     if (e <= s) return;
 
-    // Build a trimmed set of points between s..e
     const trimmed: [number, number][] = [];
     trimmed.push(pointAt(pts, segs, s));
     const step = 2; // densify for nicer rounded joins
@@ -93,23 +80,21 @@ const CircuitCanvasBG: React.FC = () => {
     }
     trimmed.push(pointAt(pts, segs, e));
 
-    // Draw with rounded corners
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
     ctx.beginPath();
     for (let i = 0; i < trimmed.length; i++) {
       const [x, y] = trimmed[i];
-      if (i === 0) ctx.moveTo(x, y);
-      else {
+      if (i === 0) {
+        ctx.moveTo(x, y);
+      } else {
         const [px, py] = trimmed[i - 1];
-        // corner rounding by quadratic if direction changes
         if (i < trimmed.length - 1) {
           const [nx, ny] = trimmed[i + 1];
           const vx1 = x - px, vy1 = y - py;
           const vx2 = nx - x, vy2 = ny - y;
           const turn = Math.abs(vx1 * vy2 - vy1 * vx2) > 1e-3;
           if (turn) {
-            // compute shortened segment
             const len1 = Math.hypot(vx1, vy1) || 1;
             const len2 = Math.hypot(vx2, vy2) || 1;
             const r = Math.min(radius, len1 * 0.5, len2 * 0.5);
@@ -133,7 +118,7 @@ const CircuitCanvasBG: React.FC = () => {
     const ctx = canvas.getContext("2d", { alpha: true })!;
 
     // Precompute metrics
-    const metrics = PATHS.map(p => polyMetrics(p.points));
+    const metrics = PATHS.map((p) => polyMetrics(p.points));
 
     const resize = () => {
       const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
@@ -149,24 +134,31 @@ const CircuitCanvasBG: React.FC = () => {
       return sh <= 0 ? 0 : window.scrollY / sh; // 0..1
     };
 
-    // Removed unused variable lastTime
-
     const draw = (t: number) => {
       const time = t / 1000; // seconds
       const scroll = getScrollProgress();
       const easeScroll = Math.pow(scroll, 0.9); // gentle easing
 
-      // Letterbox scaling to keep 1440x900 aspect without distortion
       const cw = canvas.clientWidth;
       const ch = canvas.clientHeight;
       const scale = Math.min(cw / VW, ch / VH);
       const ox = (cw - VW * scale) / 2;
       const oy = (ch - VH * scale) / 2;
 
+      // Treat narrow screens as "mobile"
+      const isMobile = cw < 700;
+
       ctx.clearRect(0, 0, cw, ch);
 
       // Background gradient (deep blue)
-      const grd = ctx.createRadialGradient(cw * 0.5, ch * 0.25, 50, cw * 0.5, ch * 0.25, Math.max(cw, ch));
+      const grd = ctx.createRadialGradient(
+        cw * 0.5,
+        ch * 0.25,
+        50,
+        cw * 0.5,
+        ch * 0.25,
+        Math.max(cw, ch)
+      );
       grd.addColorStop(0, "#143a66");
       grd.addColorStop(0.35, "#0d2a4a");
       grd.addColorStop(0.6, "#0a1f36");
@@ -178,24 +170,47 @@ const CircuitCanvasBG: React.FC = () => {
       ctx.save();
       ctx.globalAlpha = 0.12;
       const drift = -time * 10; // px
-      ctx.translate((ox + (drift % (32 * scale))), (oy + ((drift * 0.6) % (32 * scale))));
+
+      // Bigger spacing on mobile = bigger squares
+      const step = isMobile ? 72 : 32;
+
+      ctx.translate(
+        ox + (drift % (step * scale)),
+        oy + ((drift * (isMobile ? 0.9 : 0.6)) % (step * scale))
+      );
       ctx.scale(scale, scale);
       ctx.fillStyle = "transparent";
       ctx.strokeStyle = "rgba(90,130,170,0.30)";
-      ctx.lineWidth = 1;
-      const step = 32;
+      ctx.lineWidth = isMobile ? 1.6 : 1;
+
       for (let x = -VW; x <= VW * 2; x += step) {
-        ctx.beginPath(); ctx.moveTo(x, -VH); ctx.lineTo(x, VH * 2); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, -VH);
+        ctx.lineTo(x, VH * 2);
+        ctx.stroke();
       }
       for (let y = -VH; y <= VH * 2; y += step) {
-        ctx.beginPath(); ctx.moveTo(-VW, y); ctx.lineTo(VW * 2, y); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-VW, y);
+        ctx.lineTo(VW * 2, y);
+        ctx.stroke();
       }
       ctx.restore();
 
       // Circuit traces
       ctx.save();
       ctx.translate(ox, oy);
-      ctx.scale(scale, scale);
+
+      // Extra vertical stretch on mobile so paths are more spread out
+      const vertScale = isMobile ? 1.3 : 1;
+      ctx.scale(scale, scale * vertScale);
+
+      // Thicker, more prominent lines & dots on mobile
+      const glowWidth = isMobile ? 9 : 6;
+      const neonWidth = isMobile ? 4.2 : 3;
+      const dotRadius = isMobile ? 6 : 4.2;
+      const glowBlur = isMobile ? 24 : 18;
+      const neonBlur = isMobile ? 18 : 12;
 
       for (let i = 0; i < PATHS.length; i++) {
         const { points, delay, base } = PATHS[i];
@@ -204,52 +219,52 @@ const CircuitCanvasBG: React.FC = () => {
         // Local progress with a per-path delay
         const p = Math.max(0, Math.min(1, (easeScroll - delay) / (1 - delay)));
 
-        // ✅ Grow-only: start stays fixed, no tail retraction
-        const growMax = 1;              // how far a wire can grow (0..1)
-        const growPhase = Math.min(1, p);  // smooth progress
+        // Grow-only
+        const growMax = 1;
+        const growPhase = Math.min(1, p);
         const lenFrac = base + (growMax - base) * growPhase;
 
-        // Keep the start fixed (off-screen starts still look like they enter the view)
         const offFrac = 0.0;
-
-        // Convert to absolute distances along the polyline
-        const startDist = total * offFrac;                           // constant 0
-        const endDist = total * Math.min(1, offFrac + lenFrac);      // advances forward
+        const startDist = total * offFrac;
+        const endDist = total * Math.min(1, offFrac + lenFrac);
 
         // Glow stroke
-        ctx.shadowColor = "rgba(14,50,100,0.85)";
-        ctx.shadowBlur = 18;
+        ctx.shadowColor = "rgba(14,50,100,0.9)";
+        ctx.shadowBlur = glowBlur;
         ctx.strokeStyle = "#0d2a4a";
-        ctx.lineWidth = 6;
+        ctx.lineWidth = glowWidth;
         strokePolylinePartial(ctx, points, segs, startDist, endDist, 12);
 
-        // Main neon stroke (slight animated brightness)
-        ctx.shadowColor = "rgba(80,160,255,0.65)";
-        ctx.shadowBlur = 12;
+        // Main neon stroke
+        ctx.shadowColor = "rgba(80,160,255,0.8)";
+        ctx.shadowBlur = neonBlur;
         const pulse = 0.8 + 0.2 * Math.sin(time * 1.2 + i * 0.7);
-        const startColor = `rgba(110,168,255,${0.95 * pulse})`;
-        const endColor = `rgba(59,130,246,${0.95 * pulse})`;
+        const startColor = `rgba(110,168,255,${isMobile ? 1.0 * pulse : 0.95 * pulse})`;
+        const endColor = `rgba(59,130,246,${isMobile ? 1.0 * pulse : 0.95 * pulse})`;
 
-        // simple gradient along the segment
         const [sx, sy] = pointAt(points, segs, startDist);
         const [ex, ey] = pointAt(points, segs, endDist);
         const lg = ctx.createLinearGradient(sx, sy, ex, ey);
         lg.addColorStop(0, startColor);
         lg.addColorStop(1, endColor);
         ctx.strokeStyle = lg;
-        ctx.lineWidth = 3;
+        ctx.lineWidth = neonWidth;
         strokePolylinePartial(ctx, points, segs, startDist, endDist, 12);
 
-        // End-cap dots (stick to ends)
-        ctx.shadowBlur = 8;
-        ctx.fillStyle = "rgba(147,197,253,0.95)";
-        const rEnd = 4.2;
-        const rStart = 4.2;
+        // End-cap dots
+        ctx.shadowBlur = isMobile ? 14 : 8;
         const startPt = pointAt(points, segs, startDist);
         const endPt = pointAt(points, segs, endDist);
-        ctx.beginPath(); ctx.arc(startPt[0], startPt[1], rStart, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = "rgba(96,165,250,0.95)";
-        ctx.beginPath(); ctx.arc(endPt[0], endPt[1], rEnd, 0, Math.PI * 2); ctx.fill();
+
+        ctx.fillStyle = "rgba(147,197,253,0.98)";
+        ctx.beginPath();
+        ctx.arc(startPt[0], startPt[1], dotRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "rgba(96,165,250,0.98)";
+        ctx.beginPath();
+        ctx.arc(endPt[0], endPt[1], dotRadius, 0, Math.PI * 2);
+        ctx.fill();
       }
 
       ctx.restore();

@@ -18,8 +18,8 @@ interface ProjectCardProps {
   link?: string;
   repo?: string;
   details?: React.ReactNode;
-  preview?: string;          // preview image on card (right side)
-  media?: ProjectMedia[];    // gallery for modal
+  preview?: string;   
+  media?: ProjectMedia[];
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -106,7 +106,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "#0a1f36", // Optional: background color for empty space
+                backgroundColor: "#0a1f36",
                 borderRadius: "16px",
               }}
             >
@@ -116,18 +116,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 
                 style={{
                   width: "100%",
-                  //height: "100%",
-                  objectFit: "cover", // Ensures the image covers the area
+                  objectFit: "cover", 
                 }}
               />
             </div>
-            {/* Other content */}
+
           </div>
           )}
         </div>
       </Card>
 
-      {/* ============= FULL-SCREEN MODAL (unchanged layout) ============= */}
+      {/* ============= FULL-SCREEN MODAL ============= */}
       <AnimatePresence>
         {expanded && (
           <motion.div
