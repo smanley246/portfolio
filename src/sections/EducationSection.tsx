@@ -1,12 +1,20 @@
+/*
+ * EducationSection.tsx
+ * Education timeline and key academic highlights
+ * Includes main degree card, highlight card, and detailed skills card
+ */
+
 import React from "react";
 import Section from "../components/Section";
 import Card from "../components/Card";
 import { GraduationCap } from "lucide-react";
 
 const EducationSection: React.FC = () => (
+  // Section wrapper with education icon
   <Section id="education" title="Education" icon={<GraduationCap />}>
     {/* Two-column education cards */}
     <div className="grid md:grid-cols-2 gap-6">
+      {/* Left: main degree summary */}
       <Card>
         <h3 className="font-semibold mb-1">B.Eng. (Computer Engineering)</h3>
         <div className="text-sm text-blue-200/80">University of Guelph</div>
@@ -16,6 +24,7 @@ const EducationSection: React.FC = () => (
         </ul>
       </Card>
 
+      {/* Right: highlights card with logo image */}
       <Card>
         <div className="flex flex-col lg:flex-row gap-6 lg:items-center">
           {/* LEFT SIDE: title + list */}
@@ -43,10 +52,11 @@ const EducationSection: React.FC = () => (
       </Card>
     </div>
 
+    {/* Extra skills detail card below main grid */}
     <div className="mt-6">
       <Card>
         <div className="flex flex-col lg:flex-row gap-6">
-          {/* Text side */}
+          {/* Text side with detailed key skills list */}
           <div className="flex-1">
             <h4 className="font-semibold mb-2">Key Skills</h4>
             <p className="text-sm text-blue-100/80 leading-relaxed">

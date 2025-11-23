@@ -1,3 +1,9 @@
+/*
+ * ExperienceSection.tsx
+ * Work experience timeline split into two columns
+ * Uses TimelineItem components for each role with bullet highlights
+ */
+
 import React from "react";
 import Section from "../components/Section";
 import Card from "../components/Card";
@@ -5,8 +11,11 @@ import TimelineItem from "../components/TimelineItem";
 import { Briefcase } from "lucide-react";
 
 const ExperienceSection: React.FC = () => (
+  // Section wrapper with briefcase icon
   <Section id="experience" title="Work Experience" icon={<Briefcase />}>
+    {/* Two-column layout for different sets of roles */}
     <div className="grid md:grid-cols-2 gap-6">
+      {/* Left column roles */}
       <Card>
         <div className="border-l-2 border-white/10 pl-4 space-y-5">
           <TimelineItem
@@ -31,6 +40,8 @@ const ExperienceSection: React.FC = () => (
           />
         </div>
       </Card>
+
+      {/* Right column roles */}
       <Card>
         <div className="border-l-2 border-white/10 pl-4 space-y-5">
           <TimelineItem

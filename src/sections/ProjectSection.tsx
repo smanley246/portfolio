@@ -1,16 +1,24 @@
+/*
+ * ProjectSection.tsx
+ * Projects section showing multiple ProjectCards
+ * Each card can include preview media, gallery, tags, and detailed description
+ */
+
 import React from "react";
 import Section from "../components/Section";
 import ProjectCard from "../components/ProjectCard";
 import { FolderGit2 } from "lucide-react";
 
 const ProjectsSection: React.FC = () => (
+  // Section wrapper with folder icon
   <Section id="projects" title="Projects" icon={<FolderGit2 />}>
+    {/* 2-column grid of projects on medium+ screens */}
     <div className="grid md:grid-cols-2 gap-6">
+      {/* Project: Subscription Tracker App */}
       <ProjectCard
         name="Subscription Tracker App: SubView"
         blurb="React Native + Expo app to track subscription costs with Firebase auth, realtime data, and charts."
         tags={["React Native", "Expo Router", "Firebase", "TypeScript"]}
-        //preview="/subViewLogo.png"
         preview="/IMG_1263.PNG"
         media={[
           {type:"image", src: "/IMG_1263.PNG", alt: "Image of App" }, 
@@ -37,6 +45,8 @@ const ProjectsSection: React.FC = () => (
           </>
         }
       />
+
+      {/* Project: Real Time OS-III PID Controller */}
       <ProjectCard
         name="Real Time OS-III PID Controller"
         blurb="Microcontroller driver for BA56-126WA M3 7-segment display (multiplexing, brightness PWM)."
@@ -59,6 +69,8 @@ const ProjectsSection: React.FC = () => (
           </>
         }
       />
+
+      {/* Project: Portfolio Website */}
       <ProjectCard
         name="Portfolio Website"
         blurb="This very page—responsive, animated, and accessible single-page site with smooth scrolling."
@@ -82,6 +94,8 @@ const ProjectsSection: React.FC = () => (
           </>
         }
       />
+
+      {/* Project: Arduino Project placeholder */}
       <ProjectCard
         name="Arduino Project: Sensor + RFID Automation"
         blurb="Project in progress using Arduino to read RFID tags and sensor data for home automation."

@@ -1,12 +1,21 @@
+/*
+ * Footer.tsx
+ * Global footer for the portfolio
+ * Shows copyright and quick access contact/social links
+ */
+
 import React from "react";
 import { Mail, Linkedin, Github } from "lucide-react";
 
 const Footer: React.FC = () => (
   <footer className="border-t border-white/10 py-10">
     <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      {/* Left side: copyright text */}
       <p className="text-sm text-blue-200/80">
         © {new Date().getFullYear()} Samuel Manley. All rights reserved.
       </p>
+
+      {/* Right side: contact + social icons */}
       <div className="flex items-center gap-3">
         <a
           href="mailto:smanley246@gmail.com"

@@ -1,11 +1,20 @@
+/*
+ * AboutSection.tsx
+ * "About Me" section with bio and skills list
+ * Uses Section and Card components to keep layout consistent
+ */
+
 import React from "react";
 import Section from "../components/Section";
 import Card from "../components/Card";
 import { User2 } from "lucide-react";
 
 const AboutSection: React.FC = () => (
+  // Wrap section with shared Section layout and icon
   <Section id="about" title="About Me" icon={<User2 />}>
+    {/* Two-column layout on medium+ screens: bio + skills */}
     <div className="grid md:grid-cols-3 gap-6">
+      {/* Main bio card spanning two columns */}
       <Card className="md:col-span-2">
         <p>
           I'm Samuel, a graduating Computer Engineering student from Canada with a passion for building
@@ -23,6 +32,7 @@ const AboutSection: React.FC = () => (
         </p>
       </Card>
       
+      {/* Skills card with bullet list */}
       <Card>
         <h4 className="font-semibold mb-2">Skills</h4>
         <ul className="list-disc ml-5 space-y-1 text-sm">
@@ -34,7 +44,6 @@ const AboutSection: React.FC = () => (
           <li>React Native, SQL, & .NET Development</li>
           <li>Python, Java, C, VHDL & more</li>
         </ul>
-
       </Card>
     </div>
   </Section>

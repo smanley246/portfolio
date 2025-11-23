@@ -1,3 +1,9 @@
+/*
+ * UserHeroSection.tsx
+ * Hero section at top of the page
+ * Shows name, tagline, CTA buttons, and headshot image
+ */
+
 import React from "react";
 import { motion } from "framer-motion";
 import { scrollToId } from "../utils/scrollToId";
@@ -16,8 +22,9 @@ const UserHeroSection: React.FC = () => {
           text-white
         "
       >
+        {/* LEFT: text content with intro and buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20 }} // fade + slide up
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
@@ -36,21 +43,22 @@ const UserHeroSection: React.FC = () => {
             scalable solutions.
           </p>
 
+          {/* Call-to-action buttons that scroll to sections */}
           <div className="mt-6 flex flex-wrap gap-3">
             <button
-              onClick={() => scrollToId("education")}
+              onClick={() => scrollToId("education")} // jump to Education
               className="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm sm:text-base"
             >
               Education
             </button>
             <button
-              onClick={() => scrollToId("experience")}
+              onClick={() => scrollToId("experience")} // jump to Experience
               className="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm sm:text-base"
             >
               Work Experience
             </button>
             <button
-              onClick={() => scrollToId("projects")}
+              onClick={() => scrollToId("projects")} // jump to Projects
               className="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm sm:text-base"
             >
               Projects
@@ -58,9 +66,9 @@ const UserHeroSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Right side: image */}
+        {/* RIGHT: headshot image with subtle animation */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.95 }} // fade + scale in
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="relative z-10 flex justify-center md:justify-end"
@@ -80,13 +88,13 @@ const UserHeroSection: React.FC = () => {
               alt="Samuel Manley Headshot"
               className="object-cover w-full h-full"
               onError={(e) => {
-                const target = e.currentTarget;
-                target.style.display = "none";
-                const parent = target.parentElement!;
-                const fallback = document.createElement("div");
+                const target = e.currentTarget; // <img> element
+                target.style.display = "none"; // hide broken image
+                const parent = target.parentElement!; // container div
+                const fallback = document.createElement("div"); // create fallback div
                 fallback.className =
                   "w-full h-full bg-gradient-to-br from-blue-900 to-blue-700";
-                parent.appendChild(fallback);
+                parent.appendChild(fallback); // show gradient if image fails
               }}
             />
           </div>
