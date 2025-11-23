@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { Analytics } from "@vercel/analytics/next"
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Portfolio from './Portfolio';
@@ -13,5 +14,6 @@ import Portfolio from './Portfolio';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Portfolio /> {/* Main app component */}
+    <Analytics /> {/* Tracking Script */}
   </React.StrictMode>
 );
