@@ -37,7 +37,7 @@ const UserHeroSection: React.FC = () => {
           </h1>
 
           <p className="mt-4 text-sm sm:text-base lg:text-lg text-blue-100/90">
-            Gradiating Computer Engineering student passionate about hardaware &
+            Graduating Computer Engineering student passionate about hardware &
             software development. Much of my talent lies in software development
             and hardware system design, with a focus on creating efficient and
             scalable solutions.

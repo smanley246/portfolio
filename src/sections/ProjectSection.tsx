@@ -17,7 +17,7 @@ const ProjectsSection: React.FC = () => (
       {/* Project: Subscription Tracker App */}
       <ProjectCard
         name="Subscription Tracker App: SubView"
-        blurb="React Native + Expo app to track subscription costs with Firebase auth, realtime data, and charts. Account creation, login, and password reset included. API logo integrtion for popular services. Firebase database to store user data securely."
+        blurb="React Native + Expo app to track subscription costs with Firebase auth, realtime data, and charts. Account creation, login, and password reset included. API logo integration for popular services. Firebase database to store user data securely."
         tags={["React Native", "Expo Router", "Firebase", "TypeScript"]}
         preview="/IMG_1263.PNG"
         media={[
@@ -35,7 +35,7 @@ const ProjectsSection: React.FC = () => (
           <>
             <p>
             React Native + Expo app to track subscription costs with Firebase auth, realtime data, and charts. Account creation, login, and 
-            password reset included. API logo integrtion for popular services. Firebase database to store user data securely.
+            password reset included. API logo integration for popular services. Firebase database to store user data securely.
             </p>
             <ul className="list-disc ml-5 mt-2 text-sm space-y-1">
               <li>Built with Expo Router for navigation</li>
@@ -50,8 +50,8 @@ const ProjectsSection: React.FC = () => (
       {/* Project: Real Time OS-III PID Controller */}
       <ProjectCard
         name="Real Time OS-III PID Controller"
-        blurb="Real time Hot Air Plant PID controller. Programmed with uCOS-III to ensure responiveness and safetly. Auto and manual modes with LCD display and button interfacewith real time temperature 
-        monitoring and control. Auto controlls temperature based on setpoint, manual allows direct user control of voltage."
+        blurb="Real time Hot Air Plant PID controller. Programmed with uCOS-III to ensure responsiveness and safety. Auto and manual modes with LCD display and button interface with real time temperature 
+        monitoring and control. Auto controls temperature based on set point, manual allows direct user control of voltage."
         tags={["Embedded", "C", "Electronics"]}
         preview="/hotAirPlantPreview.JPEG"
         media={[
@@ -61,12 +61,12 @@ const ProjectsSection: React.FC = () => (
         details={
           <>
             <p>
-            Real time Hot Air Plant PID controller. Programmed with uCOS-III to ensure responiveness and safetly. Auto and 
-            manual modes with LCD display and button interfacewith real time temperature monitoring and control. 
-            Auto controlls temperature based on setpoint, manual allows direct user control of voltage.
+            Real time Hot Air Plant PID controller. Programmed with uCOS-III to ensure responsiveness and safety. Auto and 
+            manual modes with LCD display and button interface with real time temperature monitoring and control. 
+            Auto controls temperature based on set point, manual allows direct user control of voltage.
             </p>
             <ul className="list-disc ml-5 mt-2 text-sm space-y-1">
-              <li>Userinterface designed for usability</li>
+              <li>User interface designed for usability</li>
               <li>PID for adjustable control</li>
               <li>Written in uCOS-III for stability</li>
             </ul>
@@ -103,7 +103,7 @@ const ProjectsSection: React.FC = () => (
       {/* Project: Arduino Project placeholder */}
       <ProjectCard
         name="Arduino Project: Sensor + RFID Automation"
-        blurb="Project in progress using Arduino to read RFID tags and sensor data for home automation. Many other projects have been completed using Arduino microcontrollers for various applications."
+        blurb="Project in progress using Arduino to read RFID tags and sensor data for home automation. Many other projects have been completed using Arduino micro-controllers for various applications."
         tags={["Circuitry", "Arduino", "Programming"]}
         preview="/arduino.JPEG"
         media={[
@@ -113,7 +113,7 @@ const ProjectsSection: React.FC = () => (
           <>
             <p>
               Project in progress using Arduino to read RFID tags and sensor data for home automation. 
-              Many other projects have been completed using Arduino microcontrollers for various applications.
+              Many other projects have been completed using Arduino micro-controllers for various applications.
             </p>
             <ul className="list-disc ml-5 mt-2 text-sm space-y-1">
               <li>Circuit Design</li>

@@ -25,7 +25,7 @@ const ExperienceSection: React.FC = () => (
             bullets={[
               "Provided technical assistance and troubleshooting for hardware/software issues.",
               "Developed Powershell scripts to automate routine tasks and improve efficiency.",
-              "Organized a dontion of over 25 laptops, 50 iPhones, and 60 iPads for a local charity.",
+              "Organized a donation of over 25 laptops, 50 iPhones, and 60 iPads for a local charity.",
             ]}
           />
           <TimelineItem
@@ -49,7 +49,7 @@ const ExperienceSection: React.FC = () => (
             title="Computer Technician Specialist"
             place="Geek Squad"
             bullets={[
-              "Provided technical support, diagnostics and reprairs for tech devices.",
+              "Provided technical support, diagnostics and repairs for tech devices.",
               "Assisted customers with data security, hacked recovery, and lockouts.",
               "Worked very well in the busy fast paced environment of retail tech support.",
             ]}

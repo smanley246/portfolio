@@ -40,7 +40,7 @@ const AboutSection: React.FC = () => (
           <li>Embedded Systems & Real-Time Control</li>
           <li>Circuits & Electronics</li>
           <li>Robotics Programming</li>
-          <li>Databasing & Full Stack Development</li>
+          <li>Database & Full Stack Development</li>
           <li>React Native, SQL, & .NET Development</li>
           <li>Python, Java, C, VHDL & more</li>
         </ul>
