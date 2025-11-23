@@ -7,7 +7,7 @@ const ProjectsSection: React.FC = () => (
   <Section id="projects" title="Projects" icon={<FolderGit2 />}>
     <div className="grid md:grid-cols-2 gap-6">
       <ProjectCard
-        name="subView – Subscription Tracker"
+        name="Subscription Tracker App: SubView"
         blurb="React Native + Expo app to track subscription costs with Firebase auth, realtime data, and charts."
         tags={["React Native", "Expo Router", "Firebase", "TypeScript"]}
         //preview="/subViewLogo.png"
@@ -20,7 +20,8 @@ const ProjectsSection: React.FC = () => (
           {type:"image", src: "/IMG_1267.PNG", alt: "Image of App" }, 
           {type:"image", src: "/IMG_1271.PNG", alt: "Image of App" }, 
           {type:"image", src: "/IMG_1272.PNG", alt: "Image of App" }, 
-          {type:"image", src: "/IMG_1273.PNG", alt: "Image of App" }]}
+          {type:"image", src: "/IMG_1273.PNG", alt: "Image of App" },
+          {type:"image", src: "/subViewLogo.png", alt: "Image of App" }]}
         repo="https://github.com/your-github/subView"
         details={
           <>
@@ -37,7 +38,7 @@ const ProjectsSection: React.FC = () => (
         }
       />
       <ProjectCard
-        name="Real Time µC/OS-III PID Controller"
+        name="Real Time OS-III PID Controller"
         blurb="Microcontroller driver for BA56-126WA M3 7-segment display (multiplexing, brightness PWM)."
         tags={["Embedded", "C", "Electronics"]}
         preview="/hotAirPlantPreview.JPEG"
@@ -82,7 +83,7 @@ const ProjectsSection: React.FC = () => (
         }
       />
       <ProjectCard
-        name="Current Arduino Project. Sensor + RFID Home Automation"
+        name="Arduino Project: Sensor + RFID Automation"
         blurb="Project in progress using Arduino to read RFID tags and sensor data for home automation."
         tags={["Circuitry", "Arduino", "Programming"]}
         preview="/arduino.JPEG"

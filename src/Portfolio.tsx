@@ -6,15 +6,17 @@
 * Created by Samuel Manley
 */
 
-//Imports of Hooks
+// Imports of Hooks
 import { useHashScroll } from "./hooks/useHashScroll";
 import { useDevSmokeTests } from "./hooks/useDevSmokeTests";
-//Imports of Components
+
+// Imports of Components
 import CircuitCanvasComponent from "./components/CircuitBackground";
 import UserHeroSectionComponent from "./sections/UserHeroSection";
 import NavbarComponent from "./components/Navbar";
 import Footer from "./components/Footer";
-//Imports of Sections
+
+// Imports of Sections
 import AboutSection from "./sections/AboutSection";
 import EducationSection from "./sections/EducationSection";
 import ExperienceSection from "./sections/ExperienceSection";
@@ -22,23 +24,17 @@ import ProjectsSection from "./sections/ProjectSection";
 
 /* ========================= Circuit Diagram ========================= */
 const CircuitBackground: React.FC = () => {
-  return (
-    <CircuitCanvasComponent />
-  );
+  return <CircuitCanvasComponent />;
 };
 
 /* ============================== Navbar ============================== */
 const Navbar: React.FC = () => {
-  return (
-    <NavbarComponent />
-  );
+  return <NavbarComponent />;
 };
 
 /* ========================= UserHeroSection ========================= */
 const Hero: React.FC = () => {
-  return (
-    <UserHeroSectionComponent/>
-  );
+  return <UserHeroSectionComponent />;
 };
 
 /* ============================== Page =============================== */
@@ -48,26 +44,28 @@ export default function Portfolio() {
 
   return (
     <>
-    {/* Background Circuit Diagram */}
+      {/* Background Circuit Diagram */}
       <CircuitBackground />
 
       {/* ========================= Content ========================= */}
-      <div className="relative z-10 min-h-screen text-white">
-        <Navbar /> {/* Navbar with links to Other Sections*/}
+      <div
+        className="relative z-10 min-h-screen flex flex-col text-white"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }} // keep content above Safari bar
+      >
+        <Navbar /> {/* Navbar with links to Other Sections */}
 
-        <section id="home" className="scroll-mt-24">
-          <Hero /> {/* Hero User Section */}
-        </section>
+        <main className="flex-1">
+          <section id="home" className="scroll-mt-24">
+            <Hero /> {/* Hero User Section */}
+          </section>
 
-        <AboutSection /> {/* About User Section */}
+          <AboutSection /> {/* About User Section */}
+          <ProjectsSection /> {/* User Project Overview */}
+          <EducationSection /> {/* User Education Section */}
+          <ExperienceSection /> {/* User Experience Section */}
+        </main>
 
-        <ProjectsSection /> {/* User Project Overvirew */}
-
-        <EducationSection /> {/* User Education Section */}
-
-        <ExperienceSection /> {/* User Experience Section */}
-
-        <Footer /> {/* Footer Section*/}
+        <Footer /> {/* Footer Section */}
       </div>
     </>
   );
