@@ -23,6 +23,7 @@ export type DegreeCard = {
 };
 
 export type CourseCard = {
+  slug: string; // ✅ used for route lookup
   code: string;
   title: string;
   term?: string;
@@ -38,6 +39,18 @@ export type EducationData = {
   coursesHeading: string;
   courses: CourseCard[];
 };
+
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+/** Route helper */
+export const courseDetailPath = (slug: string) => `/education/${slug}`;
 
 export const educationData: EducationData = {
   heading: "Education",
@@ -68,6 +81,7 @@ export const educationData: EducationData = {
   coursesHeading: "Relevant Courses",
   courses: [
     {
+      slug: slugify("ENGG*4550 VLSI Digital Design"),
       code: "ENGG*4550",
       title: "VLSI Digital Design",
       badge: "Silicon-Level Circuits",
@@ -83,6 +97,7 @@ export const educationData: EducationData = {
       },
     },
     {
+      slug: slugify("ENGG*4540 Advanced Computer Architecture"),
       code: "ENGG*4540",
       title: "Advanced Computer Architecture",
       badge: "Parallel & Memory Systems",
@@ -98,6 +113,7 @@ export const educationData: EducationData = {
       },
     },
     {
+      slug: slugify("ENGG*4420 Real-Time Systems Design"),
       code: "ENGG*4420",
       title: "Real-Time Systems Design",
       badge: "RTOS & Scheduling",
@@ -113,6 +129,7 @@ export const educationData: EducationData = {
       },
     },
     {
+      slug: slugify("ENGG*3050 Embedded Reconfigurable Computing Systems"),
       code: "ENGG*3050",
       title: "Embedded Reconfigurable Computing Systems",
       badge: "Programmable Hardware",
@@ -128,6 +145,7 @@ export const educationData: EducationData = {
       },
     },
     {
+      slug: slugify("ENGG*3100 Engineering & Design III"),
       code: "ENGG*3100",
       title: "Engineering & Design III",
       badge: "Systematic Design Process",
@@ -144,3 +162,6 @@ export const educationData: EducationData = {
     },
   ],
 };
+
+export const getCourseBySlug = (slug: string) =>
+  educationData.courses.find((c) => c.slug === slug);

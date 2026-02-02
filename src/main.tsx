@@ -23,6 +23,7 @@ import WorkPage from "./pages/WorkPage";
 import WorkDetailPage from "./sections/workSections/WorkDetailPage";
 import AboutPage from "./pages/AboutPage";
 import EducationPage from "./pages/EducationPage";
+import CourseDetailPage from "./pages/CourseDetailPage";
 import ScrollToTop from "./utils/ScrollToTop";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -36,6 +37,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/resume" element={<ResumePage />} />
         <Route path="/template" element={<TemplatePage />} />
         <Route path="/education" element={<EducationPage />} />
+        <Route path="/education/:slug" element={<CourseDetailPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/:slug" element={<ProjectDetailPage />} />
         <Route path="/work" element={<WorkPage />} />

@@ -14,7 +14,7 @@ import NavbarComponent from "../components/Navbar";
 import Footer from "../components/Footer";
 
 // Data
-import { educationData } from "../data/educationData/educationData";
+import { courseDetailPath, educationData } from "../data/educationData/educationData";
 
 // Sections
 import EducationHeroSection from "../sections/educationSections/EducationHeroSection";
@@ -47,6 +47,7 @@ export default function EducationPage() {
             <EducationCoursesSection
               coursesHeading={coursesHeading}
               courses={courses}
+              courseDetailPath={courseDetailPath}
             />
           </div>
         </main>

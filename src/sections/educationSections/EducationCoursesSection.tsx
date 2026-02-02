@@ -8,7 +8,9 @@
 
 import React from "react";
 import { BookOpen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Card from "../../components/Card";
+import CustomButton from "../../components/CustomButton";
 import type { CourseCard } from "../../data/educationData/educationData";
 
 const chipBase =
@@ -17,27 +19,36 @@ const chipBase =
 type Props = {
   coursesHeading: string;
   courses: CourseCard[];
+  courseDetailPath: (slug: string) => string;
 };
 
-const EducationCoursesSection: React.FC<Props> = ({ coursesHeading, courses }) => {
-  const renderDescription = (desc: CourseCard["description"]) => {
+const EducationCoursesSection: React.FC<Props> = ({
+  coursesHeading,
+  courses,
+  courseDetailPath,
+}) => {
+  const navigate = useNavigate();
+
+  const renderDescriptionPreview = (desc: CourseCard["description"]) => {
     if (!desc) return null;
 
-    // If array -> bullet list
+    // If array -> bullet list preview (limit to 3)
     if (Array.isArray(desc)) {
       if (!desc.length) return null;
+
+      const preview = desc.slice(0, 3);
       return (
         <ul className="mt-3 ml-5 list-disc space-y-1 text-sm text-white/80 leading-relaxed">
-          {desc.map((d, i) => (
+          {preview.map((d, i) => (
             <li key={`desc-${i}`}>{d}</li>
           ))}
         </ul>
       );
     }
 
-    // If string -> paragraph
+    // If string -> paragraph preview
     return (
-      <p className="mt-3 text-sm text-white/80 leading-relaxed whitespace-pre-line">
+      <p className="mt-3 text-sm text-white/80 leading-relaxed whitespace-pre-line line-clamp-3">
         {desc}
       </p>
     );
@@ -56,27 +67,38 @@ const EducationCoursesSection: React.FC<Props> = ({ coursesHeading, courses }) =
       {/* Course cards */}
       <div className="flex flex-col gap-4">
         {courses.map((c) => (
-          <Card key={c.code} className="p-5 bg-blue-900/25 border border-white/10">
+          <Card key={c.slug} className="p-5 bg-blue-900/25 border border-white/10">
             <div className="flex items-start gap-4">
               {/* Left text */}
               <div className="flex-1 min-w-0">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                   <div className="min-w-0">
                     <h3 className="text-lg font-semibold truncate">
                       {c.code} — {c.title}
                     </h3>
-                    {c.term && <p className="text-sm text-blue-200/80 mt-1">{c.term}</p>}
+                    {c.term && (
+                      <p className="text-sm text-blue-200/80 mt-1">{c.term}</p>
+                    )}
                   </div>
 
-                  {c.badge && (
-                    <span className="text-xs px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/85 whitespace-nowrap self-start">
-                      {c.badge}
-                    </span>
-                  )}
+                  <div className="flex items-center gap-2 sm:gap-3 sm:ml-auto">
+                    {c.badge && (
+                      <span className="text-xs px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/85 whitespace-nowrap">
+                        {c.badge}
+                      </span>
+                    )}
+
+                    <CustomButton
+                      className="whitespace-nowrap"
+                      onClick={() => navigate(courseDetailPath(c.slug))}
+                    >
+                      View Details
+                    </CustomButton>
+                  </div>
                 </div>
 
-                {/* Description (string or string[]) */}
-                {renderDescription(c.description)}
+                {/* Description preview (string or string[]) */}
+                {renderDescriptionPreview(c.description)}
 
                 {/* Tags */}
                 {c.tags?.length ? (
