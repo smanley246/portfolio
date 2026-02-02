@@ -9,6 +9,7 @@
 import React from "react";
 import Card from "../../components/Card";
 import CustomButton from "../../components/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 type WorkRole = {
   slug: string;
@@ -25,6 +26,8 @@ type Props = {
 };
 
 const WorkRolesSection: React.FC<Props> = ({ workRoles, workDetailPath }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col gap-6">
       {workRoles.map((role) => (
@@ -68,8 +71,11 @@ const WorkRolesSection: React.FC<Props> = ({ workRoles, workDetailPath }) => {
                   </div>
                 </div>
 
-                <CustomButton className="ml-auto whitespace-nowrap">
-                  <a href={workDetailPath(role.slug)}>View details</a>
+                <CustomButton
+                  className="ml-auto whitespace-nowrap"
+                  onClick={() => navigate(workDetailPath(role.slug))}
+                >
+                  View Details
                 </CustomButton>
               </div>
 
