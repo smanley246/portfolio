@@ -1,4 +1,11 @@
-/* src/index.css (Tailwind v4) */
+/*
+  * File: src/index.css
+  * Author: Samuel Manley
+  * Last Modified: February 1st, 2026
+  *
+  * Description: Global CSS styles for the React application using Tailwind CSS.
+*/
+
 @import "tailwindcss";
 
 html { scroll-behavior: smooth; }
@@ -14,4 +21,8 @@ body {
 
 #root {
   min-height: 100vh;
+}
+
+html, body {
+  overflow-x: hidden;
 }

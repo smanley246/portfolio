@@ -1,8 +1,10 @@
 /*
- * Section.tsx
- * Wrapper for each major scrollable section of the portfolio
- * Handles section padding, title row, icon, and consistent layout
- */
+  * File: src/components/Section.tsx
+  * Author: Samuel Manley
+  * Last Modified: February 1st, 2026
+  * 
+  * Description: Reusable Section component with title and optional icon.
+*/
 
 import React from "react";
 

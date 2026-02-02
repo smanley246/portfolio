@@ -1,8 +1,10 @@
 /*
- * Footer.tsx
- * Global footer for the portfolio
- * Shows copyright and quick access contact/social links
- */
+  * File: src/components/Footer.tsx
+  * Author: Samuel Manley
+  * Last Modified: February 1st, 2026
+  * 
+  * Description: Footer component with contact information and social media links.
+*/
 
 import React from "react";
 import { Mail, Linkedin, Github } from "lucide-react";
@@ -16,28 +18,30 @@ const Footer: React.FC = () => (
       </p>
 
       {/* Right side: contact + social icons */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 text-white">
         <a
-          href="mailto:smanley246@gmail.com"
-          className="inline-flex items-center gap-2 text-sm hover:underline"
+          href="mailto:samuel@samuelmanley.ca"
+          className="inline-flex items-center gap-2 text-sm text-white hover:text-white hover:underline"
         >
-          <Mail className="w-4 h-4" /> Email
+          <Mail className="w-4 h-4 text-white" /> Email
         </a>
+
         <a
           href="https://www.linkedin.com/in/smanley246/"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 text-sm hover:underline"
+          className="inline-flex items-center gap-2 text-sm text-white hover:text-white hover:underline"
         >
-          <Linkedin className="w-4 h-4" /> LinkedIn
+          <Linkedin className="w-4 h-4 text-white" /> LinkedIn
         </a>
+
         <a
           href="https://github.com/smanley246"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 text-sm hover:underline"
+          className="inline-flex items-center gap-2 text-sm text-white hover:text-white hover:underline"
         >
-          <Github className="w-4 h-4" /> GitHub
+          <Github className="w-4 h-4 text-white" /> GitHub
         </a>
       </div>
     </div>

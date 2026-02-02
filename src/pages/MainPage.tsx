@@ -1,26 +1,22 @@
 /*
-* Portfolio.tsx
-* Main portfolio page component
-* Renders Navbar, Hero, About, Projects, Education, Experience sections, and Footer
-* Includes circuit background and smooth scrolling to sections
-* Created by Samuel Manley
+  * File: src/pages/MainPage.tsx
+  * Author: Samuel Manley
+  * Last Modified: February 1st, 2026
+  * 
+  * Description: This file contains the main landing page for the portfolio website.
 */
 
-// Imports of Hooks
-import { useHashScroll } from "./hooks/useHashScroll";   // syncs scroll with URL hash
-import { useDevSmokeTests } from "./hooks/useDevSmokeTests"; // optional dev checks
-
 // Imports of Components
-import CircuitCanvasComponent from "./components/CircuitBackground"; // animated background
-import UserHeroSectionComponent from "./sections/UserHeroSection";   // hero at top
-import NavbarComponent from "./components/Navbar";                   // sticky navbar
-import Footer from "./components/Footer";                            // footer bar
+import CircuitCanvasComponent from "../components/CircuitBackground"; // animated background
+import UserHeroSectionComponent from "../sections/mainSections/MainUserHeroSection";   // hero at top
+import NavbarComponent from "../components/Navbar";                   // sticky navbar
+import Footer from "../components/Footer";                            // footer bar
 
 // Imports of Sections
-import AboutSection from "./sections/AboutSection";           // about section
-import EducationSection from "./sections/EducationSection";   // education section
-import ExperienceSection from "./sections/ExperienceSection"; // work experience section
-import ProjectsSection from "./sections/ProjectSection";      // projects grid
+import AboutSection from "../sections/mainSections/MainAboutSection";           // about section
+import EducationSection from "../sections/mainSections/MainEducationSection";   // education section
+import ExperienceSection from "../sections/mainSections/MainExperienceSection"; // work experience section
+import ProjectsSection from "../sections/mainSections/MainProjectSection";      // projects grid
 
 /* ========================= Circuit Diagram ========================= */
 const CircuitBackground: React.FC = () => {
@@ -38,10 +34,7 @@ const Hero: React.FC = () => {
 };
 
 /* ============================== Page =============================== */
-export default function Portfolio() {
-  useHashScroll();      // enable scrolling to sections via URL hash (#about etc.)
-  useDevSmokeTests();   // run dev-only smoke tests when enabled
-
+export default function MainPage() {
   return (
     <>
       {/* Background Circuit Diagram behind all content */}
@@ -54,7 +47,7 @@ export default function Portfolio() {
       >
         <Navbar /> {/* Navbar with links to other sections */}
 
-        <main className="flex-1">
+        <main className="flex-1 pt-12">
           {/* Home section wraps hero for scroll targeting */}
           <section id="home" className="scroll-mt-24">
             <Hero /> {/* Hero user section */}

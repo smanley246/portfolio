@@ -1,8 +1,10 @@
 /*
- * Card.tsx
- * Reusable card container for portfolio sections
- * Provides consistent rounded, bordered, blurred background styling
- */
+  * File: src/components/Card.tsx
+  * Author: Samuel Manley
+  * Last Modified: February 1st, 2026
+  * 
+  * Description: Reusable Card component for consistent styling
+*/
 
 import React from "react";
 
@@ -12,8 +14,7 @@ const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({
 }) => (
   <div
     className={
-      // Base card styling, plus any extra classes passed in
-      "rounded-2xl border border-white/10 shadow-sm p-5 bg-[#0a1f36]/50 backdrop-blur " +
+      "rounded-2xl bg-blue-900/35 border border-white/10 shadow-sm p-5 backdrop-blur " +
       (className ?? "")
     }
   >

@@ -1,8 +1,10 @@
 /*
- * CircuitBackground.tsx
- * Animated circuit + grid canvas background for the portfolio
- * Draws a responsive neon grid and circuit traces that react to scroll and screen size
- */
+  * File: src/components/CircuitBackground.tsx
+  * Author: Samuel Manley
+  * Last Modified: February 1st, 2026
+  * 
+  * Description: Animated circuit board style background canvas
+*/
 
 import React, { useEffect, useRef } from "react";
 
