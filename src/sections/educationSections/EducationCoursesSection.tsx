@@ -32,7 +32,6 @@ const EducationCoursesSection: React.FC<Props> = ({
   const renderDescriptionPreview = (desc: CourseCard["description"]) => {
     if (!desc) return null;
 
-    // If array -> bullet list preview (limit to 3)
     if (Array.isArray(desc)) {
       if (!desc.length) return null;
 
@@ -46,7 +45,6 @@ const EducationCoursesSection: React.FC<Props> = ({
       );
     }
 
-    // If string -> paragraph preview
     return (
       <p className="mt-3 text-sm text-white/80 leading-relaxed whitespace-pre-line line-clamp-3">
         {desc}
@@ -67,7 +65,10 @@ const EducationCoursesSection: React.FC<Props> = ({
       {/* Course cards */}
       <div className="flex flex-col gap-4">
         {courses.map((c) => (
-          <Card key={c.slug} className="p-5 bg-blue-900/25 border border-white/10">
+          <Card
+            key={c.slug}
+            className="p-5 bg-blue-900/25 border border-white/10"
+          >
             <div className="flex items-start gap-4">
               {/* Left text */}
               <div className="flex-1 min-w-0">
@@ -81,7 +82,8 @@ const EducationCoursesSection: React.FC<Props> = ({
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2 sm:gap-3 sm:ml-auto">
+                  {/* Desktop actions (badge + button). Hidden on mobile. */}
+                  <div className="hidden sm:flex items-center gap-2 sm:gap-3 sm:ml-auto">
                     {c.badge && (
                       <span className="text-xs px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/85 whitespace-nowrap">
                         {c.badge}
@@ -97,7 +99,16 @@ const EducationCoursesSection: React.FC<Props> = ({
                   </div>
                 </div>
 
-                {/* Description preview (string or string[]) */}
+                {/* Mobile badge (optional). Keep it under title on mobile for nice flow. */}
+                {c.badge ? (
+                  <div className="sm:hidden pt-3">
+                    <span className="text-xs px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/85 whitespace-nowrap inline-block">
+                      {c.badge}
+                    </span>
+                  </div>
+                ) : null}
+
+                {/* Description preview */}
                 {renderDescriptionPreview(c.description)}
 
                 {/* Tags */}
@@ -112,9 +123,10 @@ const EducationCoursesSection: React.FC<Props> = ({
                 ) : null}
               </div>
 
-              {/* Right image */}
-              {c.image?.src ? (
-                <div className="shrink-0">
+              {/* Right side */}
+              <div className="shrink-0 w-24 sm:w-auto">
+                {/* Image */}
+                {c.image?.src ? (
                   <div className="relative w-24 h-24 sm:w-32 sm:h-28 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                     <img
                       src={c.image.src}
@@ -125,8 +137,20 @@ const EducationCoursesSection: React.FC<Props> = ({
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
                   </div>
+                ) : (
+                  <div className="w-24 h-24 sm:w-32 sm:h-28 rounded-2xl border border-white/10 bg-white/5" />
+                )}
+
+                {/* Mobile button under the photo */}
+                <div className="sm:hidden mt-3">
+                  <CustomButton
+                    className="w-full justify-center"
+                    onClick={() => navigate(courseDetailPath(c.slug))}
+                  >
+                    View Details
+                  </CustomButton>
                 </div>
-              ) : null}
+              </div>
             </div>
           </Card>
         ))}
