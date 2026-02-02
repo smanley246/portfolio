@@ -19,7 +19,7 @@ export type AboutImage = {
   
   export type AboutPersonalCard = {
     title: string;
-    body: string[] | string;
+    body: string | string[];
     tags: string[];
     image?: AboutImage;
   };

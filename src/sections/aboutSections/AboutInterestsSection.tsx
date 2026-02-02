@@ -19,15 +19,17 @@ const sectionFade = {
 const chipBase =
   "inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/90";
 
+type InterestsCard = {
+  title: string;
+  body: string | string[];
+  tags: string[];
+  image?: { src: string; alt: string; caption: string };
+};
+
 type InterestsSection = {
   id: "interests";
   title: string;
-  cards: Array<{
-    title: string;
-    body: string;
-    tags: string[];
-    image?: { src: string; alt: string; caption: string };
-  }>;
+  cards: InterestsCard[];
 };
 
 type Props = {
@@ -38,6 +40,22 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
   const squash = interests.cards[0];
   const tech = interests.cards[1];
   const pets = interests.cards[2];
+
+  const renderBody = (body: string | string[]) => {
+    if (Array.isArray(body)) {
+      return (
+        <div className="space-y-3">
+          {body.map((p, i) => (
+            <p key={i} className="text-white/80 leading-relaxed whitespace-pre-line">
+              {p}
+            </p>
+          ))}
+        </div>
+      );
+    }
+
+    return <p className="text-white/80 leading-relaxed whitespace-pre-line">{body}</p>;
+  };
 
   return (
     <section
@@ -81,13 +99,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
               </div>
             )}
 
-            {Array.isArray(squash.body)
-              ? squash.body.map((p, i) => (
-                  <p key={i} className="text-white/80 leading-relaxed whitespace-pre-line">
-                    {p}
-                  </p>
-                ))
-              : <p className="text-white/80 leading-relaxed">{squash.body}</p>}
+            {renderBody(squash.body)}
 
             <div className="flex flex-wrap gap-2 pt-4">
               {squash.tags.map((t) => (
@@ -107,7 +119,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
                 <h3 className="text-xl font-semibold">{tech.title}</h3>
               </div>
 
-              <p className="text-white/80 leading-relaxed">{tech.body}</p>
+              {renderBody(tech.body)}
 
               <div className="flex flex-wrap gap-2 pt-4">
                 {tech.tags.map((t) => (
@@ -140,7 +152,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
                 </div>
               )}
 
-              <p className="text-white/80 leading-relaxed">{pets.body}</p>
+              {renderBody(pets.body)}
 
               <div className="flex flex-wrap gap-2 pt-4">
                 {pets.tags.map((t) => (

@@ -27,7 +27,7 @@ export type CourseCard = {
   title: string;
   term?: string;
   badge?: string;
-  description?: string[] | string;
+  description?: string | string[];
   tags?: string[];
   image?: EducationImage;
 };
