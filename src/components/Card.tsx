@@ -3,7 +3,7 @@
   * Author: Samuel Manley
   * Last Modified: February 1st, 2026
   * 
-  * Description: Reusable Card component for consistent styling
+  * Description: Reusable Card component for consistent styling.
 */
 
 import React from "react";

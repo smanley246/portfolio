@@ -3,7 +3,7 @@
   * Author: Samuel Manley
   * Last Modified: February 1st, 2026
   *
-  * Description: A reusable, stylized button component with pressable look
+  * Description: A reusable, stylized button component.
 */
 
 import React from "react";

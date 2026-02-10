@@ -20,7 +20,9 @@ const MainExperienceSection: React.FC = () => {
         <div className="space-y-6">
           {experienceData.left.map((role) => (
             <Card key={`${role.when}-${role.title}-${role.place}`}>
-              <div className="text-sm text-blue-200/80">{role.when}</div>
+              <div className="text-sm text-blue-200/80">
+                {role.when}
+              </div>
 
               <h3 className="font-semibold mt-1">{role.title}</h3>
 
