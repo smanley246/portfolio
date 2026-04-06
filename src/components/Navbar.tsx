@@ -115,7 +115,7 @@ const Navbar: React.FC = () => {
                     <Link
                       to={l.to}
                       className={[
-                        "relative inline-flex items-center gap-2 overflow-hidden whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition",
+                        "relative inline-flex items-center gap-2 overflow-hidden whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition duration-200 hover:scale-[1.05]",
                         active ? "text-slate-950" : "text-[var(--color-text-muted)] hover:text-white",
                       ].join(" ")}
                       aria-label={`Go to ${l.label}`}

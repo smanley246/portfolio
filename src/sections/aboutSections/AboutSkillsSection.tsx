@@ -81,11 +81,11 @@ const AboutSkillsSection: React.FC<Props> = ({ skills }) => {
 
             <Card className="lg:col-span-4 p-6 bg-blue-900/35 border border-white/10">
               <div className="flex flex-col gap-4">
-                <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                <div className="interactive-media relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                   <img
                     src={skills.image1.src}
                     alt={skills.image1.alt}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="interactive-media__asset absolute inset-0 h-full w-full object-cover"
                     loading="lazy"
                   />
                   <button
@@ -109,11 +109,11 @@ const AboutSkillsSection: React.FC<Props> = ({ skills }) => {
                   </div>
                 </div>
 
-                <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                <div className="interactive-media relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                   <img
                     src={skills.image2.src}
                     alt={skills.image2.alt}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="interactive-media__asset absolute inset-0 h-full w-full object-cover"
                     loading="lazy"
                   />
                   <button

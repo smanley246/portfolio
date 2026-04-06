@@ -22,6 +22,18 @@ const MainUserHeroSection: React.FC = () => {
   const [expandedImage, setExpandedImage] = React.useState<LightboxImage | null>(
     null,
   );
+  const heroCardRef = React.useRef<HTMLDivElement>(null);
+
+  const handleHeroCardPointerMove = (
+    event: React.PointerEvent<HTMLDivElement>,
+  ) => {
+    const node = heroCardRef.current;
+    if (!node) return;
+
+    const bounds = node.getBoundingClientRect();
+    node.style.setProperty("--spotlight-x", `${event.clientX - bounds.left}px`);
+    node.style.setProperty("--spotlight-y", `${event.clientY - bounds.top}px`);
+  };
 
   return (
     <>
@@ -71,40 +83,49 @@ const MainUserHeroSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="relative flex justify-center lg:justify-end"
         >
-          <div className="panel relative w-full max-w-[23rem] overflow-hidden rounded-[2rem] p-4">
-            <div className="absolute inset-x-8 top-0 h-24 rounded-full bg-cyan-300/20 blur-3xl" />
+          <div
+            ref={heroCardRef}
+            onPointerMove={handleHeroCardPointerMove}
+            className="panel interactive-card relative w-full max-w-[23rem] overflow-hidden rounded-[2rem] p-4"
+          >
+            <div className="interactive-card__surface-glow" />
+            <div className="interactive-card__border-glow" />
 
-            <div className="relative aspect-square overflow-hidden rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-slate-800 via-slate-900 to-sky-950">
-              {!imageFailed ? (
-                <>
-                  <img
-                    src={heroData.headshotSrc}
-                    alt={heroData.headshotAlt}
-                    className="h-full w-full object-cover"
-                    onError={() => setImageFailed(true)}
-                  />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setExpandedImage({
-                        src: heroData.headshotSrc,
-                        alt: heroData.headshotAlt,
-                        title: "Headshot",
-                      })
-                    }
-                    className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/70 text-white transition hover:bg-slate-900"
-                    aria-label="Expand headshot"
-                  >
-                    <Expand className="h-4 w-4" />
-                  </button>
-                </>
-              ) : (
-                <div className="flex h-full items-center justify-center bg-gradient-to-br from-sky-900 via-slate-900 to-slate-950">
-                  <span className="text-sm text-[var(--color-text-soft)]">
-                    Headshot unavailable
-                  </span>
-                </div>
-              )}
+            <div className="relative z-10">
+              <div className="absolute inset-x-8 top-0 h-24 rounded-full bg-cyan-300/20 blur-3xl" />
+
+              <div className="interactive-media relative aspect-square overflow-hidden rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-slate-800 via-slate-900 to-sky-950">
+                {!imageFailed ? (
+                  <>
+                    <img
+                      src={heroData.headshotSrc}
+                      alt={heroData.headshotAlt}
+                      className="interactive-media__asset h-full w-full object-cover"
+                      onError={() => setImageFailed(true)}
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setExpandedImage({
+                          src: heroData.headshotSrc,
+                          alt: heroData.headshotAlt,
+                          title: "Headshot",
+                        })
+                      }
+                      className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/70 text-white transition hover:bg-slate-900"
+                      aria-label="Expand headshot"
+                    >
+                      <Expand className="h-4 w-4" />
+                    </button>
+                  </>
+                ) : (
+                  <div className="flex h-full items-center justify-center bg-gradient-to-br from-sky-900 via-slate-900 to-slate-950">
+                    <span className="text-sm text-[var(--color-text-soft)]">
+                      Headshot unavailable
+                    </span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </motion.div>

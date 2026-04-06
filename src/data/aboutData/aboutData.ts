@@ -84,7 +84,7 @@ export const aboutPageData: {
         "Problem Solving",
       ],
       image: {
-        src: "/1stYearProj.jpg",
+        src: "/IMG_3040.JPEG",
         alt: "Samuel working on an engineering project",
         caption: "Turning ideas into reliable, polished systems.",
       },

@@ -44,7 +44,7 @@ const MainCapstoneSection: React.FC = () => {
       key={slot.title}
       className={`overflow-hidden bg-transparent p-0 shadow-none ${cardClassName}`}
     >
-      <div className={`relative ${aspectClassName}`}>
+      <div className={`interactive-media relative ${aspectClassName}`}>
         <div
           className={`absolute inset-0 overflow-hidden rounded-[2rem] ${frameClassName}`}
         >
@@ -53,7 +53,7 @@ const MainCapstoneSection: React.FC = () => {
               <img
                 src={slot.src}
                 alt={slot.title}
-                className={`max-h-full max-w-full rounded-[1.6rem] ${imageClassName}`}
+                className={`interactive-media__asset max-h-full max-w-full rounded-[1.6rem] ${imageClassName}`}
                 loading="lazy"
                 draggable={false}
               />
@@ -62,7 +62,7 @@ const MainCapstoneSection: React.FC = () => {
             <img
               src={slot.src}
               alt={slot.title}
-              className={`h-full w-full rounded-[1.6rem] ${imageClassName}`}
+              className={`interactive-media__asset h-full w-full rounded-[1.6rem] ${imageClassName}`}
               loading="lazy"
               draggable={false}
             />
@@ -104,7 +104,7 @@ const MainCapstoneSection: React.FC = () => {
             {renderImageCard(
               deanSlot,
               "h-auto w-auto",
-              "aspect-[1459/1440] rounded-[1.4rem]",
+              "aspect-square rounded-[1.4rem]",
               "",
               "",
               "contain",
@@ -113,18 +113,18 @@ const MainCapstoneSection: React.FC = () => {
             {renderImageCard(
               schematicSlot,
               "h-auto w-auto",
-              "aspect-[2434/1633] rounded-[1.4rem]",
+              "aspect-[3/2] rounded-[1.4rem]",
               "",
               "",
               "contain",
             )}
           </div>
 
-          <div className="flex h-full flex-col gap-6">
+          <div className="flex flex-col gap-6 xl:h-full">
             {renderImageCard(
               posterSlot,
               "h-auto w-auto",
-              "aspect-[5403/7204] rounded-[1.4rem]",
+              "aspect-[3/4] rounded-[1.4rem]",
               "",
               "",
               "contain",
@@ -133,8 +133,8 @@ const MainCapstoneSection: React.FC = () => {
             {renderImageCard(
               displaySlot,
               "rounded-[1.6rem] object-cover object-bottom",
-              "min-h-[18rem] rounded-[1.4rem] xl:flex-1",
-              "flex h-full flex-col xl:flex-1",
+              "min-h-[18rem] rounded-[1.4rem] sm:min-h-[20rem] xl:flex-1",
+              "flex flex-col xl:h-full xl:flex-1",
               "border border-white/10",
               "cover",
             )}

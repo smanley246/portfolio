@@ -14,7 +14,7 @@ export default function ProjectsPage() {
     <div className="site-container">
       <PageIntro
         eyebrow="Selected Work"
-        title="Projects built to ship, test, and iterate."
+        title="Projects"
         description="A fuller view of my project work across mobile apps, embedded systems, controls, and web experiences."
       />
       <ProjectsSection />

@@ -119,11 +119,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
           {preview && (
             <div className="order-2 w-full lg:w-auto">
-              <div className="aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/70 lg:w-56 xl:w-64">
+              <div className="interactive-media aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/70 lg:w-56 xl:w-64">
                 <img
                   src={preview}
                   alt={`${name} preview`}
-                  className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                  className="interactive-media__asset h-full w-full object-cover"
                   loading="lazy"
                 />
               </div>

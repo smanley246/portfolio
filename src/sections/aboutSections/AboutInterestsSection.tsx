@@ -70,8 +70,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
         <motion.div
           variants={sectionFade}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
+          animate="show"
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
           <div className="mb-4 flex items-center gap-3">
@@ -89,11 +88,11 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
               </div>
 
               {squash.image && (
-                <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 mb-4">
+                <div className="interactive-media relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 mb-4">
                   <img
                     src={squash.image.src}
                     alt={squash.image.alt}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="interactive-media__asset absolute inset-0 h-full w-full object-cover"
                     loading="lazy"
                   />
                   <button
@@ -154,11 +153,11 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
                 </div>
 
                 {pets.image && (
-                  <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 mb-4">
+                  <div className="interactive-media relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 mb-4">
                     <img
                       src={pets.image.src}
                       alt={pets.image.alt}
-                      className="absolute inset-0 h-full w-full object-cover"
+                      className="interactive-media__asset absolute inset-0 h-full w-full object-cover"
                       loading="lazy"
                     />
                     <button

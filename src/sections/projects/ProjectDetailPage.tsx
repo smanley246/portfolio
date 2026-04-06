@@ -16,7 +16,6 @@ import {
   Github,
 } from "lucide-react";
 import Card from "../../components/Card";
-import PageIntro from "../../components/PageIntro";
 import { getProjectBySlug } from "../../data/projectData/projectData";
 
 export default function ProjectDetailPage() {
@@ -78,8 +77,18 @@ export default function ProjectDetailPage() {
           </Card>
         ) : (
           <>
-            <div className="grid gap-8 xl:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] xl:items-start">
-              <div className="order-2 min-w-0 xl:order-1">
+            <section className="mb-8">
+              <p className="page-intro__eyebrow">Project Detail</p>
+              <h1 className="mt-4 text-4xl font-extrabold leading-[0.96] tracking-[-0.05em] text-white sm:text-5xl xl:text-6xl">
+                {project.name}
+              </h1>
+              <p className="prose-copy mt-5 max-w-none text-base sm:text-lg">
+                {project.description ?? project.blurb}
+              </p>
+            </section>
+
+            <div className="grid gap-8 xl:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] xl:items-start">
+              <div className="min-w-0">
                 <Card className="overflow-hidden p-0">
                   <button
                     type="button"
@@ -182,78 +191,56 @@ export default function ProjectDetailPage() {
                 </Card>
               </div>
 
-              <div className="order-1 min-w-0 xl:order-2">
-                <PageIntro
-                  eyebrow="Project Detail"
-                  title={project.name}
-                  description={project.description ?? project.blurb}
-                />
-
-                <div className="mb-6 flex flex-wrap gap-3">
-                  {project.repo ? (
-                    <a
-                      href={project.repo}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-                    >
-                      <Github className="h-4 w-4" /> Repo
-                    </a>
-                  ) : null}
-                  {project.link ? (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-                    >
-                      <ArrowUpRight className="h-4 w-4" /> Live Demo
-                    </a>
-                  ) : null}
-                </div>
-
-                {project.bullets?.length ? (
-                  <Card className="mb-6">
-                    <h2 className="mb-3 text-lg font-semibold">Key Highlights</h2>
-                    <ul className="ml-5 list-disc space-y-2 text-sm text-[var(--color-text-muted)]">
-                      {project.bullets.map((b) => (
-                        <li key={b}>{b}</li>
-                      ))}
-                    </ul>
-                  </Card>
-                ) : null}
-
-                {project.materials?.length ? (
-                  <Card className="mb-6">
-                    <h2 className="mb-3 text-lg font-semibold">Project Materials</h2>
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {project.materials.map((item) => (
-                        <div
-                          key={`${item.kind}-${item.title}`}
-                          className="rounded-[1.25rem] border border-white/10 bg-white/[0.03] p-4"
+              <div className="min-w-0">
+                <Card className="h-full">
+                  {(project.repo || project.link) && (
+                    <div className="mb-5 flex flex-wrap gap-3">
+                      {project.repo ? (
+                        <a
+                          href={project.repo}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
                         >
-                          <div className="mb-2 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-[var(--color-text-soft)]">
-                            {item.kind}
-                          </div>
-                          <h3 className="text-base font-semibold text-white">
-                            {item.title}
-                          </h3>
-                          <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">
-                            {item.note}
-                          </p>
-                        </div>
-                      ))}
+                          <Github className="h-4 w-4" /> Repo
+                        </a>
+                      ) : null}
+                      {project.link ? (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
+                        >
+                          <ArrowUpRight className="h-4 w-4" /> Live Demo
+                        </a>
+                      ) : null}
                     </div>
-                  </Card>
-                ) : null}
+                  )}
 
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((t) => (
-                    <span key={t} className="card-chip">
-                      {t}
-                    </span>
-                  ))}
-                </div>
+                  {project.bullets?.length ? (
+                    <>
+                      <h2 className="mb-3 text-lg font-semibold">Key Highlights</h2>
+                      <ul className="ml-5 list-disc space-y-2 text-sm text-[var(--color-text-muted)]">
+                        {project.bullets.map((b) => (
+                          <li key={b}>{b}</li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : (
+                    <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
+                      Explore the gallery and links to see more of this project.
+                    </p>
+                  )}
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.tags.map((t) => (
+                      <span key={t} className="card-chip">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </Card>
               </div>
             </div>
 

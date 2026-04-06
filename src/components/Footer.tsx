@@ -14,8 +14,8 @@ const Footer: React.FC = () => (
     <div className="site-container flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
       <div className="space-y-1">
         <p className="text-sm font-medium text-white">Samuel Manley</p>
-        <p className="text-sm text-[var(--color-text-soft)]">
-          Built with React, Vite, and a hardware-inspired visual system.
+        <p className="text-xs text-[var(--color-text-soft)]">
+          Copyright {new Date().getFullYear()}. All rights reserved.
         </p>
       </div>
 
@@ -45,10 +45,6 @@ const Footer: React.FC = () => (
           <Github className="h-4 w-4" /> GitHub
         </a>
       </div>
-
-      <p className="text-xs text-[var(--color-text-soft)] md:text-right">
-        Copyright {new Date().getFullYear()} Samuel Manley
-      </p>
     </div>
   </footer>
 );

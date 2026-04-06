@@ -6,7 +6,7 @@
   * Description: This file contains the About Summary section component for the About page.
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Expand, Heart } from "lucide-react";
 import Card from "../../components/Card";
@@ -36,6 +36,11 @@ type Props = {
 
 const AboutSummarySection: React.FC<Props> = ({ summary }) => {
   const [expandedImage, setExpandedImage] = useState<LightboxImage | null>(null);
+  const [imageFailed, setImageFailed] = useState(false);
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [summary.image.src]);
 
   return (
     <>
@@ -77,13 +82,21 @@ const AboutSummarySection: React.FC<Props> = ({ summary }) => {
             </Card>
 
             <Card className="lg:col-span-5 flex items-center justify-center p-6 bg-blue-900/35 border border-white/10">
-              <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-                <img
-                  src={summary.image.src}
-                  alt={summary.image.alt}
-                  className="absolute inset-0 h-full w-full object-cover"
-                  loading="lazy"
-                />
+              <div className="interactive-media relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                {!imageFailed ? (
+                  <img
+                    key={summary.image.src}
+                    src={summary.image.src}
+                    alt={summary.image.alt}
+                    className="interactive-media__asset absolute inset-0 h-full w-full object-cover"
+                    loading="lazy"
+                    onError={() => setImageFailed(true)}
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 px-6 text-center text-sm text-[var(--color-text-soft)]">
+                    Summary image unavailable
+                  </div>
+                )}
                 <button
                   type="button"
                   onClick={() =>

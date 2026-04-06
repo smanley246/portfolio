@@ -155,19 +155,4 @@ export type ProjectMedia = {
       bullets: ["Fully responsive design", "Accessible navigation and content", "Animated transitions for a modern feel"],
     },
   
-    {
-      slug: slugify("Arduino Project: Sensor + RFID Automation"),
-      name: "Arduino Project: Sensor + RFID Automation",
-      blurb:
-        "Project in progress using Arduino to read RFID tags and sensor data for home automation. Many other projects have been completed using Arduino micro-controllers for various applications.",
-      tags: ["Circuitry", "Arduino", "Programming"],
-      preview: "/arduino.JPEG",
-      media: [
-        { type: "image", src: "/arduino.JPEG", alt: "Arduino project preview" },
-        { type: "image", src: "/Arduino_Logo.png", alt: "Arduino logo" },
-      ],
-      description:
-        "Project in progress using Arduino to read RFID tags and sensor data for home automation. Many other projects have been completed using Arduino micro-controllers for various applications.",
-      bullets: ["Circuit Design", "Electrical Component Implementation", "Software Integration"],
-    },
   ];

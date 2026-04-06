@@ -13,7 +13,7 @@ import Card from "../../components/Card";
 import { aboutData } from "../../data/mainSummaryData/aboutData";
 
 const MainAboutSection: React.FC = () => (
-  <Section id="about" title="About Me" icon={<User2 />}>
+  <Section id="about" title="Quick Summary" icon={<User2 />}>
     <div className="grid gap-6 md:grid-cols-3">
       <Card className="md:col-span-2">
         {aboutData.paragraphs.map((text, idx) => (
