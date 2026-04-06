@@ -6,6 +6,8 @@
   * Description: This file contains structured data for the main Projects section of the portfolio website.
 */
 
+import { capstonePlaceholders } from "../capstoneData";
+
 export type ProjectMedia = {
     type: "image" | "video";
     src: string;
@@ -37,6 +39,58 @@ export type ProjectMedia = {
       .replace(/(^-|-$)/g, "");
   
   export const projects: Project[] = [
+    {
+      slug: slugify("Engineering Capstone Project"),
+      name: "Engineering Capstone Project",
+      blurb:
+        "Capstone redesign of a continuous passive motion machine, presented at Engineering Design Day with poster, demo materials, and a full team showcase.",
+      tags: ["Capstone", "Hardware", "Electronics", "Design Day"],
+      preview: capstonePlaceholders.preview,
+      media: [
+        {
+          type: "image",
+          src: "/capstonePoster.png",
+          alt: "Capstone design poster",
+        },
+        {
+          type: "video",
+          src: "/capstoneVideo.mp4",
+          alt: "Capstone presentation video",
+        },
+        {
+          type: "image",
+          src: "/IMG_3106.JPEG",
+          alt: "Capstone detail image 1",
+        },
+        {
+          type: "image",
+          src: "/IMG_3107.JPEG",
+          alt: "Capstone detail image 2",
+        },
+        {
+          type: "image",
+          src: "/capstoneSchematic.jpg",
+          alt: "Capstone electronics schematic",
+        },
+        {
+          type: "image",
+          src: "/IMG_3049.JPEG",
+          alt: "Capstone dean group photo",
+        },
+        {
+          type: "image",
+          src: "/IMG_3057.JPEG",
+          alt: "Capstone desk display photo",
+        },
+      ],
+      description:
+        "A team capstone project focused on redesigning a continuous passive motion machine and presenting the final build during Engineering Design Day at the University of Guelph.",
+      bullets: [
+        "Final poster and presentation assets",
+        "Team showcase with judges and faculty",
+        "Cross-disciplinary engineering execution",
+      ],
+    },
     {
       slug: slugify("Subscription Tracker App: SubView"),
       name: "Subscription Tracker App: SubView",

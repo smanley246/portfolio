@@ -8,46 +8,42 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { ArrowRight, Expand } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { heroData } from "../../data/mainSummaryData/heroData";
 import CustomButton from "../../components/CustomButton";
-import { useNavigate } from "react-router-dom";
+import ImageLightboxModal, {
+  type LightboxImage,
+} from "../../components/ImageLightboxModal";
 
 const MainUserHeroSection: React.FC = () => {
   const navigate = useNavigate();
+  const [imageFailed, setImageFailed] = React.useState(false);
+  const [expandedImage, setExpandedImage] = React.useState<LightboxImage | null>(
+    null,
+  );
 
   return (
-    <section className="relative z-10">
-      <div
-        className="
-          max-w-6xl mx-auto 
-          px-4 
-          py-8 sm:py-10 lg:py-12
-          grid gap-10 lg:gap-16 
-          md:grid-cols-2 
-          items-center
-          text-white
-        "
-      >
-        {/* LEFT: text content with intro and buttons */}
+    <>
+      <section className="relative z-10 py-8">
+        <div className="site-container grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          className="space-y-6"
         >
-          <p className="text-xs sm:text-sm tracking-widest uppercase text-blue-200/70">
-            {heroData.eyebrow}
-          </p>
+          <p className="section-kicker">{heroData.eyebrow}</p>
 
-          <h1 className="mt-3 text-3xl sm:text-4xl lg:text-6xl font-extrabold leading-tight">
+          <h1 className="max-w-[11ch] text-5xl font-extrabold leading-[0.92] tracking-[-0.05em] sm:text-6xl lg:text-7xl">
             {heroData.name}
           </h1>
 
-          <p className="mt-4 text-sm sm:text-base lg:text-lg text-blue-100/90">
+          <p className="max-w-2xl text-base leading-8 text-[var(--color-text-muted)] sm:text-lg">
             {heroData.tagline}
           </p>
 
-          {/* Call-to-action buttons */}
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3">
             {heroData.ctas.map((cta) => (
               <CustomButton
                 key={"route" in cta ? cta.route : cta.targetId}
@@ -56,52 +52,70 @@ const MainUserHeroSection: React.FC = () => {
                     navigate(cta.route);
                     return;
                   }
+
                   document
                     .getElementById(cta.targetId)
                     ?.scrollIntoView({ behavior: "smooth", block: "start" });
                 }}
               >
                 {cta.label}
+                <ArrowRight className="h-4 w-4" />
               </CustomButton>
             ))}
           </div>
         </motion.div>
 
-        {/* RIGHT: headshot image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative z-10 flex justify-center md:justify-end"
+          className="relative flex justify-center lg:justify-end"
         >
-          <div
-            className="
-              rounded-3xl overflow-hidden 
-              shadow-inner ring-1 ring-white/15
-              w-40 h-40 
-              sm:w-56 sm:h-56 
-              md:w-64 md:h-64 
-              lg:w-72 lg:h-72
-            "
-          >
-            <img
-              src={heroData.headshotSrc}
-              alt={heroData.headshotAlt}
-              className="object-cover w-full h-full"
-              onError={(e) => {
-                const target = e.currentTarget;
-                target.style.display = "none";
-                const parent = target.parentElement!;
-                const fallback = document.createElement("div");
-                fallback.className =
-                  "w-full h-full bg-gradient-to-br from-blue-900 to-blue-700";
-                parent.appendChild(fallback);
-              }}
-            />
+          <div className="panel relative w-full max-w-[23rem] overflow-hidden rounded-[2rem] p-4">
+            <div className="absolute inset-x-8 top-0 h-24 rounded-full bg-cyan-300/20 blur-3xl" />
+
+            <div className="relative aspect-square overflow-hidden rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-slate-800 via-slate-900 to-sky-950">
+              {!imageFailed ? (
+                <>
+                  <img
+                    src={heroData.headshotSrc}
+                    alt={heroData.headshotAlt}
+                    className="h-full w-full object-cover"
+                    onError={() => setImageFailed(true)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExpandedImage({
+                        src: heroData.headshotSrc,
+                        alt: heroData.headshotAlt,
+                        title: "Headshot",
+                      })
+                    }
+                    className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/70 text-white transition hover:bg-slate-900"
+                    aria-label="Expand headshot"
+                  >
+                    <Expand className="h-4 w-4" />
+                  </button>
+                </>
+              ) : (
+                <div className="flex h-full items-center justify-center bg-gradient-to-br from-sky-900 via-slate-900 to-slate-950">
+                  <span className="text-sm text-[var(--color-text-soft)]">
+                    Headshot unavailable
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         </motion.div>
-      </div>
-    </section>
+        </div>
+      </section>
+
+      <ImageLightboxModal
+        image={expandedImage}
+        onClose={() => setExpandedImage(null)}
+      />
+    </>
   );
 };
 

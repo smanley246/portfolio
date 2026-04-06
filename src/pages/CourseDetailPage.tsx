@@ -6,14 +6,9 @@
  * Description: Course detail page for the Education section.
  */
 
-import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
-// Components
-import CircuitCanvasComponent from "../components/CircuitBackground";
-import NavbarComponent from "../components/Navbar";
-import Footer from "../components/Footer";
 import Card from "../components/Card";
 
 // Data
@@ -24,12 +19,6 @@ import {
 
 const chipBase =
   "inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/90";
-
-/* ========================= Circuit Diagram ========================= */
-const CircuitBackground: React.FC = () => <CircuitCanvasComponent />;
-
-/* ============================== Navbar ============================== */
-const Navbar: React.FC = () => <NavbarComponent />;
 
 const renderFullDescription = (desc: CourseCard["description"]) => {
   if (!desc) return null;
@@ -59,17 +48,8 @@ export default function CourseDetailPage() {
   const course = slug ? getCourseBySlug(slug) : undefined;
 
   return (
-    <>
-      <CircuitBackground />
-      <div
-        className="relative z-10 min-h-screen flex flex-col text-white"
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-      >
-        <Navbar />
-
-        <main className="flex-1 pt-8">
-          <div className="px-6 py-10">
-            <div className="max-w-5xl mx-auto">
+    <div className="px-6 py-10">
+      <div className="mx-auto max-w-5xl">
               <div className="flex items-center justify-between gap-3 mb-6">
                 <button
                   onClick={() => navigate(-1)}
@@ -80,8 +60,8 @@ export default function CourseDetailPage() {
               </div>
 
               {!course ? (
-                <Card>
-                  <h1 className="text-xl font-semibold">Course not found</h1>
+                  <Card>
+                    <h1 className="text-xl font-semibold">Course not found</h1>
                   <p className="mt-2 text-sm text-blue-100/80">
                     That URL does not match any course slug in your education data.
                   </p>
@@ -154,12 +134,7 @@ export default function CourseDetailPage() {
                   </Card>
                 </>
               )}
-            </div>
-          </div>
-        </main>
       </div>
-
-      <Footer />
-    </>
+    </div>
   );
 }

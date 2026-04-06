@@ -6,13 +6,6 @@
   * Description: About page component for the portfolio website.
 */
 
-import React from "react";
-
-// Components
-import CircuitCanvasComponent from "../components/CircuitBackground";
-import NavbarComponent from "../components/Navbar";
-import Footer from "../components/Footer";
-
 // Data
 import { aboutPageData } from "../data/aboutData/aboutData";
 
@@ -21,12 +14,6 @@ import AboutHeroSection from "../sections/aboutSections/AboutHeroSection";
 import AboutSummarySection from "../sections/aboutSections/AboutSummarySection";
 import AboutSkillsSection from "../sections/aboutSections/AboutSkillsSection";
 import AboutInterestsSection from "../sections/aboutSections/AboutInterestsSection";
-
-/* ========================= Circuit Diagram ========================= */
-const CircuitBackground: React.FC = () => <CircuitCanvasComponent />;
-
-/* ============================== Navbar ============================== */
-const Navbar: React.FC = () => <NavbarComponent />;
 
 export default function AboutPage() {
   const { hero, sections } = aboutPageData;
@@ -37,32 +24,12 @@ export default function AboutPage() {
 
   return (
     <>
-      <CircuitBackground />
-
-      <div
-        className="relative z-10 min-h-screen flex flex-col text-white"
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-      >
-        <Navbar />
-
-        <main className="flex-1 pt-8">
-          <AboutHeroSection hero={hero} sections={sections} />
-
-          {summary && summary.id === "summary" && (
-            <AboutSummarySection summary={summary} />
-          )}
-
-          {skills && skills.id === "skills" && (
-            <AboutSkillsSection skills={skills} />
-          )}
-
-          {interests && interests.id === "interests" && (
-            <AboutInterestsSection interests={interests} />
-          )}
-        </main>
-      </div>
-
-      <Footer />
+      <AboutHeroSection hero={hero} sections={sections} />
+      {summary && summary.id === "summary" && <AboutSummarySection summary={summary} />}
+      {interests && interests.id === "interests" && (
+        <AboutInterestsSection interests={interests} />
+      )}
+      {skills && skills.id === "skills" && <AboutSkillsSection skills={skills} />}
     </>
   );
 }

@@ -7,9 +7,9 @@
  */
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "../../components/Card";
 import CustomButton from "../../components/CustomButton";
-import { useNavigate } from "react-router-dom";
 
 type WorkRole = {
   slug: string;
@@ -33,23 +33,12 @@ const WorkRolesSection: React.FC<Props> = ({ workRoles, workDetailPath }) => {
       {workRoles.map((role) => (
         <Card key={role.slug}>
           <div className="flex items-start gap-4">
-            {/* Logo square */}
-            <div
-              className="
-                w-24 h-24
-                rounded-2xl
-                overflow-hidden
-                bg-white/20
-                border border-white/30
-                flex items-center justify-center
-                flex-shrink-0
-              "
-            >
+            <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-[1.5rem] border border-white/12 bg-white/8">
               {role.logo?.src ? (
                 <img
                   src={role.logo.src}
                   alt={role.logo.alt}
-                  className="w-full h-full object-contain p-1 scale-110"
+                  className="h-full w-full scale-110 object-contain p-1"
                   draggable={false}
                   loading="lazy"
                 />
@@ -58,16 +47,14 @@ const WorkRolesSection: React.FC<Props> = ({ workRoles, workDetailPath }) => {
               )}
             </div>
 
-            {/* Text */}
-            <div className="flex-1 min-w-0">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0">
-                  <h3 className="text-lg font-semibold leading-snug truncate">
+                  <h3 className="truncate text-xl font-semibold leading-snug">
                     {role.title}
                   </h3>
-                  <div className="text-sm text-blue-200/80 mt-1">
-                    {role.place} •{" "}
-                    <span className="text-white">{role.when}</span>
+                  <div className="mt-2 text-sm text-[var(--color-text-soft)]">
+                    {role.place} • <span className="text-white">{role.when}</span>
                   </div>
                 </div>
 
@@ -79,8 +66,7 @@ const WorkRolesSection: React.FC<Props> = ({ workRoles, workDetailPath }) => {
                 </CustomButton>
               </div>
 
-              {/* Preview bullets */}
-              <ul className="mt-3 list-disc ml-5 text-sm space-y-1 text-blue-100/90">
+              <ul className="ml-5 mt-4 list-disc space-y-2 text-sm text-[var(--color-text-muted)]">
                 {role.bullets.map((b, i) => (
                   <li key={`${role.slug}-b${i}`}>{b}</li>
                 ))}

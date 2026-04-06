@@ -9,61 +9,76 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-type ButtonProps = {
+type CommonProps = {
   children: React.ReactNode;
-  onClick?: () => void;
   className?: string;
   disabled?: boolean;
 };
 
-/**
- * Primary pill-style button
- * - Pressable (hover lift + active press)
- * - Matches existing chip aesthetic
- */
-const CustomButton: React.FC<ButtonProps> = ({
-  children,
-  onClick,
-  className = "",
-  disabled = false,
-}) => {
+type ButtonProps =
+  | (CommonProps & {
+      href: string;
+      target?: string;
+      rel?: string;
+      download?: boolean;
+      onClick?: never;
+      type?: never;
+    })
+  | (CommonProps & {
+      onClick?: () => void;
+      type?: "button" | "submit" | "reset";
+      href?: never;
+      target?: never;
+      rel?: never;
+      download?: never;
+    });
+
+const buttonClassName = (className: string, disabled: boolean) =>
+  [
+    "inline-flex items-center justify-center gap-2",
+    "min-h-11 rounded-full px-5 py-2.5",
+    "border border-cyan-200/20 bg-white/8",
+    "text-sm font-semibold tracking-[0.01em] text-white",
+    "shadow-[0_16px_30px_rgba(0,0,0,0.24)] backdrop-blur-md",
+    "transition duration-200",
+    "hover:-translate-y-0.5 hover:bg-cyan-300/12 hover:border-cyan-200/35",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+    disabled ? "cursor-not-allowed opacity-50" : "",
+    className,
+  ].join(" ");
+
+const CustomButton: React.FC<ButtonProps> = (props) => {
+  const className = buttonClassName(props.className ?? "", props.disabled ?? false);
+
+  if ("href" in props) {
+    return (
+      <motion.a
+        href={props.href}
+        target={props.target}
+        rel={props.rel}
+        download={props.download}
+        whileHover={!props.disabled ? { y: -1 } : undefined}
+        whileTap={!props.disabled ? { y: 1, scale: 0.985 } : undefined}
+        transition={{ type: "spring", stiffness: 420, damping: 24 }}
+        className={className}
+        aria-disabled={props.disabled ? true : undefined}
+      >
+        {props.children}
+      </motion.a>
+    );
+  }
+
   return (
     <motion.button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      whileHover={!disabled ? { y: -1 } : undefined}
-      whileTap={!disabled ? { y: 1, scale: 0.98 } : undefined}
-      transition={{ type: "spring", stiffness: 400, damping: 22 }}
-      className={[
-        // base shape
-        "inline-flex items-center justify-center",
-        "rounded-xl px-4 py-2",
-        "text-sm font-medium text-white",
-
-        // background + border
-        "bg-white/10 border border-white/20",
-        "backdrop-blur",
-
-        // depth
-        "shadow-[0_6px_14px_rgba(0,0,0,0.25)]",
-
-        // hover
-        "hover:bg-white/15 hover:border-white/30",
-
-        // active (pressed)
-        "active:shadow-[0_3px_8px_rgba(0,0,0,0.35)]",
-
-        // disabled
-        "disabled:opacity-50 disabled:cursor-not-allowed",
-
-        // smoothness
-        "transition-colors",
-
-        className,
-      ].join(" ")}
+      type={props.type ?? "button"}
+      onClick={props.onClick}
+      disabled={props.disabled}
+      whileHover={!props.disabled ? { y: -1 } : undefined}
+      whileTap={!props.disabled ? { y: 1, scale: 0.985 } : undefined}
+      transition={{ type: "spring", stiffness: 420, damping: 24 }}
+      className={className}
     >
-      {children}
+      {props.children}
     </motion.button>
   );
 };

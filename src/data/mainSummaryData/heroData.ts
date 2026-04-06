@@ -25,10 +25,11 @@ export const heroData: HeroData = {
   tagline:
     "Graduating Computer Engineering student passionate about hardware & software development. Much of my talent lies in software and hardware system design, with a focus on creating efficient and scalable solutions.",
   ctas: [
-    { label: "Work Experience", targetId: "experience" },
+    { label: "Work Experience", route: "/work" },
     { label: "Projects", targetId: "projects" },
+    { label: "Education", route: "/education" },
     { label: "Resume", route: "/resume" },
   ],
-  headshotSrc: "/headshot.JPEG",
+  headshotSrc: "/IMG_2559.JPEG",
   headshotAlt: "Samuel Manley Headshot",
 };

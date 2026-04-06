@@ -6,10 +6,18 @@
   * Description: This file contains structured data for the main Projects page of the portfolio website.
 */
 
+import { capstonePlaceholders, capstoneSummary } from "../capstoneData";
+
 export type ProjectMedia = {
     type: "image" | "video";
     src: string;
     alt?: string;
+  };
+
+export type ProjectMaterial = {
+    title: string;
+    kind: "Image" | "Video" | "Document";
+    note: string;
   };
   
   export type Project = {
@@ -28,6 +36,7 @@ export type ProjectMedia = {
     // detail page content
     description?: string;
     bullets?: string[];
+    materials?: ProjectMaterial[];
   };
   
   const slugify = (s: string) =>
@@ -42,6 +51,61 @@ export type ProjectMedia = {
   export const projectDetailPath = (slug: string) => `/projects/${slug}`;
   
   export const projects: Project[] = [
+    {
+      slug: slugify("Engineering Capstone Project"),
+      name: "Engineering Capstone Project",
+      completed: "2026",
+      blurb:
+        "Team redesign of a continuous passive motion machine, presented at the University of Guelph Engineering Design Day to judges, faculty, and guests.",
+      tags: ["Capstone", "Mechanical Design", "Electronics", "Prototyping"],
+      preview: capstonePlaceholders.preview,
+      media: [
+        {
+          type: "image",
+          src: capstonePlaceholders.poster,
+          alt: "Engineering capstone design poster",
+        },
+        {
+          type: "video",
+          src: capstonePlaceholders.presentationVideo,
+          alt: "Engineering capstone presentation video",
+        },
+        {
+          type: "image",
+          src: "/IMG_3106.JPEG",
+          alt: "Engineering capstone detail image 1",
+        },
+        {
+          type: "image",
+          src: "/IMG_3107.JPEG",
+          alt: "Engineering capstone detail image 2",
+        },
+        {
+          type: "image",
+          src: capstonePlaceholders.schematic,
+          alt: "Engineering capstone electronics schematic",
+        },
+        {
+          type: "image",
+          src: capstonePlaceholders.deanPhoto,
+          alt: "Engineering capstone group photo with the Dean",
+        },
+        {
+          type: "image",
+          src: capstonePlaceholders.displayPhoto,
+          alt: "Engineering capstone desk display",
+        },
+      ],
+      description:
+        "Samuel Manley, Angelina Seliverstova, James D'Silva, and Emma Jenkins presented a redesigned continuous passive motion machine during Engineering Design Day at the University of Guelph. The project was advised by Dr. Stephen Mattucci for client Mr. Ted Jacobs and received strong feedback from the judging panel.",
+      bullets: [
+        "Presented the final prototype and system story to a panel of judges",
+        "Worked across disciplines to turn the redesign into a polished final product",
+        "Prepared poster, display material, and demonstration assets for Design Day",
+        "Built a project that balanced engineering rigor with real client needs",
+      ],
+      materials: capstoneSummary.materialSlots,
+    },
     {
       slug: slugify("Subscription Tracker App: SubView"),
       name: "Subscription Tracker App: SubView",

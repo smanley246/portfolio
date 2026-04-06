@@ -7,16 +7,12 @@
  */
 
 import React from "react";
-import { motion } from "framer-motion";
 import CustomButton from "../../components/CustomButton";
-
-const sectionFade = {
-  hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0 },
-};
+import PageIntro from "../../components/PageIntro";
 
 type AboutHero = {
   kicker: string;
+  title: string;
   subtitle: string;
 };
 
@@ -32,23 +28,13 @@ type Props = {
 
 const AboutHeroSection: React.FC<Props> = ({ hero, sections }) => {
   return (
-    <section className="mx-auto w-full max-w-6xl px-4 pt-10 sm:pt-14">
-      <motion.div
-        variants={sectionFade}
-        initial="hidden"
-        animate="show"
-        transition={{ duration: 0.45, ease: "easeOut" }}
-      >
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
-            <h1 className="text-4xl font-bold text-white">{hero.kicker}</h1>
-            <p className="text-base sm:text-lg text-white/80 max-w-3xl">
-              {hero.subtitle}
-            </p>
-          </div>
-
-          {/* Quick Links */}
-          <div className="flex flex-wrap gap-2">
+    <section className="site-container">
+      <PageIntro
+        eyebrow={hero.kicker}
+        title={hero.title}
+        description={hero.subtitle}
+        actions={
+          <>
             {sections.map((s) => (
               <CustomButton
                 key={s.id}
@@ -61,9 +47,9 @@ const AboutHeroSection: React.FC<Props> = ({ hero, sections }) => {
                 {s.navLabel}
               </CustomButton>
             ))}
-          </div>
-        </div>
-      </motion.div>
+          </>
+        }
+      />
     </section>
   );
 };

@@ -7,30 +7,18 @@
 */
 
 import React from "react";
-import { motion } from "framer-motion";
-
-const sectionFade = {
-  hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0 },
-};
+import PageIntro from "../../components/PageIntro";
 
 type Props = {
   heading: string;
 };
 
-const ResumeHeroSection: React.FC<Props> = ({ heading }) => {
-  return (
-    <motion.div
-      variants={sectionFade}
-      initial="hidden"
-      animate="show"
-      transition={{ duration: 0.45, ease: "easeOut" }}
-    >
-      <div className="mb-6">
-        <h1 className="text-4xl font-bold text-white">{heading}</h1>
-      </div>
-    </motion.div>
-  );
-};
+const ResumeHeroSection: React.FC<Props> = ({ heading }) => (
+  <PageIntro
+    eyebrow="Resume"
+    title={heading}
+    description="Open, download, or preview the latest version of my resume."
+  />
+);
 
 export default ResumeHeroSection;

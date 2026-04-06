@@ -2,36 +2,44 @@
   * File: src/components/Navbar.tsx
   * Author: Samuel Manley
   * Last Modified: February 1st, 2026
-  * 
+  *
   * Description: Responsive Navbar with scroll progress bar and mobile menu.
 */
 
 import React from "react";
-import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import {
-  Cpu,
-  Home,
-  User2,
-  FolderGit2,
-  School,
   Briefcase,
-  Mail,
-  Linkedin,
-  Github,
   ClipboardList,
+  Cpu,
+  FolderGit2,
+  Github,
+  Home,
+  Linkedin,
+  Mail,
   Menu,
+  School,
+  User2,
   X,
 } from "lucide-react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const links = [
-  { to: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
-  { to: "/about", label: "About", icon: <User2 className="w-4 h-4" /> },
-  { to: "/projects", label: "Projects", icon: <FolderGit2 className="w-4 h-4" /> },
-  { to: "/education", label: "Education", icon: <School className="w-4 h-4" /> },
-  { to: "/work", label: "Work", icon: <Briefcase className="w-4 h-4" /> },
-  { to: "/resume", label: "Resume", icon: <ClipboardList className="w-4 h-4" /> },
+  { to: "/", label: "Home", icon: <Home className="h-4 w-4" /> },
+  { to: "/about", label: "About", icon: <User2 className="h-4 w-4" /> },
+  { to: "/projects", label: "Projects", icon: <FolderGit2 className="h-4 w-4" /> },
+  { to: "/education", label: "Education", icon: <School className="h-4 w-4" /> },
+  { to: "/work", label: "Work", icon: <Briefcase className="h-4 w-4" /> },
+  { to: "/resume", label: "Resume", icon: <ClipboardList className="h-4 w-4" /> },
 ] as const;
+
+const isActivePath = (currentPath: string, targetPath: string) => {
+  if (targetPath === "/") {
+    return currentPath === "/";
+  }
+
+  return currentPath === targetPath || currentPath.startsWith(`${targetPath}/`);
+};
 
 const Navbar: React.FC = () => {
   const { scrollYProgress } = useScroll();
@@ -53,109 +61,124 @@ const Navbar: React.FC = () => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMobileOpen(false);
     };
+
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-[#0a1f36]/60 dark:supports-[backdrop-filter]:bg-[#0a1f36]/60 bg-[#0a1f36]/80 border-b border-white/10 text-white">
-      <motion.div style={{ scaleX }} className="h-1 bg-white/70 origin-left" />
+    <div className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-slate-950/55 text-white backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/42">
+      <motion.div
+        style={{ scaleX }}
+        className="h-[2px] origin-left bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500"
+      />
 
-      <nav className="max-w-6xl mx-auto px-4 py-3">
-        {/* Use auto/1fr/auto columns so center gets the remaining space */}
+      <nav className="site-container py-3">
         <div className="grid grid-cols-[auto_1fr_auto] items-center">
-          {/* LEFT */}
-          <div className="flex items-center justify-start gap-2 shrink-0">
-            {/* Hamburger shown when desktop links are hidden */}
+          <div className="flex shrink-0 items-center justify-start gap-2">
             <button
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
-              className="lg:hidden p-2 rounded-xl hover:bg-white/10 transition"
+              className="rounded-2xl border border-white/10 bg-white/5 p-2 transition hover:bg-white/10 lg:hidden"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
 
-            {/* Desktop logo/name on left */}
             <button
               onClick={() => navigate("/")}
-              className="hidden lg:flex items-center gap-2 font-semibold tracking-tight whitespace-nowrap"
+              className="hidden items-center gap-3 whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold tracking-tight transition hover:border-cyan-200/20 hover:bg-white/10 lg:flex"
               aria-label="Go to Home"
             >
-              <Cpu className="w-5 h-5" />
+              <Cpu className="h-4 w-4 text-cyan-300" />
               Samuel Manley
             </button>
           </div>
 
-          {/* CENTER */}
-          <div className="flex items-center justify-center min-w-0">
-            {/* Mobile: centered logo/name */}
+          <div className="flex min-w-0 items-center justify-center">
             <button
               onClick={() => navigate("/")}
-              className="lg:hidden flex items-center gap-2 font-semibold tracking-tight whitespace-nowrap"
+              className="flex items-center gap-2 whitespace-nowrap text-sm font-semibold tracking-tight lg:hidden"
               aria-label="Go to Home"
             >
-              <Cpu className="w-5 h-5" />
+              <Cpu className="h-4 w-4 text-cyan-300" />
               Samuel Manley
             </button>
 
-            {/* Desktop: centered nav links ONLY at lg+ to avoid overlap */}
-            <ul className="hidden lg:flex items-center gap-2">
-              {links.map((l) => (
-                <li key={l.label}>
-                  <Link
-                    to={l.to}
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium hover:bg-white/10 transition whitespace-nowrap"
-                    aria-label={`Go to ${l.label}`}
-                  >
-                    {l.icon}
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
+            <ul className="hidden items-center gap-1 rounded-full border border-white/8 bg-white/5 px-2 py-1 lg:flex">
+              {links.map((l) => {
+                const active = isActivePath(location.pathname, l.to);
+
+                return (
+                  <li key={l.label}>
+                    <Link
+                      to={l.to}
+                      className={[
+                        "relative inline-flex items-center gap-2 overflow-hidden whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition",
+                        active ? "text-slate-950" : "text-[var(--color-text-muted)] hover:text-white",
+                      ].join(" ")}
+                      aria-label={`Go to ${l.label}`}
+                    >
+                      {active ? (
+                        <motion.span
+                          layoutId="nav-active-pill"
+                          className="absolute inset-0 z-0 rounded-full bg-white shadow-[0_10px_24px_rgba(255,255,255,0.22)]"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        />
+                      ) : null}
+                      <span
+                        className={[
+                          "relative z-10 inline-flex items-center gap-2",
+                          active ? "text-slate-950" : "",
+                        ].join(" ")}
+                      >
+                        {l.icon}
+                        {l.label}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
-          {/* RIGHT */}
-          <div className="flex items-center justify-end gap-2 shrink-0">
+          <div className="flex shrink-0 items-center justify-end gap-2">
             <a
               href="mailto:samuel@samuelmanley.ca"
-              className="p-2 rounded-xl hover:bg-white/10 transition"
+              className="rounded-full border border-white/8 bg-white/5 p-2 transition hover:bg-white/10"
               aria-label="Email"
             >
-              <Mail className="w-5 h-5" />
+              <Mail className="h-5 w-5" />
             </a>
             <a
               href="https://www.linkedin.com/in/smanley246/"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-xl hover:bg-white/10 transition"
+              className="rounded-full border border-white/8 bg-white/5 p-2 transition hover:bg-white/10"
               aria-label="LinkedIn"
             >
-              <Linkedin className="w-5 h-5" />
+              <Linkedin className="h-5 w-5" />
             </a>
             <a
               href="https://github.com/smanley246"
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-xl hover:bg-white/10 transition"
+              className="rounded-full border border-white/8 bg-white/5 p-2 transition hover:bg-white/10"
               aria-label="GitHub"
             >
-              <Github className="w-5 h-5" />
+              <Github className="h-5 w-5" />
             </a>
           </div>
         </div>
       </nav>
 
-      {/* Dropdown menu */}
       <AnimatePresence>
         {mobileOpen && (
           <>
-            {/* Click-outside overlay */}
             <motion.button
               type="button"
-              className="lg:hidden fixed inset-0 z-40 cursor-default"
+              className="fixed inset-0 z-40 cursor-default lg:hidden"
               onClick={() => setMobileOpen(false)}
               aria-label="Close menu overlay"
               initial={{ opacity: 0 }}
@@ -165,30 +188,34 @@ const Navbar: React.FC = () => {
             />
 
             <motion.div
-              className="lg:hidden relative z-50"
+              className="relative z-50 lg:hidden"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.18 }}
             >
-              <div className="max-w-6xl mx-auto px-4 pb-3">
-                <div className="rounded-2xl border border-white/10 bg-[#0a1f36]/90 backdrop-blur overflow-hidden">
+              <div className="site-container pb-3">
+                <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/90 backdrop-blur-2xl">
                   <ul className="py-2">
                     {links.map((l) => {
-                      const active = location.pathname === l.to;
+                      const active = isActivePath(location.pathname, l.to);
+
                       return (
                         <li key={l.label}>
                           <Link
                             to={l.to}
                             className={[
                               "flex items-center gap-3 px-4 py-3 text-sm font-medium transition",
-                              "hover:bg-white/10",
-                              active ? "bg-white/10" : "",
+                              active
+                                ? "bg-white text-slate-950"
+                                : "text-[var(--color-text-muted)] hover:bg-white/8",
                             ].join(" ")}
                             aria-label={`Go to ${l.label}`}
                           >
-                            <span className="opacity-90">{l.icon}</span>
-                            <span>{l.label}</span>
+                            <span className={active ? "text-slate-950" : "opacity-90"}>
+                              {l.icon}
+                            </span>
+                            <span className={active ? "text-slate-950" : ""}>{l.label}</span>
                           </Link>
                         </li>
                       );

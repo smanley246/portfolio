@@ -23,7 +23,7 @@ export type DegreeCard = {
 };
 
 export type CourseCard = {
-  slug: string; // ✅ used for route lookup
+  slug: string;
   code: string;
   title: string;
   term?: string;
@@ -49,7 +49,6 @@ const slugify = (s: string) =>
     .replace(/-+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-/** Route helper */
 export const courseDetailPath = (slug: string) => `/education/${slug}`;
 
 export const educationData: EducationData = {
@@ -58,7 +57,7 @@ export const educationData: EducationData = {
     school: "University of Guelph",
     program: "Bachelor of Science (B.Sc.), Computer Engineering",
     location: "Guelph, Ontario, Canada",
-    years: "2021 — 2026",
+    years: "2021 - 2026",
     subtitle:
       "Computer engineering degree with a focus on embedded systems, digital design, and full-stack development.",
     highlights: [
@@ -69,8 +68,8 @@ export const educationData: EducationData = {
       "Mobile + Web Apps",
     ],
     paragraphs: [
-      "I’m completing my Computer Engineering degree with hands-on coursework and projects spanning embedded firmware, FPGA digital logic, and modern software development.",
-      "My focus is on building reliable systems end-to-end: requirements, implementation, testing, and clean presentation — from low-level hardware integration to polished user interfaces.",
+      "I'm completing my Computer Engineering degree with hands-on coursework and projects spanning embedded firmware, FPGA digital logic, and modern software development.",
+      "My focus is on building reliable systems end-to-end: requirements, implementation, testing, and clean presentation - from low-level hardware integration to polished user interfaces.",
     ],
     image: {
       src: "/compEnggLogo.png",

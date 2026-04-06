@@ -22,21 +22,19 @@ type Props = {
 
 const ResumeActionsSection: React.FC<Props> = ({ actions }) => {
   return (
-    <div className="flex flex-wrap gap-3 mb-6">
+    <div className="mb-8 flex flex-wrap gap-3">
       {actions.map((action) => {
         const rel = action.targetBlank ? "noreferrer" : undefined;
 
         return (
-          <CustomButton>
-            <a
-              key={`${action.label}-${action.href}`}
-              href={action.href}
-              target={action.targetBlank ? "_blank" : undefined}
-              rel={rel}
-              download={action.download ? true : undefined}
-            >
-              {action.label}
-            </a>
+          <CustomButton
+            key={`${action.label}-${action.href}`}
+            href={action.href}
+            target={action.targetBlank ? "_blank" : undefined}
+            rel={rel}
+            download={action.download ? true : undefined}
+          >
+            {action.label}
           </CustomButton>
         );
       })}

@@ -2,16 +2,22 @@
   * File: src/components/ProjectCard.tsx
   * Author: Samuel Manley
   * Last Modified: February 1st, 2026
-  * 
+  *
   * Description: ProjectCard component with expandable modal for detailed view.
 */
 
 import React, { useState } from "react";
-import { ArrowUpRight, Expand, Github, X } from "lucide-react";
-import Card from "./Card";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+  Expand,
+  Github,
+  X,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Card from "./Card";
 import CustomButton from "./CustomButton";
 
 type ProjectMedia = {
@@ -55,19 +61,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const isSmallViewport = () =>
     typeof window !== "undefined" && window.innerWidth < MOBILE_BREAKPOINT;
 
-  // -------------------------------
-  // EXPAND HANDLER
-  // -------------------------------
   const handleExpandClick = () => {
     setActiveIndex(0);
 
-    // Mobile: navigate to internal detail page (no new tabs)
     if (isSmallViewport()) {
       navigate(`/projects/${slug}`);
       return;
     }
 
-    // Desktop: open modal
     setExpanded(true);
   };
 
@@ -79,65 +80,51 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <>
-      {/* ============================== CARD ============================== */}
-      <Card className="bg-blue-900/35 border border-white/10">
-        <div className="flex flex-col lg:flex-row gap-4 h-full">
-          {/* ---------- TEXT FIRST ALWAYS ON MOBILE ---------- */}
-          <div className="flex-1 flex flex-col order-1 lg:order-1">
+      <Card className="group overflow-hidden">
+        <div className="flex h-full flex-col gap-4 lg:flex-row">
+          <div className="order-1 flex flex-1 flex-col">
             <div className="flex items-start gap-2">
-              <div className="flex items-center gap-2 flex-wrap">
-                <h3 className="text-lg font-semibold">{name}</h3>
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-xl font-semibold tracking-tight">{name}</h3>
                 {link && (
                   <a
                     href={link}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-sm text-blue-300"
+                    className="inline-flex items-center gap-1 text-sm text-cyan-300"
                   >
-                    Live <ArrowUpRight className="w-4 h-4" />
+                    Live <ArrowUpRight className="h-4 w-4" />
                   </a>
                 )}
               </div>
 
               <CustomButton
                 onClick={handleExpandClick}
-                className="ml-auto p-2 rounded-lg hover:bg-white/10 text-xs sm:text-sm flex items-center gap-1"
+                className="ml-auto min-h-0 px-4 py-2 text-xs sm:text-sm"
               >
-                <Expand className="w-4 h-4" /> Details
+                <Expand className="h-4 w-4" /> Details
               </CustomButton>
             </div>
 
-            <p className="mt-1 text-sm text-blue-100/90">{blurb}</p>
+            <p className="prose-copy mt-3 text-sm">{blurb}</p>
 
-            <div className="mt-3 lg:mt-auto flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2 lg:mt-auto">
               {tags.map((t) => (
-                <span
-                  key={t}
-                  className="text-xs px-2 py-1 rounded-full border border-white/10 bg-white/10"
-                >
+                <span key={t} className="card-chip">
                   {t}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* ---------- IMAGE SECOND ALWAYS ON MOBILE ---------- */}
           {preview && (
-            <div className="order-2 lg:order-2 w-full lg:w-auto">
-              <div
-                className="
-                  w-full
-                  lg:w-56 xl:w-64
-                  aspect-[4/5]
-                  overflow-hidden
-                  rounded-2xl
-                  bg-[#0a1f36]
-                "
-              >
+            <div className="order-2 w-full lg:w-auto">
+              <div className="aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/70 lg:w-56 xl:w-64">
                 <img
                   src={preview}
                   alt={`${name} preview`}
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -145,17 +132,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
       </Card>
 
-      {/* ============================== DESKTOP MODAL ============================== */}
       <AnimatePresence>
         {expanded && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/88 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-[#0a1f36] rounded-2xl p-6 md:p-8 max-w-6xl w-[95vw] h-[90vh] relative text-white shadow-xl flex flex-col gap-6 overflow-hidden"
+              className="panel relative flex h-[90vh] w-[95vw] max-w-6xl flex-col gap-6 overflow-hidden rounded-[2rem] p-6 text-white md:p-8"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -163,29 +149,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             >
               <button
                 onClick={() => setExpanded(false)}
-                className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10"
+                className="absolute right-4 top-4 rounded-full border border-white/10 bg-white/5 p-2 hover:bg-white/10"
               >
-                <X className="w-5 h-5" />
+                <X className="h-5 w-5" />
               </button>
 
-              <div className="flex flex-col md:flex-row gap-6 h-full">
-                {/* MEDIA VIEWER */}
-                <div className="md:w-1/2 w-full flex flex-col gap-3">
+              <div className="flex h-full flex-col gap-6 md:flex-row">
+                <div className="flex w-full flex-col gap-3 md:w-1/2">
                   {hasMedia ? (
                     <>
-                      <div className="relative flex-1 bg-black/40 rounded-xl flex items-center justify-center overflow-hidden">
+                      <div className="relative flex-1 overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/35">
                         {activeMedia?.type === "image" && (
                           <img
                             src={activeMedia.src}
                             alt={activeMedia.alt || `${name} media`}
-                            className="w-full h-full object-contain"
+                            className="h-full w-full object-contain"
+                            loading="lazy"
                           />
                         )}
                         {activeMedia?.type === "video" && (
                           <video
                             src={activeMedia.src}
                             controls
-                            className="w-full h-full object-contain"
+                            className="h-full w-full object-contain"
                           />
                         )}
 
@@ -193,13 +179,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                           <>
                             <button
                               onClick={goPrev}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50"
+                              className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2"
                             >
                               <ChevronLeft />
                             </button>
                             <button
                               onClick={goNext}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50"
+                              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2"
                             >
                               <ChevronRight />
                             </button>
@@ -211,22 +197,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                         <div className="flex gap-2 overflow-x-auto pb-1">
                           {media.map((m, i) => (
                             <button
-                              key={i}
+                              key={m.src}
                               onClick={() => setActiveIndex(i)}
-                              className={`border rounded-lg overflow-hidden flex-shrink-0 ${
-                                i === activeIndex
-                                  ? "border-blue-400"
-                                  : "border-white/20"
+                              className={`overflow-hidden rounded-lg border flex-shrink-0 ${
+                                i === activeIndex ? "border-cyan-300" : "border-white/20"
                               }`}
                             >
                               {m.type === "image" ? (
                                 <img
                                   src={m.src}
                                   alt={m.alt || "thumb"}
-                                  className="w-20 h-14 object-cover"
+                                  className="h-14 w-20 object-cover"
+                                  loading="lazy"
                                 />
                               ) : (
-                                <div className="w-20 h-14 flex items-center justify-center bg-black/60 text-[10px]">
+                                <div className="flex h-14 w-20 items-center justify-center bg-black/60 text-[10px]">
                                   Video
                                 </div>
                               )}
@@ -236,33 +221,28 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                       )}
                     </>
                   ) : (
-                    <div className="flex-1 bg-black/40 rounded-xl flex items-center justify-center">
+                    <div className="flex flex-1 items-center justify-center rounded-[1.5rem] border border-white/10 bg-black/35">
                       {preview && (
                         <img
                           src={preview}
                           alt={`${name} preview`}
-                          className="w-full h-full object-contain"
+                          className="h-full w-full object-contain"
+                          loading="lazy"
                         />
                       )}
                     </div>
                   )}
                 </div>
 
-                {/* DETAILS */}
-                <div className="md:w-1/2 w-full flex flex-col overflow-y-auto pr-1">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                    {name}
-                  </h2>
-                  <div className="mb-4 text-sm md:text-base leading-relaxed">
+                <div className="flex w-full flex-col overflow-y-auto pr-1 md:w-1/2">
+                  <h2 className="mb-3 text-2xl font-bold md:text-3xl">{name}</h2>
+                  <div className="prose-copy mb-4 text-sm md:text-base">
                     {details ? details : blurb}
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="mb-4 flex flex-wrap gap-2">
                     {tags.map((t) => (
-                      <span
-                        key={t}
-                        className="text-xs px-2 py-1 rounded-full border border-white/10 bg-white/10"
-                      >
+                      <span key={t} className="card-chip">
                         {t}
                       </span>
                     ))}
@@ -274,9 +254,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                         href={repo}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-2 text-blue-300"
+                        className="flex items-center gap-2 text-cyan-300"
                       >
-                        <Github className="w-5 h-5" /> Repo
+                        <Github className="h-5 w-5" /> Repo
                       </a>
                     )}
                     {link && (
@@ -284,9 +264,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                         href={link}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-2 text-blue-300"
+                        className="flex items-center gap-2 text-cyan-300"
                       >
-                        <ArrowUpRight className="w-5 h-5" /> Live Demo
+                        <ArrowUpRight className="h-5 w-5" /> Live Demo
                       </a>
                     )}
                   </div>

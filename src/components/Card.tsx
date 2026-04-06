@@ -14,11 +14,11 @@ const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({
 }) => (
   <div
     className={
-      "rounded-2xl bg-blue-900/35 border border-white/10 shadow-sm p-5 backdrop-blur " +
+      "panel rounded-[1.75rem] p-6 sm:p-7 " +
       (className ?? "")
     }
   >
-    {children /* Render whatever content gets passed into the card */}
+    {children}
   </div>
 );
 

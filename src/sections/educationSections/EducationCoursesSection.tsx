@@ -13,9 +13,6 @@ import Card from "../../components/Card";
 import CustomButton from "../../components/CustomButton";
 import type { CourseCard } from "../../data/educationData/educationData";
 
-const chipBase =
-  "inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/90";
-
 type Props = {
   coursesHeading: string;
   courses: CourseCard[];
@@ -37,7 +34,7 @@ const EducationCoursesSection: React.FC<Props> = ({
 
       const preview = desc.slice(0, 3);
       return (
-        <ul className="mt-3 ml-5 list-disc space-y-1 text-sm text-white/80 leading-relaxed">
+        <ul className="mt-3 ml-5 list-disc space-y-1 text-sm leading-relaxed text-[var(--color-text-muted)]">
           {preview.map((d, i) => (
             <li key={`desc-${i}`}>{d}</li>
           ))}
@@ -46,7 +43,7 @@ const EducationCoursesSection: React.FC<Props> = ({
     }
 
     return (
-      <p className="mt-3 text-sm text-white/80 leading-relaxed whitespace-pre-line line-clamp-3">
+      <p className="mt-3 line-clamp-3 whitespace-pre-line text-sm leading-relaxed text-[var(--color-text-muted)]">
         {desc}
       </p>
     );
@@ -54,38 +51,29 @@ const EducationCoursesSection: React.FC<Props> = ({
 
   return (
     <div className="mt-10">
-      {/* Section header */}
       <div className="mb-4 flex items-center gap-2">
         <div className="rounded-2xl border border-white/10 bg-white/5 p-2">
           <BookOpen className="h-5 w-5 text-teal-300" />
         </div>
-        <h2 className="text-2xl sm:text-3xl font-semibold">{coursesHeading}</h2>
+        <h2 className="text-2xl font-semibold sm:text-3xl">{coursesHeading}</h2>
       </div>
 
-      {/* Course cards */}
       <div className="flex flex-col gap-4">
         {courses.map((c) => (
-          <Card
-            key={c.slug}
-            className="p-5 bg-blue-900/25 border border-white/10"
-          >
+          <Card key={c.slug} className="p-5">
             <div className="flex items-start gap-4">
-              {/* Left text */}
-              <div className="flex-1 min-w-0">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div className="min-w-0">
-                    <h3 className="text-lg font-semibold truncate">
-                      {c.code} — {c.title}
+                    <h3 className="truncate text-lg font-semibold">
+                      {c.code} - {c.title}
                     </h3>
-                    {c.term && (
-                      <p className="text-sm text-blue-200/80 mt-1">{c.term}</p>
-                    )}
+                    {c.term && <p className="mt-1 text-sm text-blue-200/80">{c.term}</p>}
                   </div>
 
-                  {/* Desktop actions (badge + button). Hidden on mobile. */}
-                  <div className="hidden sm:flex items-center gap-2 sm:gap-3 sm:ml-auto">
+                  <div className="hidden items-center gap-2 sm:ml-auto sm:flex sm:gap-3">
                     {c.badge && (
-                      <span className="text-xs px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/85 whitespace-nowrap">
+                      <span className="whitespace-nowrap rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/85">
                         {c.badge}
                       </span>
                     )}
@@ -99,23 +87,20 @@ const EducationCoursesSection: React.FC<Props> = ({
                   </div>
                 </div>
 
-                {/* Mobile badge (optional). Keep it under title on mobile for nice flow. */}
                 {c.badge ? (
-                  <div className="sm:hidden pt-3">
-                    <span className="text-xs px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/85 whitespace-nowrap inline-block">
+                  <div className="pt-3 sm:hidden">
+                    <span className="inline-block whitespace-nowrap rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/85">
                       {c.badge}
                     </span>
                   </div>
                 ) : null}
 
-                {/* Description preview */}
                 {renderDescriptionPreview(c.description)}
 
-                {/* Tags */}
                 {c.tags?.length ? (
                   <div className="flex flex-wrap gap-2 pt-3">
                     {c.tags.map((t) => (
-                      <span key={t} className={chipBase}>
+                      <span key={t} className="card-chip">
                         {t}
                       </span>
                     ))}
@@ -123,11 +108,9 @@ const EducationCoursesSection: React.FC<Props> = ({
                 ) : null}
               </div>
 
-              {/* Right side */}
-              <div className="shrink-0 w-24 sm:w-auto">
-                {/* Image */}
+              <div className="w-24 shrink-0 sm:w-auto">
                 {c.image?.src ? (
-                  <div className="relative w-24 h-24 sm:w-32 sm:h-28 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                  <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:h-28 sm:w-32">
                     <img
                       src={c.image.src}
                       alt={c.image.alt}
@@ -138,11 +121,10 @@ const EducationCoursesSection: React.FC<Props> = ({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
                   </div>
                 ) : (
-                  <div className="w-24 h-24 sm:w-32 sm:h-28 rounded-2xl border border-white/10 bg-white/5" />
+                  <div className="h-24 w-24 rounded-2xl border border-white/10 bg-white/5 sm:h-28 sm:w-32" />
                 )}
 
-                {/* Mobile button under the photo */}
-                <div className="sm:hidden mt-3">
+                <div className="mt-3 sm:hidden">
                   <CustomButton
                     className="w-full justify-center"
                     onClick={() => navigate(courseDetailPath(c.slug))}
