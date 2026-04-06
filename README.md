@@ -1,25 +1,40 @@
-Samuel Manley — Engineering Portfolio
+# Samuel Manley Portfolio
 
-This repository contains the source code for my personal engineering portfolio website. The site showcases my projects, technical experience, and skills as a graduating Computer Engineering student with a focus on embedded systems, digital design, and full-stack development.
+This repository contains the source code for Samuel Manley's engineering portfolio website. The site highlights projects, technical experience, education, and personal background as a graduating Computer Engineering student at the University of Guelph.
 
-Built with React, TypeScript, and Vite, and deployed via Vercel.
+## Stack
 
-Live Site  
-https://samuelmanley.ca  
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Vercel Analytics and Speed Insights
 
-The site is designed to be fast, clean, and recruiter-friendly while demonstrating practical engineering work across both hardware and software.
+## Local Development
 
-Contact Information:
+```bash
+npm install
+npm run dev
+```
 
-Samuel Manley  
-Computer Engineering — University of Guelph  
+## Production Checks
 
-Website: https://samuelmanley.ca  
-GitHub: https://github.com/smanley246  
-Email: samuel@samuelmanley.ca
+```bash
+npm run build
+npm run lint
+```
 
-This project is intended for personal portfolio use. Content and design are original and should not be copied directly.
+## Vercel Deployment
 
-Maintained by  
-Samuel Manley  
-2026
+The project is ready for Vercel deployment as a client-side React app.
+
+- `vercel.json` includes an SPA rewrite so direct visits to routes like `/about` or `/projects/subscription-tracker-app-subview` resolve correctly.
+- Static media lives in `public/`.
+- Analytics and Speed Insights are already wired in through `src/main.tsx`.
+
+## Contact
+
+- Website: [samuelmanley.ca](https://samuelmanley.ca)
+- GitHub: [github.com/smanley246](https://github.com/smanley246)
+- Email: [samuel@samuelmanley.ca](mailto:samuel@samuelmanley.ca)

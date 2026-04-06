@@ -1,9 +1,9 @@
 /*
-  * File: src/sections/mainSections/MainProjectsSection.tsx
+  * File: src/sections/mainSections/MainProjectSection.tsx
   * Author: Samuel Manley
-  * Last Modified: February 1st, 2026
-  * 
-  * Description: This file contains the Main Projects section component for the portfolio website.
+  * Last Modified: April 6th, 2026
+  *
+  * Description: This file contains the homepage Projects section component for the portfolio website.
 */
 
 // ProjectsSection.tsx

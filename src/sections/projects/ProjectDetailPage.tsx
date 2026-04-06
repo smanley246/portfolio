@@ -1,10 +1,10 @@
 /*
- * File: src/pages/ProjectDetailPage.tsx
- * Author: Samuel Manley
- * Last Modified: February 1st, 2026
- *
- * Description: This file contains the project detail page for individual projects.
- */
+  * File: src/sections/projects/ProjectDetailPage.tsx
+  * Author: Samuel Manley
+  * Last Modified: April 6th, 2026
+  *
+  * Description: This file contains the project detail page for individual projects.
+*/
 
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";

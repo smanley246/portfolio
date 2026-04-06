@@ -1,7 +1,7 @@
 /*
   * File: src/data/aboutData/aboutData.ts
   * Author: Samuel Manley
-  * Last Modified: February 1st, 2026
+  * Last Modified: April 6th, 2026
   *
   * Description: This file contains structured data for the About page of the portfolio website.
 */
@@ -70,8 +70,8 @@ export const aboutPageData: {
       navLabel: "Summary",
       title: "Summary",
       paragraphs: [
-        "I'm a graduating Computer Engineering student from Guelph Ontario with a passion for building reliable and polished technical solutions. I work across both hardware and software, developing embedded systems, digital logic in hardware description languages, and modern mobile applications with React Native.",
-        "I enjoy turning ideas into functional systems by writing firmware, designing circuits, creating user-friendly interfaces and anything else is required by the task.",
+        "I'm a graduating Computer Engineering student from Guelph, Ontario, with a passion for building reliable and polished technical solutions. I work across both hardware and software, developing embedded systems, digital logic in hardware description languages, and modern mobile applications with React Native.",
+        "I enjoy turning ideas into functional systems by writing firmware, designing circuits, creating user-friendly interfaces, and handling anything else the task requires.",
         "Outside of academics, I spend a lot of time working on self-driven engineering projects to strengthen my skills and explore new technologies. I like challenging myself through hands-on learning in areas such as robotics, real-time control, and full-stack development. When I'm not building something, I am usually playing squash, cycling, skiing, or cooking.",
       ],
       highlights: [
@@ -123,7 +123,7 @@ export const aboutPageData: {
           items: [
             "React Native (Expo)",
             "TypeScript",
-            "Firebase (Auth + Realtime DB)",
+            "Firebase (Auth + Realtime Database)",
             "SQL",
             ".NET",
             "SwiftUI",
@@ -161,8 +161,8 @@ export const aboutPageData: {
       },
       image2: {
         src: "/vsli1.JPEG",
-        alt: "Cadence Circuit Design / electronics / VSLI",
-        caption: "nmos Capacitor Cadence Design.",
+        alt: "Cadence circuit design and VLSI coursework",
+        caption: "NMOS capacitor Cadence design.",
       },
     },
 
@@ -175,8 +175,8 @@ export const aboutPageData: {
           title: "Squash",
           body: [
             "Squash has been a huge part of my life. Competing has taught me consistency, composure under pressure, and how to keep improving over time. I bring that same mindset into engineering projects: train the fundamentals, iterate quickly, and show up prepared.",
-            "\nDuring my time as team Captain of the University of Guelph Varsity Squash Team, I developed leadership and teamwork skills that I apply to group projects and collaborative work. Leading by example, fostering a positive team culture, and encouraging open communication are values I carry into all my endeavors.",
-            "\nSquash also allows me to partake in the local community through coaching and volunteering at events, which helps me maintain a balanced lifestyle outside of academics and engineering.",
+            "During my time as captain of the University of Guelph Varsity Squash Team, I developed leadership and teamwork skills that I apply to group projects and collaborative work. Leading by example, fostering a positive team culture, and encouraging open communication are values I carry into all my endeavors.",
+            "Squash also allows me to take part in the local community through coaching and volunteering at events, which helps me maintain a balanced lifestyle outside of academics and engineering.",
           ],
           tags: ["Discipline", "Team Leadership", "Competitive", "Volunteering"],
           image: {

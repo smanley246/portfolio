@@ -1,3 +1,11 @@
+/*
+  * File: src/components/PageIntro.tsx
+  * Author: Samuel Manley
+  * Last Modified: April 6th, 2026
+  *
+  * Description: Reusable page-intro component for section headers across routed pages.
+*/
+
 import React from "react";
 import { motion } from "framer-motion";
 

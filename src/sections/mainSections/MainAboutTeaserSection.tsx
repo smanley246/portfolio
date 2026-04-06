@@ -1,3 +1,11 @@
+/*
+  * File: src/sections/mainSections/MainAboutTeaserSection.tsx
+  * Author: Samuel Manley
+  * Last Modified: April 6th, 2026
+  *
+  * Description: Compact homepage teaser that invites visitors to explore the About page.
+*/
+
 import React from "react";
 import { ArrowRight, User2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";

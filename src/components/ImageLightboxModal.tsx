@@ -1,3 +1,11 @@
+/*
+  * File: src/components/ImageLightboxModal.tsx
+  * Author: Samuel Manley
+  * Last Modified: April 6th, 2026
+  *
+  * Description: Shared fullscreen image lightbox modal used across portfolio sections.
+*/
+
 import React, { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";

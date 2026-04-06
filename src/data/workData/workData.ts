@@ -1,8 +1,8 @@
 /*
   * File: src/data/workData/workData.ts
   * Author: Samuel Manley
-  * Last Modified: February 1st, 2026
-  * 
+  * Last Modified: April 6th, 2026
+  *
   * Description: This file contains structured data for the Work Experience page of the portfolio website.
 */
 
@@ -39,7 +39,7 @@ export type WorkRole = {
       place: "Skyline Group of Companies",
       bullets: [
         "Provided technical assistance and troubleshooting for hardware/software issues.",
-        "Developed Powershell scripts to automate routine tasks and improve efficiency.",
+        "Developed PowerShell scripts to automate routine tasks and improve efficiency.",
         "Organized a donation of over 25 laptops, 50 iPhones, and 60 iPads for a local charity.",
       ],
       logo: {
@@ -53,8 +53,8 @@ export type WorkRole = {
       title: "App Developer CO-OP",
       place: "Skyjack Inc.",
       bullets: [
-        "Full Stack Application Developer for internal tools.",
-        "Developed .net core applications.",
+        "Full-stack application developer for internal tools.",
+        "Developed .NET Core applications.",
         "Database management with SQL Server.",
       ],
       logo: {
@@ -69,8 +69,8 @@ export type WorkRole = {
       place: "Geek Squad",
       bullets: [
         "Provided technical support, diagnostics and repairs for tech devices.",
-        "Assisted customers with data security, hacked recovery, and lockouts.",
-        "Worked very well in the busy fast paced environment of retail tech support.",
+        "Assisted customers with data security, account recovery, and lockouts.",
+        "Worked effectively in the busy, fast-paced environment of retail tech support.",
       ],
       logo: {
         src: "/logos/geeksquad.png",
@@ -84,8 +84,8 @@ export type WorkRole = {
       place: "Linamar Corporation",
       bullets: [
         "Provided technical assistance and troubleshooting for hardware/software issues.",
-        "Developed Powershell scripts to automate routine tasks and improve efficiency.",
-        "Supported the electronic hardware of a pop up COVID-19 vaccination clinic hosted by Linamar.",
+        "Developed PowerShell scripts to automate routine tasks and improve efficiency.",
+        "Supported the electronic hardware of a pop-up COVID-19 vaccination clinic hosted by Linamar.",
       ],
       logo: {
         src: "/logos/linamar.png",

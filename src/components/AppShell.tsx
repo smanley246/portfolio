@@ -1,3 +1,11 @@
+/*
+  * File: src/components/AppShell.tsx
+  * Author: Samuel Manley
+  * Last Modified: April 6th, 2026
+  *
+  * Description: Shared site shell that keeps the background, navigation, and footer mounted while page content animates.
+*/
+
 import React from "react";
 import { motion } from "framer-motion";
 import { useLocation, useOutlet } from "react-router-dom";
@@ -12,7 +20,6 @@ const routeOrder: Record<string, number> = {
   education: 3,
   work: 4,
   resume: 5,
-  template: 6,
 };
 
 const getRouteRank = (pathname: string) => {

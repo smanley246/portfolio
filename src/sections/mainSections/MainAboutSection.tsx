@@ -1,9 +1,9 @@
 /*
-  * File: src/sections/mainSections/mainAboutSection.tsx
+  * File: src/sections/mainSections/MainAboutSection.tsx
   * Author: Samuel Manley
-  * Last Modified: February 1st, 2026
+  * Last Modified: April 6th, 2026
   *
-  * Description: This file contains the Main About section component for the portfolio website.
+  * Description: This file contains the homepage About section component for the portfolio website.
 */
 
 import React from "react";
