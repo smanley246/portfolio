@@ -17,16 +17,13 @@ import {
   type CourseCard,
 } from "../data/educationData/educationData";
 
-const chipBase =
-  "inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/90";
-
 const renderFullDescription = (desc: CourseCard["description"]) => {
   if (!desc) return null;
 
   if (Array.isArray(desc)) {
     if (!desc.length) return null;
     return (
-      <ul className="list-disc ml-5 text-sm space-y-2 text-blue-100/90">
+      <ul className="prose-copy ml-5 list-disc space-y-2 text-sm">
         {desc.map((d, i) => (
           <li key={`desc-${i}`}>{d}</li>
         ))}
@@ -35,7 +32,7 @@ const renderFullDescription = (desc: CourseCard["description"]) => {
   }
 
   return (
-    <p className="text-sm text-blue-100/90 leading-relaxed whitespace-pre-line">
+    <p className="prose-copy whitespace-pre-line text-sm">
       {desc}
     </p>
   );
@@ -48,12 +45,11 @@ export default function CourseDetailPage() {
   const course = slug ? getCourseBySlug(slug) : undefined;
 
   return (
-    <div className="px-6 py-10">
-      <div className="mx-auto max-w-5xl">
-              <div className="flex items-center justify-between gap-3 mb-6">
+    <div className="site-container max-w-5xl pb-8">
+              <div className="mb-6 flex items-center justify-between gap-3">
                 <button
                   onClick={() => navigate(-1)}
-                  className={`${chipBase} px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 transition text-white`}
+                  className="surface-control inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white"
                 >
                   <ArrowLeft className="w-4 h-4" /> Back
                 </button>
@@ -62,22 +58,23 @@ export default function CourseDetailPage() {
               {!course ? (
                   <Card>
                     <h1 className="text-xl font-semibold">Course not found</h1>
-                  <p className="mt-2 text-sm text-blue-100/80">
+                  <p className="prose-copy mt-2 text-sm">
                     That URL does not match any course slug in your education data.
                   </p>
                 </Card>
               ) : (
                 <>
                   {/* Header block: image + title/meta */}
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-6">
+                  <Card className="mb-6">
+                  <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
                     {/* Image */}
                     <div
                       className="
                         w-24 h-24
-                        rounded-2xl
+                        rounded-[1.4rem]
                         overflow-hidden
-                        bg-white/10
-                        border border-white/15
+                        media-frame
+                        border
                         flex items-center justify-center
                         flex-shrink-0
                       "
@@ -100,7 +97,7 @@ export default function CourseDetailPage() {
                         {course.code} — {course.title}
                       </h1>
 
-                      <div className="text-sm text-blue-200/80 mt-2">
+                      <div className="meta-line mt-2 text-sm">
                         {course.term ? (
                           <>
                             <span className="text-white">{course.term}</span>
@@ -116,7 +113,7 @@ export default function CourseDetailPage() {
                       {course.tags?.length ? (
                         <div className="flex flex-wrap gap-2 pt-4">
                           {course.tags.map((t) => (
-                            <span key={t} className={chipBase}>
+                            <span key={t} className="card-chip">
                               {t}
                             </span>
                           ))}
@@ -124,6 +121,7 @@ export default function CourseDetailPage() {
                       ) : null}
                     </div>
                   </div>
+                  </Card>
 
                   {/* Body */}
                   <Card>
@@ -134,7 +132,6 @@ export default function CourseDetailPage() {
                   </Card>
                 </>
               )}
-      </div>
     </div>
   );
 }

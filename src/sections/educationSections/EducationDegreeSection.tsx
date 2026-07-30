@@ -30,16 +30,16 @@ const EducationDegreeSection: React.FC<Props> = ({ degreeCard }) => {
     <Card>
       <div className="flex items-start gap-5">
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-2">
-              <GraduationCap className="h-5 w-5 text-teal-300" />
+          <div className="section-heading">
+            <div className="section-heading__icon">
+              <GraduationCap className="h-5 w-5" />
             </div>
-            <h2 className="text-2xl font-semibold sm:text-3xl">{degreeCard.school}</h2>
+            <h2 className="section-heading__title">{degreeCard.school}</h2>
           </div>
 
-          <div className="mt-3">
+          <div>
             <p className="text-lg font-semibold text-white">{degreeCard.program}</p>
-            <p className="mt-1 text-sm text-white/75">
+            <p className="meta-line mt-1 text-sm">
               {degreeCard.location} • <span className="text-white">{degreeCard.years}</span>
             </p>
           </div>
@@ -67,7 +67,7 @@ const EducationDegreeSection: React.FC<Props> = ({ degreeCard }) => {
 
         {degreeCard.image?.src ? (
           <div className="shrink-0">
-            <div className="relative h-28 w-28 overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:h-40 sm:w-40">
+            <div className="media-frame relative h-28 w-28 overflow-hidden rounded-2xl border sm:h-40 sm:w-40">
               <img
                 src={degreeCard.image.src}
                 alt={degreeCard.image.alt}

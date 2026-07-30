@@ -91,7 +91,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                     href={link}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-sm text-cyan-300"
+                    className="accent-link text-sm"
                   >
                     Live <ArrowUpRight className="h-4 w-4" />
                   </a>
@@ -119,7 +119,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
           {preview && (
             <div className="order-2 w-full lg:w-auto">
-              <div className="interactive-media aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/70 lg:w-56 xl:w-64">
+              <div className="interactive-media aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] border lg:w-56 xl:w-64">
                 <img
                   src={preview}
                   alt={`${name} preview`}
@@ -135,21 +135,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <AnimatePresence>
         {expanded && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/88 p-4"
+            className="modal-scrim fixed inset-0 z-50 flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="panel relative flex h-[90vh] w-[95vw] max-w-6xl flex-col gap-6 overflow-hidden rounded-[2rem] p-6 text-white md:p-8"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              className="modal-panel relative flex h-[90vh] w-[95vw] max-w-6xl flex-col gap-6 overflow-hidden rounded-[2rem] p-6 text-white md:p-8"
+              initial={{ scale: 0.96, opacity: 0, y: 14 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.98, opacity: 0, y: 8 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
             >
               <button
                 onClick={() => setExpanded(false)}
-                className="absolute right-4 top-4 rounded-full border border-white/10 bg-white/5 p-2 hover:bg-white/10"
+                className="icon-control absolute right-4 top-4"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -200,7 +200,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                               key={m.src}
                               onClick={() => setActiveIndex(i)}
                               className={`overflow-hidden rounded-lg border flex-shrink-0 ${
-                                i === activeIndex ? "border-cyan-300" : "border-white/20"
+                                i === activeIndex
+                                  ? "border-[var(--color-accent)]"
+                                  : "border-white/20"
                               }`}
                             >
                               {m.type === "image" ? (
@@ -254,7 +256,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                         href={repo}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-2 text-cyan-300"
+                        className="accent-link"
                       >
                         <Github className="h-5 w-5" /> Repo
                       </a>
@@ -264,7 +266,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                         href={link}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-2 text-cyan-300"
+                        className="accent-link"
                       >
                         <ArrowUpRight className="h-5 w-5" /> Live Demo
                       </a>

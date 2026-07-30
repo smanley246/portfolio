@@ -20,7 +20,7 @@ export default function WorkDetailPage() {
     <div className="site-container max-w-6xl">
       <button
         onClick={() => navigate(-1)}
-        className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
+        className="surface-control mb-6 inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white"
       >
         <ArrowLeft className="h-4 w-4" /> Back
       </button>
@@ -35,7 +35,7 @@ export default function WorkDetailPage() {
       ) : (
         <>
           <div className="mb-8 grid gap-6 lg:grid-cols-[160px_minmax(0,1fr)] lg:items-center">
-            <div className="flex h-32 w-32 items-center justify-center overflow-hidden rounded-[1.75rem] border border-white/12 bg-white/8 sm:h-36 sm:w-36">
+            <div className="media-frame flex h-32 w-32 items-center justify-center overflow-hidden rounded-[1.75rem] border sm:h-36 sm:w-36">
               {role.logo?.src ? (
                 <img
                   src={role.logo.src}
@@ -51,10 +51,10 @@ export default function WorkDetailPage() {
 
             <div className="min-w-0">
               <p className="page-intro__eyebrow">Role Detail</p>
-              <h1 className="mb-4 overflow-hidden text-ellipsis whitespace-nowrap text-4xl font-extrabold leading-none tracking-[-0.05em] text-white sm:text-5xl lg:text-6xl">
+              <h1 className="hero-title mb-4 overflow-hidden text-ellipsis whitespace-nowrap text-4xl font-[760] leading-none tracking-[-0.055em] sm:text-5xl lg:text-6xl">
                 {role.title}
               </h1>
-              <p className="max-w-3xl text-base leading-8 text-[var(--color-text-muted)] sm:text-lg">
+              <p className="prose-copy max-w-3xl text-base sm:text-lg">
                 {role.place} - {role.when}
               </p>
             </div>

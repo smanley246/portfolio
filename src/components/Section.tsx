@@ -7,6 +7,7 @@
 */
 
 import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface SectionProps {
   id: string;               // HTML id for scroll targets
@@ -15,20 +16,26 @@ interface SectionProps {
   children: React.ReactNode;
 }
 
-const Section: React.FC<SectionProps> = ({ id, title, icon, children }) => (
-  <section id={id} className="scroll-mt-28 py-10 sm:py-12">
-    <div className="site-container w-full">
-      <div className="mb-6 flex items-center gap-3">
-        <div className="rounded-2xl border border-cyan-200/15 bg-cyan-300/8 p-2.5 text-cyan-200 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
-          {icon}
-        </div>
-        <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-          {title}
-        </h2>
+const Section: React.FC<SectionProps> = ({ id, title, icon, children }) => {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <section id={id} className="content-section scroll-mt-28 py-10 sm:py-12">
+      <div className="site-container w-full">
+        <motion.div
+          className="section-heading"
+          initial={reduceMotion ? false : { opacity: 0, x: -18 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="section-heading__icon">{icon}</div>
+          <h2 className="section-heading__title">{title}</h2>
+        </motion.div>
+        {children}
       </div>
-      {children}
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Section;

@@ -19,9 +19,6 @@ const sectionFade = {
   show: { opacity: 1, y: 0 },
 };
 
-const chipBase =
-  "inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/90";
-
 type InterestsCard = {
   title: string;
   body: string | string[];
@@ -50,7 +47,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
       return (
         <div className="space-y-3">
           {body.map((p, i) => (
-            <p key={i} className="text-white/80 leading-relaxed whitespace-pre-line">
+            <p key={i} className="prose-copy whitespace-pre-line">
               {p}
             </p>
           ))}
@@ -58,7 +55,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
       );
     }
 
-    return <p className="text-white/80 leading-relaxed whitespace-pre-line">{body}</p>;
+    return <p className="prose-copy whitespace-pre-line">{body}</p>;
   };
 
   return (
@@ -73,17 +70,17 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
           animate="show"
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <div className="mb-4 flex items-center gap-3">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-2">
-              <Heart className="h-5 w-5 text-teal-300" />
+          <div className="section-heading">
+            <div className="section-heading__icon">
+              <Heart className="h-5 w-5" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-semibold">{interests.title}</h2>
+            <h2 className="section-heading__title">{interests.title}</h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <Card className="lg:col-span-6 p-6 bg-blue-900/35 border border-white/10">
+            <Card className="lg:col-span-6 p-6">
               <div className="flex items-center gap-2 mb-3">
-                <Trophy className="h-5 w-5 text-teal-300" />
+                <Trophy className="h-5 w-5 text-[var(--color-accent)]" />
                 <h3 className="text-xl font-semibold">{squash.title}</h3>
               </div>
 
@@ -105,7 +102,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
                         caption: squash.image!.caption,
                       })
                     }
-                    className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/70 text-white transition hover:bg-slate-900"
+                    className="icon-control absolute right-3 top-3 z-10 h-10 w-10 text-white"
                     aria-label={`Expand ${squash.title} image`}
                   >
                     <Expand className="h-4 w-4" />
@@ -121,7 +118,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
 
               <div className="flex flex-wrap gap-2 pt-4">
                 {squash.tags.map((t) => (
-                  <span key={t} className={chipBase}>
+                  <span key={t} className="card-chip">
                     {t}
                   </span>
                 ))}
@@ -129,9 +126,9 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
             </Card>
 
             <div className="lg:col-span-6 grid grid-cols-1 gap-6">
-              <Card className="p-6 bg-blue-900/35 border border-white/10">
+              <Card className="p-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <Cpu className="h-5 w-5 text-teal-300" />
+                  <Cpu className="h-5 w-5 text-[var(--color-accent)]" />
                   <h3 className="text-xl font-semibold">{tech.title}</h3>
                 </div>
 
@@ -139,16 +136,16 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
 
                 <div className="flex flex-wrap gap-2 pt-4">
                   {tech.tags.map((t) => (
-                    <span key={t} className={chipBase}>
+                    <span key={t} className="card-chip">
                       {t}
                     </span>
                   ))}
                 </div>
               </Card>
 
-              <Card className="p-6 bg-blue-900/35 border border-white/10">
+              <Card className="p-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <PawPrint className="h-5 w-5 text-teal-300" />
+                  <PawPrint className="h-5 w-5 text-[var(--color-accent)]" />
                   <h3 className="text-xl font-semibold">{pets.title}</h3>
                 </div>
 
@@ -170,7 +167,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
                           caption: pets.image!.caption,
                         })
                       }
-                      className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/70 text-white transition hover:bg-slate-900"
+                      className="icon-control absolute right-3 top-3 z-10 h-10 w-10 text-white"
                       aria-label={`Expand ${pets.title} image`}
                     >
                       <Expand className="h-4 w-4" />
@@ -186,7 +183,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
 
                 <div className="flex flex-wrap gap-2 pt-4">
                   {pets.tags.map((t) => (
-                    <span key={t} className={chipBase}>
+                    <span key={t} className="card-chip">
                       {t}
                     </span>
                   ))}

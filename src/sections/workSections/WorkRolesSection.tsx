@@ -30,10 +30,11 @@ const WorkRolesSection: React.FC<Props> = ({ workRoles, workDetailPath }) => {
 
   return (
     <div className="flex flex-col gap-6">
+      <h2 className="sr-only">Professional roles</h2>
       {workRoles.map((role) => (
         <Card key={role.slug}>
-          <div className="flex items-start gap-4">
-            <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-[1.5rem] border border-white/12 bg-white/8">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+            <div className="media-frame flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[1.35rem] border sm:h-24 sm:w-24 sm:rounded-[1.5rem]">
               {role.logo?.src ? (
                 <img
                   src={role.logo.src}
@@ -50,16 +51,16 @@ const WorkRolesSection: React.FC<Props> = ({ workRoles, workDetailPath }) => {
             <div className="min-w-0 flex-1">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0">
-                  <h3 className="truncate text-xl font-semibold leading-snug">
+                  <h3 className="text-xl font-semibold leading-snug">
                     {role.title}
                   </h3>
-                  <div className="mt-2 text-sm text-[var(--color-text-soft)]">
+                  <div className="meta-line mt-2 text-sm">
                     {role.place} • <span className="text-white">{role.when}</span>
                   </div>
                 </div>
 
                 <CustomButton
-                  className="ml-auto whitespace-nowrap"
+                  className="w-full whitespace-nowrap sm:ml-auto sm:w-auto"
                   onClick={() => navigate(workDetailPath(role.slug))}
                 >
                   View Details

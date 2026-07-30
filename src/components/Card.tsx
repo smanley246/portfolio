@@ -7,12 +7,14 @@
 */
 
 import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({
   children,
   className,
 }) => {
   const cardRef = React.useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     const node = cardRef.current;
@@ -24,9 +26,21 @@ const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({
   };
 
   return (
-    <div
+    <motion.div
       ref={cardRef}
       onPointerMove={handlePointerMove}
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={
+        reduceMotion
+          ? undefined
+          : {
+              y: -4,
+              transition: { type: "spring", stiffness: 360, damping: 26 },
+            }
+      }
       className={
         "panel interactive-card relative rounded-[1.75rem] p-6 sm:p-7 " +
         (className ?? "")
@@ -35,7 +49,7 @@ const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({
       <div className="interactive-card__surface-glow" />
       <div className="interactive-card__border-glow" />
       <div className="relative z-10 h-full w-full">{children}</div>
-    </div>
+    </motion.div>
   );
 };
 

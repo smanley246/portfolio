@@ -7,11 +7,11 @@
 */
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useLocation, useOutlet } from "react-router-dom";
-import CircuitBackground from "./CircuitBackground";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import ParticlesBackground from "./ParticlesBackground";
 
 const routeOrder: Record<string, number> = {
   "": 0,
@@ -30,6 +30,7 @@ const getRouteRank = (pathname: string) => {
 };
 
 const AppShell: React.FC = () => {
+  const reduceMotion = useReducedMotion();
   const location = useLocation();
   const outlet = useOutlet();
   const [displayPath, setDisplayPath] = React.useState(location.pathname);
@@ -61,17 +62,17 @@ const AppShell: React.FC = () => {
 
   const animation =
     phase === "exit"
-      ? { opacity: 0, x: direction >= 0 ? -56 : 56 }
+      ? { opacity: 0, x: reduceMotion ? 0 : direction >= 0 ? -28 : 28 }
       : { opacity: 1, x: 0 };
 
   const initial =
     phase === "enter"
-      ? { opacity: 0, x: direction >= 0 ? 56 : -56 }
+      ? { opacity: 0, x: reduceMotion ? 0 : direction >= 0 ? 28 : -28 }
       : false;
 
   return (
     <>
-      <CircuitBackground />
+      <ParticlesBackground />
 
       <div className="relative z-10 flex min-h-screen flex-col text-[var(--color-text)]">
         <Navbar />
@@ -83,7 +84,10 @@ const AppShell: React.FC = () => {
             key={displayPath}
             initial={initial}
             animate={animation}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              duration: reduceMotion ? 0.01 : 0.36,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             onAnimationComplete={handleAnimationComplete}
           >
             {displayOutlet}

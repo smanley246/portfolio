@@ -62,7 +62,7 @@ export default function ProjectDetailPage() {
         <div className="mb-6 flex items-center justify-between gap-3">
           <button
             onClick={() => navigate(-1)}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
+            className="surface-control inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white"
           >
             <ArrowLeft className="h-4 w-4" /> Back
           </button>
@@ -79,7 +79,7 @@ export default function ProjectDetailPage() {
           <>
             <section className="mb-8">
               <p className="page-intro__eyebrow">Project Detail</p>
-              <h1 className="mt-4 text-4xl font-extrabold leading-[0.96] tracking-[-0.05em] text-white sm:text-5xl xl:text-6xl">
+              <h1 className="hero-title mt-4 text-4xl font-[760] leading-[0.96] tracking-[-0.055em] sm:text-5xl xl:text-6xl">
                 {project.name}
               </h1>
               <p className="prose-copy mt-5 max-w-none text-base sm:text-lg">
@@ -96,7 +96,7 @@ export default function ProjectDetailPage() {
                     className="relative w-full text-left"
                     aria-label="Open gallery"
                   >
-                    <div className="relative overflow-hidden rounded-[1.75rem] bg-black/40">
+                    <div className="media-frame relative overflow-hidden rounded-[1.75rem]">
                       <div className="flex aspect-[16/10] w-full items-center justify-center">
                         {hasMedia ? (
                           <>
@@ -166,7 +166,9 @@ export default function ProjectDetailPage() {
                           onClick={() => setActiveIndex(i)}
                           className={[
                             "overflow-hidden rounded-xl border transition",
-                            i === activeIndex ? "border-cyan-300" : "border-white/20",
+                            i === activeIndex
+                              ? "border-[var(--color-accent)]"
+                              : "border-white/20",
                           ].join(" ")}
                           aria-label={`Select media ${i + 1}`}
                           type="button"
@@ -200,7 +202,7 @@ export default function ProjectDetailPage() {
                           href={project.repo}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
+                          className="surface-control inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm text-white"
                         >
                           <Github className="h-4 w-4" /> Repo
                         </a>
@@ -210,7 +212,7 @@ export default function ProjectDetailPage() {
                           href={project.link}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
+                          className="surface-control inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm text-white"
                         >
                           <ArrowUpRight className="h-4 w-4" /> Live Demo
                         </a>
@@ -246,19 +248,19 @@ export default function ProjectDetailPage() {
 
             {isGalleryOpen && (
               <div
-                className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/88 p-4"
+                className="modal-scrim fixed inset-0 z-50 flex items-center justify-center p-4"
                 onClick={() => setIsGalleryOpen(false)}
                 role="dialog"
                 aria-modal="true"
               >
                 <div
-                  className="panel relative h-[90vh] w-full max-w-6xl overflow-hidden rounded-[2rem] border border-white/10"
+                  className="modal-panel relative h-[90vh] w-full max-w-6xl overflow-hidden rounded-[2rem]"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div className="absolute left-3 right-3 top-3 z-10 flex items-center justify-between">
                     <button
                       onClick={() => setIsGalleryOpen(false)}
-                      className="rounded-xl bg-white/10 px-3 py-2 text-sm text-white transition hover:bg-white/20"
+                      className="surface-control rounded-full px-3 py-2 text-sm text-white"
                       type="button"
                     >
                       Close

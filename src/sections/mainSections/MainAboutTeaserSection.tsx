@@ -31,7 +31,7 @@ const MainAboutTeaserSection: React.FC = () => {
         type="button"
         onClick={() => navigate("/about")}
         onPointerMove={handlePointerMove}
-        className="interactive-card group panel flex w-full items-center gap-4 overflow-hidden rounded-[2rem] p-4 text-left transition hover:-translate-y-0.5 sm:gap-6 sm:p-5"
+        className="interactive-card group panel flex w-full items-center gap-4 overflow-hidden rounded-[2rem] p-4 text-left sm:gap-6 sm:p-5"
         aria-label="Go to About page"
       >
         <div className="interactive-card__surface-glow" />
@@ -57,8 +57,8 @@ const MainAboutTeaserSection: React.FC = () => {
           />
         </div>
 
-        <div className="relative z-10 flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.5rem] border border-white/10 bg-white/[0.05] transition group-hover:border-cyan-200/30 group-hover:bg-cyan-300/10 sm:h-24 sm:w-24">
-          <ArrowRight className="h-8 w-8 text-white transition group-hover:translate-x-1" />
+        <div className="relative z-10 flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.5rem] border border-[rgba(114,241,223,0.16)] bg-[rgba(114,241,223,0.06)] transition duration-300 group-hover:border-[rgba(114,241,223,0.34)] group-hover:bg-[rgba(114,241,223,0.11)] sm:h-24 sm:w-24">
+          <ArrowRight className="h-8 w-8 text-[var(--color-accent)] transition duration-300 group-hover:translate-x-1" />
         </div>
       </button>
     </Section>

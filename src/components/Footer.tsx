@@ -10,7 +10,7 @@ import React from "react";
 import { Mail, Linkedin, Github } from "lucide-react";
 
 const Footer: React.FC = () => (
-  <footer className="border-t border-white/8 bg-slate-950/25 py-8">
+  <footer className="border-t border-[rgba(159,224,234,0.1)] bg-[rgba(2,10,19,0.4)] py-8 backdrop-blur-lg">
     <div className="site-container flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
       <div className="space-y-1">
         <p className="text-sm font-medium text-white">Samuel Manley</p>
@@ -19,10 +19,10 @@ const Footer: React.FC = () => (
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3 text-white">
+      <div className="flex flex-wrap items-center gap-2.5 text-white">
         <a
           href="mailto:samuel@samuelmanley.ca"
-          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:border-cyan-200/25 hover:bg-white/8"
+          className="surface-control inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm text-white"
         >
           <Mail className="h-4 w-4" /> Email
         </a>
@@ -31,7 +31,7 @@ const Footer: React.FC = () => (
           href="https://www.linkedin.com/in/smanley246/"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:border-cyan-200/25 hover:bg-white/8"
+          className="surface-control inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm text-white"
         >
           <Linkedin className="h-4 w-4" /> LinkedIn
         </a>
@@ -40,7 +40,7 @@ const Footer: React.FC = () => (
           href="https://github.com/smanley246"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:border-cyan-200/25 hover:bg-white/8"
+          className="surface-control inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm text-white"
         >
           <Github className="h-4 w-4" /> GitHub
         </a>

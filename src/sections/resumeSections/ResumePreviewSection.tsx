@@ -7,6 +7,7 @@
 */
 
 import React from "react";
+import Card from "../../components/Card";
 
 type Preview = {
   maxWidthPx: number;
@@ -22,22 +23,19 @@ const ResumePreviewSection: React.FC<Props> = ({ preview }) => {
   return (
     <div className="flex justify-center">
       <div
-        className="
-          w-full
-          rounded-2xl
-          overflow-hidden
-          bg-white
-          shadow-[0_18px_70px_rgba(0,0,0,0.45)]
-          ring-1 ring-white/10
-        "
+        className="w-full"
         style={{ maxWidth: `${preview.maxWidthPx}px` }}
       >
-        <img
-          src={preview.imageSrc}
-          alt={preview.imageAlt}
-          className="w-full h-auto block"
-          draggable={false}
-        />
+        <Card className="overflow-hidden p-2 sm:p-3">
+          <div className="overflow-hidden rounded-[1.25rem] bg-white">
+            <img
+              src={preview.imageSrc}
+              alt={preview.imageAlt}
+              className="block h-auto w-full"
+              draggable={false}
+            />
+          </div>
+        </Card>
       </div>
     </div>
   );

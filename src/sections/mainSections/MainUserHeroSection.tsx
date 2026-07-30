@@ -7,7 +7,7 @@
  */
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Expand } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { heroData } from "../../data/mainSummaryData/heroData";
@@ -22,6 +22,7 @@ const MainUserHeroSection: React.FC = () => {
   const [expandedImage, setExpandedImage] = React.useState<LightboxImage | null>(
     null,
   );
+  const reduceMotion = useReducedMotion();
   const heroCardRef = React.useRef<HTMLDivElement>(null);
 
   const handleHeroCardPointerMove = (
@@ -37,17 +38,17 @@ const MainUserHeroSection: React.FC = () => {
 
   return (
     <>
-      <section className="relative z-10 py-8">
+      <section className="relative z-10 py-8 sm:py-10">
         <div className="site-container grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="space-y-6"
         >
           <p className="section-kicker">{heroData.eyebrow}</p>
 
-          <h1 className="max-w-[11ch] text-5xl font-extrabold leading-[0.92] tracking-[-0.05em] sm:text-6xl lg:text-7xl">
+          <h1 className="hero-title max-w-[11ch] text-5xl font-[760] leading-[0.92] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
             {heroData.name}
           </h1>
 
@@ -78,9 +79,10 @@ const MainUserHeroSection: React.FC = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.94, y: 18 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          whileHover={reduceMotion ? undefined : { y: -6, rotate: 0.35 }}
+          transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="relative flex justify-center lg:justify-end"
         >
           <div
@@ -92,9 +94,9 @@ const MainUserHeroSection: React.FC = () => {
             <div className="interactive-card__border-glow" />
 
             <div className="relative z-10">
-              <div className="absolute inset-x-8 top-0 h-24 rounded-full bg-cyan-300/20 blur-3xl" />
+              <div className="absolute inset-x-8 top-0 h-24 rounded-full bg-[rgba(114,241,223,0.18)] blur-3xl" />
 
-              <div className="interactive-media relative aspect-square overflow-hidden rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-slate-800 via-slate-900 to-sky-950">
+              <div className="interactive-media relative aspect-square overflow-hidden rounded-[1.5rem] border">
                 {!imageFailed ? (
                   <>
                     <img
@@ -112,14 +114,14 @@ const MainUserHeroSection: React.FC = () => {
                           title: "Headshot",
                         })
                       }
-                      className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/70 text-white transition hover:bg-slate-900"
+                      className="icon-control absolute right-4 top-4 h-10 w-10 text-white"
                       aria-label="Expand headshot"
                     >
                       <Expand className="h-4 w-4" />
                     </button>
                   </>
                 ) : (
-                  <div className="flex h-full items-center justify-center bg-gradient-to-br from-sky-900 via-slate-900 to-slate-950">
+                  <div className="flex h-full items-center justify-center bg-[linear-gradient(145deg,#0a3443,#071a2a_55%,#030c16)]">
                     <span className="text-sm text-[var(--color-text-soft)]">
                       Headshot unavailable
                     </span>

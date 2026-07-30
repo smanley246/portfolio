@@ -40,18 +40,18 @@ const ImageLightboxModal: React.FC<Props> = ({ image, onClose }) => {
     <AnimatePresence>
       {image ? (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 p-4"
+          className="modal-scrim fixed inset-0 z-50 flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
         >
           <motion.div
-            className="relative flex max-h-[92vh] w-full max-w-6xl flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[rgba(7,17,31,0.96)] shadow-[0_30px_80px_rgba(0,0,0,0.45)]"
-            initial={{ scale: 0.96, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.96, opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            className="modal-panel relative flex max-h-[92vh] w-full max-w-6xl flex-col overflow-hidden rounded-[2rem]"
+            initial={{ scale: 0.96, opacity: 0, y: 12 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.98, opacity: 0, y: 8 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
@@ -73,14 +73,14 @@ const ImageLightboxModal: React.FC<Props> = ({ image, onClose }) => {
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/10"
+                className="icon-control h-11 w-11 text-white"
                 aria-label="Close expanded image"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="flex min-h-0 flex-1 items-center justify-center bg-slate-950/80 p-4 sm:p-6">
+            <div className="flex min-h-0 flex-1 items-center justify-center bg-[rgba(1,8,16,0.68)] p-4 sm:p-6">
               <img
                 src={image.src}
                 alt={image.alt}

@@ -67,10 +67,10 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-slate-950/55 text-white backdrop-blur-xl supports-[backdrop-filter]:bg-slate-950/42">
+    <div className="nav-shell fixed inset-x-0 top-0 z-50">
       <motion.div
         style={{ scaleX }}
-        className="h-[2px] origin-left bg-gradient-to-r from-cyan-300 via-sky-400 to-blue-500"
+        className="h-[2px] origin-left bg-gradient-to-r from-[var(--color-accent-strong)] via-[var(--color-accent)] to-[var(--color-accent-blue)] shadow-[0_0_16px_rgba(114,241,223,0.42)]"
       />
 
       <nav className="site-container py-3">
@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
-              className="rounded-2xl border border-white/10 bg-white/5 p-2 transition hover:bg-white/10 lg:hidden"
+              className="icon-control nav-mobile-toggle h-10 w-10"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
             >
@@ -88,10 +88,10 @@ const Navbar: React.FC = () => {
 
             <button
               onClick={() => navigate("/")}
-              className="hidden items-center gap-3 whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold tracking-tight transition hover:border-cyan-200/20 hover:bg-white/10 lg:flex"
+              className="surface-control hidden min-h-10 items-center gap-3 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold tracking-tight lg:flex"
               aria-label="Go to Home"
             >
-              <Cpu className="h-4 w-4 text-cyan-300" />
+              <Cpu className="h-4 w-4 text-[var(--color-accent)]" />
               Samuel Manley
             </button>
           </div>
@@ -99,14 +99,14 @@ const Navbar: React.FC = () => {
           <div className="flex min-w-0 items-center justify-center">
             <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 whitespace-nowrap text-sm font-semibold tracking-tight lg:hidden"
+              className="nav-mobile-home flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold tracking-tight lg:hidden"
               aria-label="Go to Home"
             >
-              <Cpu className="h-4 w-4 text-cyan-300" />
-              Samuel Manley
+              <Cpu className="h-4 w-4 text-[var(--color-accent)]" />
+              <span className="nav-mobile-name">Samuel Manley</span>
             </button>
 
-            <ul className="hidden items-center gap-1 rounded-full border border-white/8 bg-white/5 px-2 py-1 lg:flex">
+            <ul className="nav-cluster hidden items-center gap-1 rounded-full px-2 py-1 lg:flex">
               {links.map((l) => {
                 const active = isActivePath(location.pathname, l.to);
 
@@ -115,22 +115,25 @@ const Navbar: React.FC = () => {
                     <Link
                       to={l.to}
                       className={[
-                        "relative inline-flex items-center gap-2 overflow-hidden whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition duration-200 hover:scale-[1.05]",
-                        active ? "text-slate-950" : "text-[var(--color-text-muted)] hover:text-white",
+                        "relative inline-flex items-center gap-2 overflow-hidden whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition duration-200",
+                        active
+                          ? "nav-active-text"
+                          : "text-[var(--color-text-muted)] hover:text-white",
                       ].join(" ")}
                       aria-label={`Go to ${l.label}`}
+                      aria-current={active ? "page" : undefined}
                     >
                       {active ? (
                         <motion.span
                           layoutId="nav-active-pill"
-                          className="absolute inset-0 z-0 rounded-full bg-white shadow-[0_10px_24px_rgba(255,255,255,0.22)]"
+                          className="nav-active-pill absolute inset-0 z-0 rounded-full"
                           transition={{ type: "spring", stiffness: 380, damping: 30 }}
                         />
                       ) : null}
                       <span
                         className={[
                           "relative z-10 inline-flex items-center gap-2",
-                          active ? "text-slate-950" : "",
+                          active ? "nav-active-text" : "",
                         ].join(" ")}
                       >
                         {l.icon}
@@ -146,7 +149,7 @@ const Navbar: React.FC = () => {
           <div className="flex shrink-0 items-center justify-end gap-2">
             <a
               href="mailto:samuel@samuelmanley.ca"
-              className="rounded-full border border-white/8 bg-white/5 p-2 transition hover:bg-white/10"
+              className="icon-control"
               aria-label="Email"
             >
               <Mail className="h-5 w-5" />
@@ -155,7 +158,7 @@ const Navbar: React.FC = () => {
               href="https://www.linkedin.com/in/smanley246/"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-white/8 bg-white/5 p-2 transition hover:bg-white/10"
+              className="icon-control"
               aria-label="LinkedIn"
             >
               <Linkedin className="h-5 w-5" />
@@ -164,7 +167,7 @@ const Navbar: React.FC = () => {
               href="https://github.com/smanley246"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-white/8 bg-white/5 p-2 transition hover:bg-white/10"
+              className="icon-control"
               aria-label="GitHub"
             >
               <Github className="h-5 w-5" />
@@ -192,10 +195,10 @@ const Navbar: React.FC = () => {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.18 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="site-container pb-3">
-                <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/90 backdrop-blur-2xl">
+                <div className="modal-panel overflow-hidden rounded-[1.5rem] backdrop-blur-2xl">
                   <ul className="py-2">
                     {links.map((l) => {
                       const active = isActivePath(location.pathname, l.to);
@@ -207,15 +210,15 @@ const Navbar: React.FC = () => {
                             className={[
                               "flex items-center gap-3 px-4 py-3 text-sm font-medium transition",
                               active
-                                ? "bg-white text-slate-950"
+                                ? "bg-[var(--color-accent)] text-[#04202b]"
                                 : "text-[var(--color-text-muted)] hover:bg-white/8",
                             ].join(" ")}
                             aria-label={`Go to ${l.label}`}
                           >
-                            <span className={active ? "text-slate-950" : "opacity-90"}>
+                            <span className={active ? "text-[#04202b]" : "opacity-90"}>
                               {l.icon}
                             </span>
-                            <span className={active ? "text-slate-950" : ""}>{l.label}</span>
+                            <span className={active ? "text-[#04202b]" : ""}>{l.label}</span>
                           </Link>
                         </li>
                       );

@@ -19,9 +19,6 @@ const sectionFade = {
   show: { opacity: 1, y: 0 },
 };
 
-const chipBase =
-  "inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white/90";
-
 type SummarySection = {
   id: "summary";
   title: string;
@@ -55,25 +52,25 @@ const AboutSummarySection: React.FC<Props> = ({ summary }) => {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <div className="mb-4 flex items-center gap-3">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-2">
-              <Heart className="h-5 w-5 text-teal-300" />
+          <div className="section-heading">
+            <div className="section-heading__icon">
+              <Heart className="h-5 w-5" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-semibold">{summary.title}</h2>
+            <h2 className="section-heading__title">{summary.title}</h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <Card className="lg:col-span-7 p-6 bg-blue-900/35 border border-white/10">
+            <Card className="lg:col-span-7 p-6">
               <div className="flex flex-col gap-4">
                 {summary.paragraphs.map((p, i) => (
-                  <p key={i} className="text-white/80 leading-relaxed">
+                  <p key={i} className="prose-copy">
                     {p}
                   </p>
                 ))}
 
                 <div className="flex flex-wrap gap-2 pt-1">
                   {summary.highlights.map((h) => (
-                    <span key={h} className={chipBase}>
+                    <span key={h} className="card-chip">
                       {h}
                     </span>
                   ))}
@@ -81,7 +78,7 @@ const AboutSummarySection: React.FC<Props> = ({ summary }) => {
               </div>
             </Card>
 
-            <Card className="lg:col-span-5 flex items-center justify-center p-6 bg-blue-900/35 border border-white/10">
+            <Card className="lg:col-span-5 flex items-center justify-center p-6">
               <div className="interactive-media relative aspect-square w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                 {!imageFailed ? (
                   <img
@@ -107,7 +104,7 @@ const AboutSummarySection: React.FC<Props> = ({ summary }) => {
                       caption: summary.image.caption,
                     })
                   }
-                  className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/70 text-white transition hover:bg-slate-900"
+                  className="icon-control absolute right-3 top-3 z-10 h-10 w-10 text-white"
                   aria-label={`Expand ${summary.title} image`}
                 >
                   <Expand className="h-4 w-4" />

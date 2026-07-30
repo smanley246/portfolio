@@ -17,6 +17,7 @@ const ProjectsSection: React.FC = () => {
 
   return (
     <section>
+      <h2 className="sr-only">Project list</h2>
       <div className="flex flex-col gap-6">
         {projects.map((p) => (
           <Card key={p.slug} className="group overflow-hidden">
@@ -28,7 +29,7 @@ const ProjectsSection: React.FC = () => {
                       {p.name}
                     </h3>
 
-                    <div className="mt-2 inline-flex w-fit rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--color-text-soft)]">
+                    <div className="card-chip mt-2 w-fit uppercase tracking-[0.14em]">
                       {p.completed}
                     </div>
                   </div>
@@ -56,11 +57,11 @@ const ProjectsSection: React.FC = () => {
 
               {p.preview && (
                 <div className="order-2 w-full lg:w-auto">
-                  <div className="aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/70 lg:w-56 xl:w-64">
+                  <div className="interactive-media aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] border lg:w-56 xl:w-64">
                     <img
                       src={p.preview}
                       alt={`${p.name} preview`}
-                      className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+                      className="interactive-media__asset h-full w-full object-cover"
                       draggable={false}
                       loading="lazy"
                     />

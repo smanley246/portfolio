@@ -65,7 +65,7 @@ const MainCapstoneSection: React.FC = () => {
               caption: slot.caption,
             })
           }
-          className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-slate-950/70 text-white transition hover:bg-slate-900"
+          className="icon-control absolute right-4 top-4 h-10 w-10 text-white"
           aria-label={`Expand ${slot.title}`}
         >
           <Expand className="h-4 w-4" />

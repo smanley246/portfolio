@@ -51,11 +51,11 @@ const EducationCoursesSection: React.FC<Props> = ({
 
   return (
     <div className="mt-10">
-      <div className="mb-4 flex items-center gap-2">
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-2">
-          <BookOpen className="h-5 w-5 text-teal-300" />
+      <div className="section-heading">
+        <div className="section-heading__icon">
+          <BookOpen className="h-5 w-5" />
         </div>
-        <h2 className="text-2xl font-semibold sm:text-3xl">{coursesHeading}</h2>
+        <h2 className="section-heading__title">{coursesHeading}</h2>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -68,12 +68,12 @@ const EducationCoursesSection: React.FC<Props> = ({
                     <h3 className="truncate text-lg font-semibold">
                       {c.code} - {c.title}
                     </h3>
-                    {c.term && <p className="mt-1 text-sm text-blue-200/80">{c.term}</p>}
+                    {c.term && <p className="meta-line mt-1 text-sm">{c.term}</p>}
                   </div>
 
                   <div className="hidden items-center gap-2 sm:ml-auto sm:flex sm:gap-3">
                     {c.badge && (
-                      <span className="whitespace-nowrap rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/85">
+                      <span className="card-chip whitespace-nowrap">
                         {c.badge}
                       </span>
                     )}
@@ -89,7 +89,7 @@ const EducationCoursesSection: React.FC<Props> = ({
 
                 {c.badge ? (
                   <div className="pt-3 sm:hidden">
-                    <span className="inline-block whitespace-nowrap rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/85">
+                    <span className="card-chip whitespace-nowrap">
                       {c.badge}
                     </span>
                   </div>
@@ -110,7 +110,7 @@ const EducationCoursesSection: React.FC<Props> = ({
 
               <div className="w-24 shrink-0 sm:w-auto">
                 {c.image?.src ? (
-                  <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:h-28 sm:w-32">
+                  <div className="media-frame relative h-24 w-24 overflow-hidden rounded-2xl border sm:h-28 sm:w-32">
                     <img
                       src={c.image.src}
                       alt={c.image.alt}
@@ -121,7 +121,7 @@ const EducationCoursesSection: React.FC<Props> = ({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
                   </div>
                 ) : (
-                  <div className="h-24 w-24 rounded-2xl border border-white/10 bg-white/5 sm:h-28 sm:w-32" />
+                  <div className="media-frame h-24 w-24 rounded-2xl border sm:h-28 sm:w-32" />
                 )}
 
                 <div className="mt-3 sm:hidden">

@@ -7,7 +7,7 @@
 */
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 type PageIntroProps = {
   eyebrow?: string;
@@ -16,23 +16,58 @@ type PageIntroProps = {
   actions?: React.ReactNode;
 };
 
+const introVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 0.04,
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const introItemVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 const PageIntro: React.FC<PageIntroProps> = ({
   eyebrow,
   title,
   description,
   actions,
 }) => {
+  const reduceMotion = useReducedMotion();
+
   return (
     <motion.section
       className="page-intro"
-      initial={{ opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
+      variants={introVariants}
+      initial={reduceMotion ? false : "hidden"}
+      animate={reduceMotion ? undefined : "visible"}
     >
-      {eyebrow ? <p className="page-intro__eyebrow">{eyebrow}</p> : null}
-      <h1 className="page-intro__title">{title}</h1>
-      {description ? <p className="page-intro__description">{description}</p> : null}
-      {actions ? <div className="page-intro__actions">{actions}</div> : null}
+      {eyebrow ? (
+        <motion.p className="page-intro__eyebrow" variants={introItemVariants}>
+          {eyebrow}
+        </motion.p>
+      ) : null}
+      <motion.h1 className="page-intro__title" variants={introItemVariants}>
+        {title}
+      </motion.h1>
+      {description ? (
+        <motion.p className="page-intro__description" variants={introItemVariants}>
+          {description}
+        </motion.p>
+      ) : null}
+      {actions ? (
+        <motion.div className="page-intro__actions" variants={introItemVariants}>
+          {actions}
+        </motion.div>
+      ) : null}
     </motion.section>
   );
 };
