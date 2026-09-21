@@ -13,17 +13,23 @@ export type AboutData = {
   
   export const aboutData: AboutData = {
     paragraphs: [
-      "I'm a graduating Computer Engineering student from Guelph, Ontario, with a passion for building reliable and polished technical solutions. I work across both hardware and software, developing embedded systems, digital logic in hardware description languages, and modern mobile applications with React Native. I enjoy turning ideas into functional systems by writing firmware, designing circuits, creating user-friendly interfaces, and handling anything else the task requires.",
-      "Outside of academics, I spend a lot of time working on self-driven engineering projects to strengthen my skills and explore new technologies. I like challenging myself through hands-on learning in areas such as robotics, real-time control, and full-stack development. When I'm not building something, I am usually playing squash, cycling, skiing, or cooking.",
+      "I currently build custom software, develop Microsoft Fabric data platforms, automate business processes, and contribute to applied AI initiatives. I turn operational needs into dependable tools, clean data flows, and useful automation.",
+      "I have built full-stack and mobile applications, cloud-connected dashboards, embedded control systems, FPGA and VLSI designs, and automation scripts across professional, academic, and personal projects.",
+      "My experience spans data and software engineering, embedded systems and digital hardware, and technical operations. I work with SQL, Python, TypeScript, .NET, React Native, C, VHDL, Firebase, PowerShell, and real-time systems.",
     ],
     skills: [
+      "Microsoft Fabric & Data Lakes",
+      "Custom Software Solutions",
+      "Business Process Automation",
+      "AI Initiatives",
+      "SQL & Data Development",
+      "Software Development",
       "Digital Design & FPGA Development",
       "Cadence & Vivado Digital Design Suites",
       "Embedded Systems & Real-Time Control",
       "Circuits & Electronics",
       "Robotics Programming",
-      "Database & Full Stack Development",
-      "React Native, SQL, & .NET Development",
+      "React Native & .NET Development",
       "Python, Java, C, VHDL & more",
     ],
   };

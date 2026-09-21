@@ -7,7 +7,7 @@
 */
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Cpu, Expand, Heart, Trophy, PawPrint } from "lucide-react";
 import Card from "../../components/Card";
 import ImageLightboxModal, {
@@ -15,8 +15,8 @@ import ImageLightboxModal, {
 } from "../../components/ImageLightboxModal";
 
 const sectionFade = {
-  hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0 },
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
 };
 
 type InterestsCard = {
@@ -37,6 +37,7 @@ type Props = {
 };
 
 const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
+  const reduceMotion = useReducedMotion();
   const squash = interests.cards[0];
   const tech = interests.cards[1];
   const pets = interests.cards[2];
@@ -66,8 +67,8 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
       >
         <motion.div
           variants={sectionFade}
-          initial="hidden"
-          animate="show"
+          initial={reduceMotion ? false : "hidden"}
+          animate={reduceMotion ? undefined : "show"}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
           <div className="section-heading">

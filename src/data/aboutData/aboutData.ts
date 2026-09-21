@@ -61,7 +61,7 @@ export const aboutPageData: {
     kicker: "About",
     title: "A bit more about me.",
     subtitle:
-      "I design and build hardware and software systems with an emphasis on reliability, clean architecture, and practical impact. Whether it's embedded systems, digital logic, or full-stack applications, I focus on solutions that work well, scale cleanly, and hold up in the real world.",
+      "I build custom software, Microsoft Fabric data platforms, automation, and AI-driven tools. My B.Eng. in Computer Engineering adds depth across full-stack development, embedded systems, and digital hardware.",
   },
 
   sections: [
@@ -70,9 +70,9 @@ export const aboutPageData: {
       navLabel: "Summary",
       title: "Summary",
       paragraphs: [
-        "I'm a graduating Computer Engineering student from Guelph, Ontario, with a passion for building reliable and polished technical solutions. I work across both hardware and software, developing embedded systems, digital logic in hardware description languages, and modern mobile applications with React Native.",
-        "I enjoy turning ideas into functional systems by writing firmware, designing circuits, creating user-friendly interfaces, and handling anything else the task requires.",
-        "Outside of academics, I spend a lot of time working on self-driven engineering projects to strengthen my skills and explore new technologies. I like challenging myself through hands-on learning in areas such as robotics, real-time control, and full-stack development. When I'm not building something, I am usually playing squash, cycling, skiing, or cooking.",
+        "I currently build custom software, develop Microsoft Fabric data platforms, automate business processes, and contribute to applied AI initiatives. I take projects from requirements through architecture, implementation, testing, and delivery.",
+        "I have built full-stack and mobile applications, cloud-connected dashboards, embedded control systems, FPGA and VLSI designs, and automation scripts. These projects include subscription analytics, real-time temperature control, rehabilitation hardware, and internal business tools.",
+        "My experience covers data and software engineering, embedded systems and digital hardware, and technical operations. I work with SQL, Python, TypeScript, .NET, React Native, C, VHDL, Firebase, PowerShell, and real-time systems. Outside of engineering, I spend time playing squash, cycling, skiing, and cooking.",
       ],
       highlights: [
         "Electrical Systems",
@@ -95,8 +95,19 @@ export const aboutPageData: {
       navLabel: "Technical Skills",
       title: "Technical Skills",
       pitch:
-        "I'm strongest when a project needs someone who can jump from requirements to architecture to implementation, whether that's firmware, FPGA logic, or a clean full-stack app.",
+        "I'm strongest when a project needs someone who can move from requirements to architecture to implementation, whether that's a data platform, custom software solution, automation workflow, or the embedded and FPGA systems that shaped my engineering foundation.",
       skillGroups: [
+        {
+          title: "Business Intelligence & Automation",
+          items: [
+            "Microsoft Fabric",
+            "Data lakes",
+            "Custom software solutions",
+            "Business process automation",
+            "AI initiatives",
+            "SQL",
+          ],
+        },
         {
           title: "Digital Design & FPGA",
           items: [
@@ -124,6 +135,7 @@ export const aboutPageData: {
             "React Native (Expo)",
             "TypeScript",
             "Firebase (Auth + Realtime Database)",
+            "Custom software development",
             "SQL",
             ".NET",
             "SwiftUI",
@@ -176,7 +188,7 @@ export const aboutPageData: {
           body: [
             "Squash has been a huge part of my life. Competing has taught me consistency, composure under pressure, and how to keep improving over time. I bring that same mindset into engineering projects: train the fundamentals, iterate quickly, and show up prepared.",
             "During my time as captain of the University of Guelph Varsity Squash Team, I developed leadership and teamwork skills that I apply to group projects and collaborative work. Leading by example, fostering a positive team culture, and encouraging open communication are values I carry into all my endeavors.",
-            "Squash also allows me to take part in the local community through coaching and volunteering at events, which helps me maintain a balanced lifestyle outside of academics and engineering.",
+            "Squash also allows me to take part in the local community through coaching and volunteering at events, which helps me maintain a balanced lifestyle outside of work and engineering.",
           ],
           tags: ["Discipline", "Team Leadership", "Competitive", "Volunteering"],
           image: {
@@ -188,7 +200,7 @@ export const aboutPageData: {
         {
           title: "Technology & Computers",
           body:
-            "I genuinely enjoy staying current with new tech; from embedded platforms and tools to modern app stacks. I like exploring how systems work end-to-end, and I'm always looking for better ways to build, test, and ship clean solutions.",
+            "I stay current with new tools, from Microsoft data platforms and AI workflows to embedded systems and modern app stacks. I like understanding how systems work end-to-end and finding cleaner ways to build, test, and ship software.",
           tags: ["Cutting Edge Tech", "Systems Thinking", "Efficient Solutions"],
         },
         {

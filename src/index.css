@@ -16,8 +16,8 @@
   --color-border: rgba(159, 224, 234, 0.15);
   --color-border-strong: rgba(122, 238, 224, 0.3);
   --color-text: #f4fbff;
-  --color-text-muted: rgba(220, 236, 246, 0.78);
-  --color-text-soft: rgba(201, 224, 238, 0.58);
+  --color-text-muted: rgba(226, 241, 248, 0.9);
+  --color-text-soft: rgba(211, 232, 241, 0.76);
   --color-accent: #72f1df;
   --color-accent-strong: #a1fff1;
   --color-accent-blue: #78b9ff;
@@ -159,7 +159,6 @@ canvas {
     border-color 280ms ease,
     box-shadow 320ms var(--ease-out),
     background-color 280ms ease;
-  will-change: transform;
 }
 
 .interactive-card:hover {
@@ -415,8 +414,8 @@ canvas {
     linear-gradient(100deg, rgba(var(--color-accent-rgb), 0.08), transparent),
     rgba(255, 255, 255, 0.035);
   padding: 0.42rem 0.78rem;
-  color: rgba(225, 242, 249, 0.76);
-  font-size: 0.72rem;
+  color: rgba(235, 248, 252, 0.92);
+  font-size: 0.78rem;
   font-weight: 620;
   letter-spacing: 0.035em;
   line-height: 1;

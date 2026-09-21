@@ -81,7 +81,6 @@ const MainUserHeroSection: React.FC = () => {
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 0.94, y: 18 }}
           animate={{ opacity: 1, scale: 1 }}
-          whileHover={reduceMotion ? undefined : { y: -6, rotate: 0.35 }}
           transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="relative flex justify-center lg:justify-end"
         >

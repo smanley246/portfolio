@@ -20,10 +20,10 @@ export type HeroData = {
 };
 
 export const heroData: HeroData = {
-  eyebrow: "Computer Engineer",
+  eyebrow: "Junior Business Intelligence Developer",
   name: "Samuel Manley",
   tagline:
-    "Graduating Computer Engineering student passionate about hardware & software development. Much of my talent lies in software and hardware system design, with a focus on creating efficient and scalable solutions.",
+    "I build custom software, data platforms, automation, and AI-driven tools. My background spans business intelligence, full-stack development, embedded systems, and digital hardware.",
   ctas: [
     { label: "Work Experience", route: "/work" },
     { label: "Projects", targetId: "projects" },

@@ -7,7 +7,7 @@
 */
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Cpu, Expand, Wrench } from "lucide-react";
 import Card from "../../components/Card";
 import ImageLightboxModal, {
@@ -15,8 +15,8 @@ import ImageLightboxModal, {
 } from "../../components/ImageLightboxModal";
 
 const sectionFade = {
-  hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0 },
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
 };
 
 type SkillsSection = {
@@ -32,6 +32,7 @@ type Props = {
 };
 
 const AboutSkillsSection: React.FC<Props> = ({ skills }) => {
+  const reduceMotion = useReducedMotion();
   const [expandedImage, setExpandedImage] = useState<LightboxImage | null>(null);
 
   return (
@@ -42,8 +43,8 @@ const AboutSkillsSection: React.FC<Props> = ({ skills }) => {
       >
         <motion.div
           variants={sectionFade}
-          initial="hidden"
-          whileInView="show"
+          initial={reduceMotion ? false : "hidden"}
+          whileInView={reduceMotion ? undefined : "show"}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >

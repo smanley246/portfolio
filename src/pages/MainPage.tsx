@@ -10,6 +10,7 @@ import UserHeroSectionComponent from "../sections/mainSections/MainUserHeroSecti
 
 // Imports of Sections
 import AboutSection from "../sections/mainSections/MainAboutSection";           // about section
+import ExperienceSection from "../sections/mainSections/MainExperienceSection";
 import CapstoneSection from "../sections/mainSections/MainCapstoneSection";
 import AboutTeaserSection from "../sections/mainSections/MainAboutTeaserSection";
 import ProjectsSection from "../sections/mainSections/MainProjectSection";      // projects grid
@@ -25,8 +26,9 @@ export default function MainPage() {
         <Hero />
       </section>
       <AboutSection />
-      <CapstoneSection />
+      <ExperienceSection />
       <ProjectsSection />
+      <CapstoneSection />
       <AboutTeaserSection />
     </>
   );

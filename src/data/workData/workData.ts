@@ -31,7 +31,24 @@ export type WorkRole = {
   /** Route helper */
   export const workDetailPath = (slug: string) => `/work/${slug}`;
   
+  export const currentWorkRole: WorkRole = {
+    slug: slugify("Junior Business Intelligence Developer Skyline Group of Companies June 2026 Present"),
+    when: "June 2026–Present",
+    title: "Junior Business Intelligence Developer",
+    place: "Skyline Group of Companies",
+    bullets: [
+      "Create custom software solutions that support internal teams and business operations.",
+      "Help build and manage Microsoft Fabric data lakes for reliable, accessible business intelligence.",
+      "Develop process automation and contribute to AI initiatives that support innovation and growth.",
+    ],
+    logo: {
+      src: "/logos/skyline.png",
+      alt: "Skyline Group of Companies logo",
+    },
+  };
+
   export const workRoles: WorkRole[] = [
+    currentWorkRole,
     {
       slug: slugify("IT Support Specialist CO-OP Skyline Group of Companies Summer 2023 2024 2025"),
       when: "Summer 2023, 2024, 2025",

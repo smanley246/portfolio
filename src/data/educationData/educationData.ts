@@ -55,7 +55,7 @@ export const educationData: EducationData = {
   heading: "Education",
   degreeCard: {
     school: "University of Guelph",
-    program: "Bachelor of Science (B.Sc.), Computer Engineering",
+    program: "Bachelor of Engineering (B.Eng.), Computer Engineering",
     location: "Guelph, Ontario, Canada",
     years: "2021 - 2026",
     subtitle:
@@ -68,8 +68,8 @@ export const educationData: EducationData = {
       "Mobile + Web Apps",
     ],
     paragraphs: [
-      "I'm completing my Computer Engineering degree with hands-on coursework and projects spanning embedded firmware, FPGA digital logic, and modern software development.",
-      "My focus is on building reliable systems end-to-end: requirements, implementation, testing, and clean presentation - from low-level hardware integration to polished user interfaces.",
+      "I completed my Computer Engineering degree with hands-on coursework and projects spanning embedded firmware, FPGA digital logic, and modern software development.",
+      "My academic focus was building reliable systems end-to-end: requirements, implementation, testing, and clean presentation - from low-level hardware integration to polished user interfaces.",
     ],
     image: {
       src: "/compEnggLogo.png",

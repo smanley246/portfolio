@@ -51,7 +51,7 @@ export default function WorkDetailPage() {
 
             <div className="min-w-0">
               <p className="page-intro__eyebrow">Role Detail</p>
-              <h1 className="hero-title mb-4 overflow-hidden text-ellipsis whitespace-nowrap text-4xl font-[760] leading-none tracking-[-0.055em] sm:text-5xl lg:text-6xl">
+              <h1 className="hero-title mb-4 max-w-4xl text-4xl font-[760] leading-[0.98] tracking-[-0.055em] sm:text-5xl lg:text-6xl">
                 {role.title}
               </h1>
               <p className="prose-copy max-w-3xl text-base sm:text-lg">

@@ -29,18 +29,10 @@ const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({
     <motion.div
       ref={cardRef}
       onPointerMove={handlePointerMove}
-      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={reduceMotion ? false : { opacity: 0 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1 }}
       viewport={{ once: true, amount: 0.08 }}
       transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={
-        reduceMotion
-          ? undefined
-          : {
-              y: -4,
-              transition: { type: "spring", stiffness: 360, damping: 26 },
-            }
-      }
       className={
         "panel interactive-card relative rounded-[1.75rem] p-6 sm:p-7 " +
         (className ?? "")

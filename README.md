@@ -1,6 +1,6 @@
 # Samuel Manley Portfolio
 
-This repository contains the source code for Samuel Manley's engineering portfolio website. The site highlights projects, technical experience, education, and personal background as a graduating Computer Engineering student at the University of Guelph.
+This repository contains the source code for Samuel Manley's professional portfolio website. The site highlights his business intelligence and software work, selected engineering projects, technical experience, completed B.Eng. in Computer Engineering from the University of Guelph, and personal background.
 
 ## Stack
 
