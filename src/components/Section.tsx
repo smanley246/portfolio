@@ -8,6 +8,7 @@
 
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import SectionHeading from "./SectionHeading";
 
 interface SectionProps {
   id: string;               // HTML id for scroll targets
@@ -20,17 +21,15 @@ const Section: React.FC<SectionProps> = ({ id, title, icon, children }) => {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id={id} className="content-section scroll-mt-28 py-10 sm:py-12">
+    <section id={id} className="content-section scroll-mt-28">
       <div className="site-container w-full">
         <motion.div
-          className="section-heading"
           initial={reduceMotion ? false : { opacity: 0, x: -18 }}
           whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="section-heading__icon">{icon}</div>
-          <h2 className="section-heading__title">{title}</h2>
+          <SectionHeading title={title} icon={icon} />
         </motion.div>
         {children}
       </div>

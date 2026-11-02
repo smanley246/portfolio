@@ -7,6 +7,8 @@
 */
 
 import UserHeroSectionComponent from "../sections/mainSections/MainUserHeroSection";
+import ProjectCard from "../components/ProjectCard";
+import { latestProjects } from "../data/projectData/projectData";
 
 // Imports of Sections
 import AboutSection from "../sections/mainSections/MainAboutSection";           // about section
@@ -25,6 +27,11 @@ export default function MainPage() {
       <section id="home" className="scroll-mt-28">
         <Hero />
       </section>
+      {latestProjects[0] && (
+        <section className="site-container pb-4" aria-label="Latest project">
+          <ProjectCard project={latestProjects[0]} variant="banner" headingLevel={2} />
+        </section>
+      )}
       <AboutSection />
       <ExperienceSection />
       <ProjectsSection />

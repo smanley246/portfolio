@@ -8,7 +8,8 @@
 
 import React from "react";
 import { BookOpen } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import SectionHeading from "../../components/SectionHeading";
+import TagList from "../../components/TagList";
 import Card from "../../components/Card";
 import CustomButton from "../../components/CustomButton";
 import type { CourseCard } from "../../data/educationData/educationData";
@@ -24,7 +25,6 @@ const EducationCoursesSection: React.FC<Props> = ({
   courses,
   courseDetailPath,
 }) => {
-  const navigate = useNavigate();
 
   const renderDescriptionPreview = (desc: CourseCard["description"]) => {
     if (!desc) return null;
@@ -50,13 +50,8 @@ const EducationCoursesSection: React.FC<Props> = ({
   };
 
   return (
-    <div className="mt-10">
-      <div className="section-heading">
-        <div className="section-heading__icon">
-          <BookOpen className="h-5 w-5" />
-        </div>
-        <h2 className="section-heading__title">{coursesHeading}</h2>
-      </div>
+    <div className="page-section">
+      <SectionHeading title={coursesHeading} icon={<BookOpen className="h-5 w-5" />} />
 
       <div className="flex flex-col gap-4">
         {courses.map((c) => (
@@ -65,7 +60,7 @@ const EducationCoursesSection: React.FC<Props> = ({
               <div className="min-w-0 flex-1">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div className="min-w-0">
-                    <h3 className="truncate text-lg font-semibold">
+                    <h3 className="card-title">
                       {c.code} - {c.title}
                     </h3>
                     {c.term && <p className="meta-line mt-1 text-sm">{c.term}</p>}
@@ -80,7 +75,7 @@ const EducationCoursesSection: React.FC<Props> = ({
 
                     <CustomButton
                       className="whitespace-nowrap"
-                      onClick={() => navigate(courseDetailPath(c.slug))}
+                      to={courseDetailPath(c.slug)}
                     >
                       View Details
                     </CustomButton>
@@ -97,15 +92,7 @@ const EducationCoursesSection: React.FC<Props> = ({
 
                 {renderDescriptionPreview(c.description)}
 
-                {c.tags?.length ? (
-                  <div className="flex flex-wrap gap-2 pt-3">
-                    {c.tags.map((t) => (
-                      <span key={t} className="card-chip">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
+                <TagList tags={c.tags} className="pt-3" />
               </div>
 
               <div className="w-24 shrink-0 sm:w-auto">
@@ -127,7 +114,7 @@ const EducationCoursesSection: React.FC<Props> = ({
                 <div className="mt-3 sm:hidden">
                   <CustomButton
                     className="w-full justify-center"
-                    onClick={() => navigate(courseDetailPath(c.slug))}
+                    to={courseDetailPath(c.slug)}
                   >
                     View Details
                   </CustomButton>

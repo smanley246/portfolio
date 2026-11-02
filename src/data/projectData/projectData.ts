@@ -15,6 +15,7 @@ export type ProjectMedia = {
     type: "image" | "video";
     src: string;
     alt?: string;
+    caption?: string;
   };
 
   export type Project = {
@@ -23,6 +24,8 @@ export type ProjectMedia = {
     blurb: string;
     tags: string[];
     completed: string; 
+    latest?: boolean;
+    logo?: string;
   
     // links / assets
     preview?: string;
@@ -33,6 +36,7 @@ export type ProjectMedia = {
     // detail page content
     description?: string;
     bullets?: string[];
+    sections?: { title: string; paragraphs: string[]; steps?: string[] }[];
   };
   
   const slugify = (s: string) =>
@@ -47,6 +51,80 @@ export type ProjectMedia = {
   export const projectDetailPath = (slug: string) => `/projects/${slug}`;
   
   export const projects: Project[] = [
+    {
+      slug: "readyracquets",
+      name: "ReadyRacquets",
+      completed: "Live website",
+      latest: true,
+      logo: "/projects/readyracquets/icon.webp",
+      blurb:
+        "A squash racquet stringing platform connecting a public string catalog, a customer service portal, and a private workspace for day-to-day operations.",
+      tags: ["Web Platform", "Customer Portal", "Service Management", "Responsive Design"],
+      preview: "/projects/readyracquets/home-desktop.webp",
+      link: "https://readyracquets.vercel.app/",
+      description:
+        "ReadyRacquets brings the squash stringing experience into one place. Players can explore strings and follow their racquet's progress, while the owner manages intake, stringing, inventory, and payments in a private Command center.",
+      media: [
+        {
+          type: "image", src: "/projects/readyracquets/home-desktop.webp",
+          alt: "ReadyRacquets homepage with squash stringing service information and string selection links",
+          caption: "The public homepage introduces the service and helps players find their next string.",
+        },
+        {
+          type: "image", src: "/projects/readyracquets/catalog.webp",
+          alt: "ReadyRacquets squash string catalog with string options and all-in CAD pricing",
+          caption: "A seven-string catalog organized into Essential, Performance, and Pro price tiers.",
+        },
+        {
+          type: "image", src: "/projects/readyracquets/product.webp",
+          alt: "ReadyRacquets string product page with photography, playing characteristics, and tension guidance",
+          caption: "Individual product pages explain how each string feels and plays.",
+        },
+        {
+          type: "image", src: "/projects/readyracquets/home-mobile.webp",
+          alt: "ReadyRacquets homepage displayed in a phone-sized layout",
+          caption: "A responsive mobile layout keeps the service accessible on the go.",
+        },
+      ],
+      bullets: [
+        "Public string catalog with clear, all-in service pricing",
+        "Customer accounts for progress updates and service history",
+        "Private owner workspace for everyday stringing operations",
+      ],
+      sections: [
+        {
+          title: "The use case",
+          paragraphs: ["Squash players need a clear way to choose a string and keep track of their racquet's service. A stringing business needs a reliable way to manage that work. ReadyRacquets connects both sides through a public website, a customer portal, and a private owner workspace."],
+        },
+        {
+          title: "A catalog built around the player",
+          paragraphs: [
+            "Seven squash strings span three all-in CAD tiers: Essential ($40), Performance ($45), and Pro ($50). Each product page includes photography, gauge, construction, playing characteristics, and tension guidance to help players make an informed choice.",
+            "The service price includes string and labour. No customer GST/HST is charged at launch, and payment is by e-transfer.",
+          ],
+        },
+        {
+          title: "A personal customer portal",
+          paragraphs: [
+            "Customers can create an account, sign in, track ongoing services, and revisit completed work in History. Service details bring together the selected string, tension, quoted price, progress, and payment status.",
+            "Account settings include profile, email, password, and session controls. Only the signed-in customer's records are available in their portal.",
+          ],
+        },
+        {
+          title: "The owner's Command center",
+          paragraphs: ["The private workspace supports customer records, stringing intake, service progress, inventory, and payment recording. Operational reporting and account administration help the owner manage the business alongside the work at the stringing machine."],
+        },
+        {
+          title: "From intake to a finished racquet",
+          paragraphs: ["Customers can follow progress updates in their account throughout the ordinary service path, then return to completed services in History."],
+          steps: ["Received", "Stringing", "Quality check", "Complete"],
+        },
+        {
+          title: "Designed for everyday access",
+          paragraphs: ["ReadyRacquets supports phone, tablet, and desktop layouts, touch and keyboard controls, and reduced-motion preferences. Its own visual identity and self-hosted Outfit typography carry across the experience."],
+        },
+      ],
+    },
     {
       slug: slugify("Engineering Capstone Project"),
       name: "Engineering Capstone Project",
@@ -166,4 +244,7 @@ export type ProjectMedia = {
   
   export const getProjectBySlug = (slug: string) =>
     projects.find((p) => p.slug === slug);
+
+  export const latestProjects = projects.filter((project) => project.latest);
+  export const otherProjects = projects.filter((project) => !project.latest);
   

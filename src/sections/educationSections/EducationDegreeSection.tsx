@@ -8,6 +8,8 @@
 
 import React from "react";
 import { GraduationCap } from "lucide-react";
+import SectionHeading from "../../components/SectionHeading";
+import TagList from "../../components/TagList";
 import Card from "../../components/Card";
 
 type DegreeCard = {
@@ -28,14 +30,9 @@ type Props = {
 const EducationDegreeSection: React.FC<Props> = ({ degreeCard }) => {
   return (
     <Card>
-      <div className="flex items-start gap-5">
+      <div className="flex flex-col items-start gap-5 sm:flex-row">
         <div className="min-w-0 flex-1">
-          <div className="section-heading">
-            <div className="section-heading__icon">
-              <GraduationCap className="h-5 w-5" />
-            </div>
-            <h2 className="section-heading__title">{degreeCard.school}</h2>
-          </div>
+          <SectionHeading title={degreeCard.school} icon={<GraduationCap className="h-5 w-5" />} />
 
           <div>
             <p className="text-lg font-semibold text-white">{degreeCard.program}</p>
@@ -45,13 +42,7 @@ const EducationDegreeSection: React.FC<Props> = ({ degreeCard }) => {
           </div>
 
           {degreeCard.highlights?.length ? (
-            <div className="flex flex-wrap gap-2 pt-4">
-              {degreeCard.highlights.map((h) => (
-                <span key={h} className="card-chip">
-                  {h}
-                </span>
-              ))}
-            </div>
+            <TagList tags={degreeCard.highlights} className="pt-1" />
           ) : null}
 
           {degreeCard.paragraphs?.length ? (
@@ -66,7 +57,7 @@ const EducationDegreeSection: React.FC<Props> = ({ degreeCard }) => {
         </div>
 
         {degreeCard.image?.src ? (
-          <div className="shrink-0">
+          <div className="order-first shrink-0 sm:order-last">
             <div className="media-frame relative h-28 w-28 overflow-hidden rounded-2xl border sm:h-40 sm:w-40">
               <img
                 src={degreeCard.image.src}

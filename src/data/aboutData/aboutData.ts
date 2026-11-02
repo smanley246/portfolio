@@ -6,25 +6,25 @@
   * Description: This file contains structured data for the About page of the portfolio website.
 */
 
-export type AboutImage = {
+type AboutImage = {
   src: string;
   alt: string;
   caption: string;
 };
 
-export type AboutSkillGroup = {
+type AboutSkillGroup = {
   title: string;
   items: string[];
 };
 
-export type AboutPersonalCard = {
+type AboutPersonalCard = {
   title: string;
   body: string | string[];
   tags: string[];
   image?: AboutImage;
 };
 
-export type AboutSection =
+type AboutSection =
   | {
       id: "summary";
       navLabel: string;

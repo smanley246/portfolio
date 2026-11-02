@@ -6,7 +6,7 @@
   * Description: This file contains structured data for the homepage About section of the portfolio website.
 */
 
-export type AboutData = {
+type AboutData = {
     paragraphs: string[];
     skills: string[];
   };

@@ -9,6 +9,8 @@
 import React, { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Expand, Heart } from "lucide-react";
+import SectionHeading from "../../components/SectionHeading";
+import TagList from "../../components/TagList";
 import Card from "../../components/Card";
 import ImageLightboxModal, {
   type LightboxImage,
@@ -44,7 +46,7 @@ const AboutSummarySection: React.FC<Props> = ({ summary }) => {
     <>
       <section
         id={summary.id}
-        className="mx-auto w-full max-w-6xl px-4 pt-10 sm:pt-8"
+        className="site-container page-section scroll-mt-28"
       >
         <motion.div
           variants={sectionFade}
@@ -53,12 +55,7 @@ const AboutSummarySection: React.FC<Props> = ({ summary }) => {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <div className="section-heading">
-            <div className="section-heading__icon">
-              <Heart className="h-5 w-5" />
-            </div>
-            <h2 className="section-heading__title">{summary.title}</h2>
-          </div>
+          <SectionHeading title={summary.title} icon={<Heart className="h-5 w-5" />} />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <Card className="lg:col-span-7 p-6">
@@ -69,13 +66,7 @@ const AboutSummarySection: React.FC<Props> = ({ summary }) => {
                   </p>
                 ))}
 
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {summary.highlights.map((h) => (
-                    <span key={h} className="card-chip">
-                      {h}
-                    </span>
-                  ))}
-                </div>
+                <TagList tags={summary.highlights} className="pt-1" />
               </div>
             </Card>
 
@@ -105,7 +96,7 @@ const AboutSummarySection: React.FC<Props> = ({ summary }) => {
                       caption: summary.image.caption,
                     })
                   }
-                  className="icon-control absolute right-3 top-3 z-10 h-10 w-10 text-white"
+                  className="icon-control absolute right-3 top-3 z-10 h-11 w-11 text-white"
                   aria-label={`Expand ${summary.title} image`}
                 >
                   <Expand className="h-4 w-4" />

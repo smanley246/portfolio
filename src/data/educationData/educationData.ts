@@ -11,7 +11,7 @@ export type EducationImage = {
   alt: string;
 };
 
-export type DegreeCard = {
+type DegreeCard = {
   school: string;
   program: string;
   location: string;
@@ -33,7 +33,7 @@ export type CourseCard = {
   image?: EducationImage;
 };
 
-export type EducationData = {
+type EducationData = {
   heading: string;
   degreeCard: DegreeCard;
   coursesHeading: string;

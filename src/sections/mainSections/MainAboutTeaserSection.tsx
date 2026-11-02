@@ -8,14 +8,13 @@
 
 import React from "react";
 import { ArrowRight, User2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Section from "../../components/Section";
 
 const MainAboutTeaserSection: React.FC = () => {
-  const navigate = useNavigate();
-  const teaserRef = React.useRef<HTMLButtonElement>(null);
+  const teaserRef = React.useRef<HTMLAnchorElement>(null);
 
-  const handlePointerMove = (event: React.PointerEvent<HTMLButtonElement>) => {
+  const handlePointerMove = (event: React.PointerEvent<HTMLAnchorElement>) => {
     const node = teaserRef.current;
     if (!node) return;
 
@@ -26,10 +25,9 @@ const MainAboutTeaserSection: React.FC = () => {
 
   return (
     <Section id="more-about-me" title="More About Me" icon={<User2 />}>
-      <button
+      <Link
         ref={teaserRef}
-        type="button"
-        onClick={() => navigate("/about")}
+        to="/about"
         onPointerMove={handlePointerMove}
         className="interactive-card group panel flex w-full items-center gap-4 overflow-hidden rounded-[2rem] p-4 text-left sm:gap-6 sm:p-5"
         aria-label="Go to About page"
@@ -39,7 +37,7 @@ const MainAboutTeaserSection: React.FC = () => {
 
         <div className="relative z-10 min-w-0 flex-1">
           <p className="section-kicker mb-3">More About Me</p>
-          <h3 className="text-2xl font-extrabold leading-[0.98] tracking-[-0.04em] text-white sm:text-3xl">
+          <h3 className="section-title">
             Get to know me outside the projects.
           </h3>
           <p className="prose-copy mt-2 max-w-[34rem] text-sm sm:text-base">
@@ -60,7 +58,7 @@ const MainAboutTeaserSection: React.FC = () => {
         <div className="relative z-10 flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.5rem] border border-[rgba(114,241,223,0.16)] bg-[rgba(114,241,223,0.06)] transition duration-300 group-hover:border-[rgba(114,241,223,0.34)] group-hover:bg-[rgba(114,241,223,0.11)] sm:h-24 sm:w-24">
           <ArrowRight className="h-8 w-8 text-[var(--color-accent)] transition duration-300 group-hover:translate-x-1" />
         </div>
-      </button>
+      </Link>
     </Section>
   );
 };

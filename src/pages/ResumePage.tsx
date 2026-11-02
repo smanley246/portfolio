@@ -16,7 +16,7 @@ import ResumePreviewSection from "../sections/resumeSections/ResumePreviewSectio
 
 export default function ResumePage() {
   return (
-    <div className="site-container pb-8">
+    <div className="site-container">
       <ResumeHeroSection heading={resumeData.heading} />
       <ResumeActionsSection actions={resumeData.actions} />
       <ResumePreviewSection preview={resumeData.preview} />

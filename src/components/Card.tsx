@@ -34,7 +34,7 @@ const Card: React.FC<{ children: React.ReactNode; className?: string }> = ({
       viewport={{ once: true, amount: 0.08 }}
       transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
       className={
-        "panel interactive-card relative rounded-[1.75rem] p-6 sm:p-7 " +
+        "panel interactive-card card relative " +
         (className ?? "")
       }
     >

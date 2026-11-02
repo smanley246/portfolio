@@ -9,7 +9,6 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Expand } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { heroData } from "../../data/mainSummaryData/heroData";
 import CustomButton from "../../components/CustomButton";
 import ImageLightboxModal, {
@@ -17,7 +16,6 @@ import ImageLightboxModal, {
 } from "../../components/ImageLightboxModal";
 
 const MainUserHeroSection: React.FC = () => {
-  const navigate = useNavigate();
   const [imageFailed, setImageFailed] = React.useState(false);
   const [expandedImage, setExpandedImage] = React.useState<LightboxImage | null>(
     null,
@@ -60,16 +58,7 @@ const MainUserHeroSection: React.FC = () => {
             {heroData.ctas.map((cta) => (
               <CustomButton
                 key={"route" in cta ? cta.route : cta.targetId}
-                onClick={() => {
-                  if ("route" in cta) {
-                    navigate(cta.route);
-                    return;
-                  }
-
-                  document
-                    .getElementById(cta.targetId)
-                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
-                }}
+                {...("route" in cta ? { to: cta.route } : { href: `#${cta.targetId}` })}
               >
                 {cta.label}
                 <ArrowRight className="h-4 w-4" />
@@ -113,7 +102,7 @@ const MainUserHeroSection: React.FC = () => {
                           title: "Headshot",
                         })
                       }
-                      className="icon-control absolute right-4 top-4 h-10 w-10 text-white"
+                      className="icon-control absolute right-4 top-4 h-11 w-11 text-white"
                       aria-label="Expand headshot"
                     >
                       <Expand className="h-4 w-4" />

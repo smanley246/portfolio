@@ -5,14 +5,12 @@
 
 import React from "react";
 import { ArrowRight, BriefcaseBusiness } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import Card from "../../components/Card";
 import CustomButton from "../../components/CustomButton";
 import Section from "../../components/Section";
 import { currentWorkRole, workDetailPath } from "../../data/workData/workData";
 
 const MainExperienceSection: React.FC = () => {
-  const navigate = useNavigate();
 
   return (
     <Section id="experience" title="Current Experience" icon={<BriefcaseBusiness />}>
@@ -44,7 +42,7 @@ const MainExperienceSection: React.FC = () => {
             </div>
             <CustomButton
               className="whitespace-nowrap"
-              onClick={() => navigate(workDetailPath(currentWorkRole.slug))}
+              to={workDetailPath(currentWorkRole.slug)}
             >
               View Experience <ArrowRight className="h-4 w-4" />
             </CustomButton>

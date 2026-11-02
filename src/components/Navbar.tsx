@@ -22,7 +22,7 @@ import {
   User2,
   X,
 } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const links = [
   { to: "/", label: "Home", icon: <Home className="h-4 w-4" /> },
@@ -49,7 +49,6 @@ const Navbar: React.FC = () => {
     mass: 0.3,
   });
 
-  const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -79,32 +78,32 @@ const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
-              className="icon-control nav-mobile-toggle h-10 w-10"
+              className="icon-control nav-mobile-toggle"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
             >
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
 
-            <button
-              onClick={() => navigate("/")}
+            <Link
+              to="/"
               className="surface-control hidden min-h-10 items-center gap-3 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold tracking-tight lg:flex"
               aria-label="Go to Home"
             >
               <Cpu className="h-4 w-4 text-[var(--color-accent)]" />
               Samuel Manley
-            </button>
+            </Link>
           </div>
 
           <div className="flex min-w-0 items-center justify-center">
-            <button
-              onClick={() => navigate("/")}
+            <Link
+              to="/"
               className="nav-mobile-home flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold tracking-tight lg:hidden"
               aria-label="Go to Home"
             >
               <Cpu className="h-4 w-4 text-[var(--color-accent)]" />
               <span className="nav-mobile-name">Samuel Manley</span>
-            </button>
+            </Link>
 
             <ul className="nav-cluster hidden items-center gap-1 rounded-full px-2 py-1 lg:flex">
               {links.map((l) => {

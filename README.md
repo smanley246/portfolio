@@ -14,7 +14,7 @@ This repository contains the source code for Samuel Manley's professional portfo
 ## Local Development
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -23,6 +23,7 @@ npm run dev
 ```bash
 npm run build
 npm run lint
+npm test
 ```
 
 ## Vercel Deployment

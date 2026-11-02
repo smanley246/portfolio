@@ -9,6 +9,8 @@
 import React, { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Cpu, Expand, Wrench } from "lucide-react";
+import SectionHeading from "../../components/SectionHeading";
+import TagList from "../../components/TagList";
 import Card from "../../components/Card";
 import ImageLightboxModal, {
   type LightboxImage,
@@ -39,7 +41,7 @@ const AboutSkillsSection: React.FC<Props> = ({ skills }) => {
     <>
       <section
         id={skills.id}
-        className="mx-auto w-full max-w-6xl px-4 pt-10 sm:pt-8"
+        className="site-container page-section scroll-mt-28"
       >
         <motion.div
           variants={sectionFade}
@@ -48,12 +50,7 @@ const AboutSkillsSection: React.FC<Props> = ({ skills }) => {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <div className="section-heading">
-            <div className="section-heading__icon">
-              <Cpu className="h-5 w-5" />
-            </div>
-            <h2 className="section-heading__title">{skills.title}</h2>
-          </div>
+          <SectionHeading title={skills.title} icon={<Cpu className="h-5 w-5" />} />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <Card className="lg:col-span-8 p-6">
@@ -62,16 +59,10 @@ const AboutSkillsSection: React.FC<Props> = ({ skills }) => {
                   <div key={g.title} className="flex flex-col gap-3">
                     <div className="flex items-center gap-2">
                       <Wrench className="h-4 w-4 text-[var(--color-accent)]" />
-                      <h3 className="text-lg font-semibold">{g.title}</h3>
+                      <h3 className="card-title">{g.title}</h3>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
-                      {g.items.map((it) => (
-                        <span key={it} className="card-chip">
-                          {it}
-                        </span>
-                      ))}
-                    </div>
+                    <TagList tags={g.items} className="pt-1" />
                   </div>
                 ))}
               </div>
@@ -96,7 +87,7 @@ const AboutSkillsSection: React.FC<Props> = ({ skills }) => {
                         caption: skills.image1.caption,
                       })
                     }
-                    className="icon-control absolute right-3 top-3 z-10 h-10 w-10 text-white"
+                    className="icon-control absolute right-3 top-3 z-10 h-11 w-11 text-white"
                     aria-label={`Expand ${skills.image1.alt}`}
                   >
                     <Expand className="h-4 w-4" />
@@ -124,7 +115,7 @@ const AboutSkillsSection: React.FC<Props> = ({ skills }) => {
                         caption: skills.image2.caption,
                       })
                     }
-                    className="icon-control absolute right-3 top-3 z-10 h-10 w-10 text-white"
+                    className="icon-control absolute right-3 top-3 z-10 h-11 w-11 text-white"
                     aria-label={`Expand ${skills.image2.alt}`}
                   >
                     <Expand className="h-4 w-4" />

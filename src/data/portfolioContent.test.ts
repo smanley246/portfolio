@@ -1,3 +1,5 @@
+import { projects, getProjectBySlug } from "./projectData/projectData";
+import { projects as homepageProjects, homepageProjectSlugs } from "./mainSummaryData/projectsData";
 import { describe, expect, it } from "vitest";
 import { aboutPageData } from "./aboutData/aboutData";
 import { educationData } from "./educationData/educationData";
@@ -37,5 +39,18 @@ describe("professional portfolio content", () => {
   it("keeps employer references out of personal profile copy", () => {
     const personalCopy = JSON.stringify({ aboutPageData, aboutData, heroData });
     expect(personalCopy).not.toMatch(/Skyline Group of Companies/i);
+  });
+});
+
+
+describe("project catalog", () => {
+  it("has unique stable slugs", () => {
+    expect(new Set(projects.map(project => project.slug)).size).toBe(projects.length);
+    expect(projects.every(project => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug))).toBe(true);
+  });
+
+  it("uses canonical records for the ordered homepage selection", () => {
+    expect(homepageProjects.map(project => project.slug)).toEqual([...homepageProjectSlugs]);
+    for (const project of homepageProjects) expect(project).toBe(getProjectBySlug(project.slug));
   });
 });

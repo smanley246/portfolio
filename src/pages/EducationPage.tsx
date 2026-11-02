@@ -18,7 +18,7 @@ export default function EducationPage() {
   const { heading, degreeCard, coursesHeading, courses } = educationData;
 
   return (
-    <div className="site-container pb-8">
+    <div className="site-container">
       <EducationHeroSection heading={heading} degreeCard={degreeCard} />
       <EducationDegreeSection degreeCard={degreeCard} />
       <EducationCoursesSection

@@ -6,7 +6,7 @@
   * Description: This file contains structured data for the Work Experience page of the portfolio website.
 */
 
-export type WorkRole = {
+type WorkRole = {
     slug: string;
     when: string;
     title: string;

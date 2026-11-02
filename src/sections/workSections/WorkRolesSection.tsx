@@ -7,7 +7,6 @@
  */
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Card from "../../components/Card";
 import CustomButton from "../../components/CustomButton";
 
@@ -26,7 +25,6 @@ type Props = {
 };
 
 const WorkRolesSection: React.FC<Props> = ({ workRoles, workDetailPath }) => {
-  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col gap-6">
@@ -51,7 +49,7 @@ const WorkRolesSection: React.FC<Props> = ({ workRoles, workDetailPath }) => {
             <div className="min-w-0 flex-1">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0">
-                  <h3 className="text-xl font-semibold leading-snug">
+                  <h3 className="card-title">
                     {role.title}
                   </h3>
                   <div className="meta-line mt-2 text-sm">
@@ -61,7 +59,7 @@ const WorkRolesSection: React.FC<Props> = ({ workRoles, workDetailPath }) => {
 
                 <CustomButton
                   className="w-full whitespace-nowrap sm:ml-auto sm:w-auto"
-                  onClick={() => navigate(workDetailPath(role.slug))}
+                  to={workDetailPath(role.slug)}
                 >
                   View Details
                 </CustomButton>

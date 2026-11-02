@@ -6,13 +6,13 @@
   * Description: Centralized capstone project content and media for the portfolio website.
 */
 
-export type CapstoneMediaItem = {
+type CapstoneMediaItem = {
   type: "image" | "video";
   src: string;
   alt: string;
 };
 
-export type CapstoneShowcaseCard = {
+type CapstoneShowcaseCard = {
   title: string;
   caption: string;
   src: string;

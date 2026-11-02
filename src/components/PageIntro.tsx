@@ -14,6 +14,7 @@ type PageIntroProps = {
   title: string;
   description?: string;
   actions?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const introVariants: Variants = {
@@ -40,11 +41,12 @@ const PageIntro: React.FC<PageIntroProps> = ({
   title,
   description,
   actions,
+  children,
 }) => {
   const reduceMotion = useReducedMotion();
 
   return (
-    <motion.section
+    <motion.header
       className="page-intro"
       variants={introVariants}
       initial={reduceMotion ? false : "hidden"}
@@ -68,7 +70,8 @@ const PageIntro: React.FC<PageIntroProps> = ({
           {actions}
         </motion.div>
       ) : null}
-    </motion.section>
+      {children}
+    </motion.header>
   );
 };
 

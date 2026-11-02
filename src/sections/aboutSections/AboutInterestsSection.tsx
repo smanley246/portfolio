@@ -9,6 +9,8 @@
 import React, { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Cpu, Expand, Heart, Trophy, PawPrint } from "lucide-react";
+import SectionHeading from "../../components/SectionHeading";
+import TagList from "../../components/TagList";
 import Card from "../../components/Card";
 import ImageLightboxModal, {
   type LightboxImage,
@@ -63,7 +65,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
     <>
       <section
         id={interests.id}
-        className="mx-auto w-full max-w-6xl px-4 pt-10 sm:pt-8 pb-16"
+        className="site-container page-section scroll-mt-28"
       >
         <motion.div
           variants={sectionFade}
@@ -71,18 +73,13 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
           animate={reduceMotion ? undefined : "show"}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <div className="section-heading">
-            <div className="section-heading__icon">
-              <Heart className="h-5 w-5" />
-            </div>
-            <h2 className="section-heading__title">{interests.title}</h2>
-          </div>
+          <SectionHeading title={interests.title} icon={<Heart className="h-5 w-5" />} />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <Card className="lg:col-span-6 p-6">
               <div className="flex items-center gap-2 mb-3">
                 <Trophy className="h-5 w-5 text-[var(--color-accent)]" />
-                <h3 className="text-xl font-semibold">{squash.title}</h3>
+                <h3 className="card-title">{squash.title}</h3>
               </div>
 
               {squash.image && (
@@ -103,7 +100,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
                         caption: squash.image!.caption,
                       })
                     }
-                    className="icon-control absolute right-3 top-3 z-10 h-10 w-10 text-white"
+                    className="icon-control absolute right-3 top-3 z-10 h-11 w-11 text-white"
                     aria-label={`Expand ${squash.title} image`}
                   >
                     <Expand className="h-4 w-4" />
@@ -117,37 +114,25 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
 
               {renderBody(squash.body)}
 
-              <div className="flex flex-wrap gap-2 pt-4">
-                {squash.tags.map((t) => (
-                  <span key={t} className="card-chip">
-                    {t}
-                  </span>
-                ))}
-              </div>
+              <TagList tags={squash.tags} className="pt-1" />
             </Card>
 
             <div className="lg:col-span-6 grid grid-cols-1 gap-6">
               <Card className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Cpu className="h-5 w-5 text-[var(--color-accent)]" />
-                  <h3 className="text-xl font-semibold">{tech.title}</h3>
+                  <h3 className="card-title">{tech.title}</h3>
                 </div>
 
                 {renderBody(tech.body)}
 
-                <div className="flex flex-wrap gap-2 pt-4">
-                  {tech.tags.map((t) => (
-                    <span key={t} className="card-chip">
-                      {t}
-                    </span>
-                  ))}
-                </div>
+                <TagList tags={tech.tags} className="pt-1" />
               </Card>
 
               <Card className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <PawPrint className="h-5 w-5 text-[var(--color-accent)]" />
-                  <h3 className="text-xl font-semibold">{pets.title}</h3>
+                  <h3 className="card-title">{pets.title}</h3>
                 </div>
 
                 {pets.image && (
@@ -168,7 +153,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
                           caption: pets.image!.caption,
                         })
                       }
-                      className="icon-control absolute right-3 top-3 z-10 h-10 w-10 text-white"
+                      className="icon-control absolute right-3 top-3 z-10 h-11 w-11 text-white"
                       aria-label={`Expand ${pets.title} image`}
                     >
                       <Expand className="h-4 w-4" />
@@ -182,13 +167,7 @@ const AboutInterestsSection: React.FC<Props> = ({ interests }) => {
 
                 {renderBody(pets.body)}
 
-                <div className="flex flex-wrap gap-2 pt-4">
-                  {pets.tags.map((t) => (
-                    <span key={t} className="card-chip">
-                      {t}
-                    </span>
-                  ))}
-                </div>
+                <TagList tags={pets.tags} className="pt-1" />
               </Card>
             </div>
           </div>

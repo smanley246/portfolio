@@ -6,11 +6,11 @@
   * Description: Structured data for the main Hero section.
 */
 
-export type HeroCta =
+type HeroCta =
   | { label: string; targetId: string } // scroll
   | { label: string; route: string };   // navigate
 
-export type HeroData = {
+type HeroData = {
   eyebrow: string;
   name: string;
   tagline: string;

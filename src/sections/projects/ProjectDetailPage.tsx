@@ -1,333 +1,40 @@
-/*
-  * File: src/sections/projects/ProjectDetailPage.tsx
-  * Author: Samuel Manley
-  * Last Modified: April 6th, 2026
-  *
-  * Description: This file contains the project detail page for individual projects.
-*/
-
-import { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  ChevronLeft,
-  ChevronRight,
-  Github,
-} from "lucide-react";
-import Card from "../../components/Card";
+import { useParams } from "react-router-dom";
+import { ArrowUpRight, Github } from "lucide-react";
+import BackLink from "../../components/BackLink";
+import CustomButton from "../../components/CustomButton";
+import PageIntro from "../../components/PageIntro";
+import TagList from "../../components/TagList";
+import ProjectGallery from "../../components/ProjectGallery";
 import { getProjectBySlug } from "../../data/projectData/projectData";
 
 export default function ProjectDetailPage() {
-  const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [slug]);
-
-  const media = project?.media ?? [];
-  const hasMedia = media.length > 0;
-  const activeMedia = hasMedia ? media[activeIndex] : undefined;
-
-  const goPrev = useCallback(() => {
-    if (!hasMedia) return;
-    setActiveIndex((i) => (i - 1 + media.length) % media.length);
-  }, [hasMedia, media.length]);
-
-  const goNext = useCallback(() => {
-    if (!hasMedia) return;
-    setActiveIndex((i) => (i + 1) % media.length);
-  }, [hasMedia, media.length]);
-
-  useEffect(() => {
-    if (!isGalleryOpen) return;
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsGalleryOpen(false);
-      if (e.key === "ArrowLeft") goPrev();
-      if (e.key === "ArrowRight") goNext();
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [goNext, goPrev, isGalleryOpen]);
-
-  return (
-    <div className="site-container">
-        <div className="mb-6 flex items-center justify-between gap-3">
-          <button
-            onClick={() => navigate(-1)}
-            className="surface-control inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white"
-          >
-            <ArrowLeft className="h-4 w-4" /> Back
-          </button>
-        </div>
-
-        {!project ? (
-          <Card>
-            <h1 className="text-xl font-semibold">Project not found</h1>
-            <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-              The project slug does not exist.
-            </p>
-          </Card>
-        ) : (
-          <>
-            <section className="mb-8">
-              <p className="page-intro__eyebrow">Project Detail</p>
-              <h1 className="hero-title mt-4 text-4xl font-[760] leading-[0.96] tracking-[-0.055em] sm:text-5xl xl:text-6xl">
-                {project.name}
-              </h1>
-              <p className="prose-copy mt-5 max-w-none text-base sm:text-lg">
-                {project.description ?? project.blurb}
-              </p>
-            </section>
-
-            <div className="grid gap-8 xl:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] xl:items-start">
-              <div className="min-w-0">
-                <Card className="overflow-hidden p-0">
-                  <button
-                    type="button"
-                    onClick={() => setIsGalleryOpen(true)}
-                    className="relative w-full text-left"
-                    aria-label="Open gallery"
-                  >
-                    <div className="media-frame relative overflow-hidden rounded-[1.75rem]">
-                      <div className="flex aspect-[16/10] w-full items-center justify-center">
-                        {hasMedia ? (
-                          <>
-                            {activeMedia?.type === "image" && (
-                              <img
-                                src={activeMedia.src}
-                                alt={activeMedia.alt || project.name}
-                                className="h-full w-full object-contain"
-                                draggable={false}
-                                loading="lazy"
-                              />
-                            )}
-                            {activeMedia?.type === "video" && (
-                              <video
-                                src={activeMedia.src}
-                                controls
-                                playsInline
-                                className="h-full w-full object-contain"
-                              />
-                            )}
-                          </>
-                        ) : project.preview ? (
-                          <img
-                            src={project.preview}
-                            alt={`${project.name} preview`}
-                            className="h-full w-full object-contain"
-                            draggable={false}
-                            loading="lazy"
-                          />
-                        ) : null}
-                      </div>
-
-                      {media.length > 1 && (
-                        <>
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              goPrev();
-                            }}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/55 p-3 text-white transition hover:bg-black/75"
-                            aria-label="Previous"
-                          >
-                            <ChevronLeft />
-                          </button>
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              goNext();
-                            }}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/55 p-3 text-white transition hover:bg-black/75"
-                            aria-label="Next"
-                          >
-                            <ChevronRight />
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  </button>
-
-                  {media.length > 1 && (
-                    <div className="grid grid-cols-4 gap-3 p-4 sm:grid-cols-6">
-                      {media.map((m, i) => (
-                        <button
-                          key={`${m.src}-${i}`}
-                          onClick={() => setActiveIndex(i)}
-                          className={[
-                            "overflow-hidden rounded-xl border transition",
-                            i === activeIndex
-                              ? "border-[var(--color-accent)]"
-                              : "border-white/20",
-                          ].join(" ")}
-                          aria-label={`Select media ${i + 1}`}
-                          type="button"
-                        >
-                          {m.type === "image" ? (
-                            <img
-                              src={m.src}
-                              className="aspect-[4/3] w-full object-cover"
-                              alt={m.alt || "thumb"}
-                              draggable={false}
-                              loading="lazy"
-                            />
-                          ) : (
-                            <div className="flex aspect-[4/3] w-full items-center justify-center bg-black/60 text-[10px] text-white/80">
-                              Video
-                            </div>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </Card>
-              </div>
-
-              <div className="min-w-0">
-                <Card className="h-full">
-                  {(project.repo || project.link) && (
-                    <div className="mb-5 flex flex-wrap gap-3">
-                      {project.repo ? (
-                        <a
-                          href={project.repo}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="surface-control inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm text-white"
-                        >
-                          <Github className="h-4 w-4" /> Repo
-                        </a>
-                      ) : null}
-                      {project.link ? (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="surface-control inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm text-white"
-                        >
-                          <ArrowUpRight className="h-4 w-4" /> Live Demo
-                        </a>
-                      ) : null}
-                    </div>
-                  )}
-
-                  {project.bullets?.length ? (
-                    <>
-                      <h2 className="mb-3 text-lg font-semibold">Key Highlights</h2>
-                      <ul className="ml-5 list-disc space-y-2 text-sm text-[var(--color-text-muted)]">
-                        {project.bullets.map((b) => (
-                          <li key={b}>{b}</li>
-                        ))}
-                      </ul>
-                    </>
-                  ) : (
-                    <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
-                      Explore the gallery and links to see more of this project.
-                    </p>
-                  )}
-
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {project.tags.map((t) => (
-                      <span key={t} className="card-chip">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </Card>
-              </div>
-            </div>
-
-            {isGalleryOpen && (
-              <div
-                className="modal-scrim fixed inset-0 z-50 flex items-center justify-center p-4"
-                onClick={() => setIsGalleryOpen(false)}
-                role="dialog"
-                aria-modal="true"
-              >
-                <div
-                  className="modal-panel relative h-[90vh] w-full max-w-6xl overflow-hidden rounded-[2rem]"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="absolute left-3 right-3 top-3 z-10 flex items-center justify-between">
-                    <button
-                      onClick={() => setIsGalleryOpen(false)}
-                      className="surface-control rounded-full px-3 py-2 text-sm text-white"
-                      type="button"
-                    >
-                      Close
-                    </button>
-
-                    <div className="text-xs text-white">
-                      {media.length ? `${activeIndex + 1} / ${media.length}` : ""}
-                    </div>
-                  </div>
-
-                  <div className="flex h-full w-full items-center justify-center">
-                    {hasMedia ? (
-                      <>
-                        {activeMedia?.type === "image" && (
-                          <img
-                            src={activeMedia.src}
-                            alt={activeMedia.alt || project.name}
-                            className="h-full w-full object-contain"
-                            draggable={false}
-                            loading="lazy"
-                          />
-                        )}
-                        {activeMedia?.type === "video" && (
-                          <video
-                            src={activeMedia.src}
-                            controls
-                            playsInline
-                            className="h-full w-full object-contain"
-                          />
-                        )}
-                      </>
-                    ) : project.preview ? (
-                      <img
-                        src={project.preview}
-                        alt={`${project.name} preview`}
-                        className="h-full w-full object-contain"
-                        draggable={false}
-                        loading="lazy"
-                      />
-                    ) : null}
-                  </div>
-
-                  {media.length > 1 && (
-                    <>
-                      <button
-                        onClick={goPrev}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-3 text-white transition hover:bg-black/70"
-                        type="button"
-                        aria-label="Previous"
-                      >
-                        <ChevronLeft />
-                      </button>
-                      <button
-                        onClick={goNext}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-3 text-white transition hover:bg-black/70"
-                        type="button"
-                        aria-label="Next"
-                      >
-                        <ChevronRight />
-                      </button>
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
-          </>
-        )}
-    </div>
-  );
+  return <article className="site-container detail-page">
+    <BackLink to="/projects">All projects</BackLink>
+    {!project ? <PageIntro title="Project not found" description="This project is unavailable. Browse all projects to explore more work." /> : <>
+      <PageIntro eyebrow={project.latest ? "Latest project" : "Project"} title={project.name} description={project.description ?? project.blurb}
+        actions={project.link || project.repo ? <>
+          {project.link && <CustomButton href={project.link} target="_blank" rel="noopener noreferrer">Live demo <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></CustomButton>}
+          {project.repo && <CustomButton href={project.repo} target="_blank" rel="noopener noreferrer"><Github className="h-4 w-4" aria-hidden="true" />Source code</CustomButton>}
+        </> : undefined}>
+        <p className="meta-line text-sm">{project.completed}</p>
+        <TagList tags={project.tags} />
+      </PageIntro>
+      <ProjectGallery key={project.slug} project={project} />
+      {project.bullets?.length || project.sections?.length ? <div className="project-story">
+        {project.bullets?.length ? <section className="project-story__section" aria-labelledby="project-highlights">
+          <h2 id="project-highlights" className="section-title">Key highlights</h2>
+          <ul className="prose-copy reading-copy list-disc space-y-3 pl-5">{project.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul>
+        </section> : null}
+        {project.sections?.map((section, index) => <section key={section.title} className="project-story__section" aria-labelledby={`story-${index}`}>
+          <div><p className="page-intro__eyebrow mb-3">{String(index + 1).padStart(2, "0")}</p><h2 id={`story-${index}`} className="section-title">{section.title}</h2></div>
+          <div className="reading-copy">
+            <div className="space-y-4">{section.paragraphs.map(paragraph => <p key={paragraph} className="prose-copy">{paragraph}</p>)}</div>
+            {section.steps?.length ? <ol className="project-progress">{section.steps.map((step, i) => <li key={step}><span className="project-progress__number" aria-hidden="true">{i + 1}</span><span>{step}</span></li>)}</ol> : null}
+          </div>
+        </section>)}
+      </div> : null}
+    </>}
+  </article>;
 }

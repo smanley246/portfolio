@@ -38,11 +38,7 @@ const AboutHeroSection: React.FC<Props> = ({ hero, sections }) => {
             {sections.map((s) => (
               <CustomButton
                 key={s.id}
-                onClick={() => {
-                  document
-                    .getElementById(s.id)
-                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
-                }}
+                href={`#${s.id}`}
               >
                 {s.navLabel}
               </CustomButton>

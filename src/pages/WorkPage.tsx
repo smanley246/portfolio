@@ -15,7 +15,7 @@ import WorkRolesSection from "../sections/workSections/WorkRolesSection";
 
 export default function WorkPage() {
   return (
-    <div className="site-container pb-8">
+    <div className="site-container">
       <WorkHeroSection />
       <WorkRolesSection workRoles={workRoles} workDetailPath={workDetailPath} />
     </div>
